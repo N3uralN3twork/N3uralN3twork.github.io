@@ -27,8 +27,8 @@ website:
         text: "Personal Github"
       - icon: linkedin
         href: https://www.linkedin.com/in/matthiasquinn
-        text: "Personal Linkedin"      
-      - icon: mail
+        text: "Personal Linkedin"
+      - icon: "question-circle"
         href: mailto:miq_qedquinn@yahoo.com
         text: "Contact Me"
 
@@ -49,7 +49,6 @@ website:
         text: Transition from Rmd
       - href: resumes.qmd
         text: Resumes
-        icon: file
 
 
 format:
