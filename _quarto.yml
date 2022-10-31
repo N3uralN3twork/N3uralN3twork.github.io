@@ -3,14 +3,14 @@ project:
   
 website: 
   page-navigation: true
-  title: "Making sharable documents with Quarto" 
+  title: "QED Website" 
   site-url: "https://openscapes.github.io/quarto-website-tutorial" 
-  repo-url: https://github.com/openscapes/quarto-website-tutorial 
+  repo-url: https://github.com/N3uralN3twork/n3uraln3twork.github.io
   repo-actions: [edit, issue]
   
   page-footer:
     right: "This page is built with ❤️ and [Quarto](https://quarto.org/)."
-    left: "&copy; CC-By Openscapes, 2022"
+    left: "&copy; CC-By Matthias Quinn, 2022"
     
   sidebar:
     logo: "images/openscapes_hex.png"
@@ -18,14 +18,14 @@ website:
     align: center
     tools: 
       - icon: globe
-        href: https://openscapes.org
-        text: "Openscapes.org"
+        href: https://github.com/N3uralN3twork/n3uraln3twork.github.io
+        text: "Website"
       - icon: github
-        href: https://github.com/openscapes/quarto-website-tutorial
-        text: "Quarto website tutorial"
-      - icon: twitter
-        href: https://twitter.com/openscapes
-        text: "Openscapes Twitter"         
+        href: https://github.com/N3uralN3twork
+        text: "Personal Github"
+      - icon: linkedin
+        href: https://www.linkedin.com/in/matthiasquinn
+        text: "Personal Linkedin"         
 
     style: "docked"
     search: true
@@ -52,6 +52,10 @@ format:
     code-copy: true
     code-overflow: wrap
     toc: true
+    linkcolor: orange
+    code-fold: true
+    code-line-numbers: true
+    html-math-method: katex
 
 
 filters:
