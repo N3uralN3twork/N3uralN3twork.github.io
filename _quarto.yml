@@ -38,6 +38,8 @@ website:
     contents:
       - href: index.qmd
         text: Welcome
+      - href: aboutme.qmd
+        text: Who am I?
       - explore.qmd
       - section: quarto-workflows/index.qmd
         contents: 
