@@ -1,5 +1,7 @@
 project: 
   type: website
+  resources: 
+    - "*.pdf"
   
 website: 
   page-navigation: true
@@ -25,7 +27,10 @@ website:
         text: "Personal Github"
       - icon: linkedin
         href: https://www.linkedin.com/in/matthiasquinn
-        text: "Personal Linkedin"         
+        text: "Personal Linkedin"      
+      - icon: mail
+        href: mailto:miq_qedquinn@yahoo.com
+        text: "Contact Me"
 
     style: "docked"
     search: true
@@ -42,6 +47,9 @@ website:
       - learning-more.qmd
       - href: transition-from-rmarkdown.qmd
         text: Transition from Rmd
+      - href: resumes.qmd
+        text: Resumes
+        icon: file
 
 
 format:
