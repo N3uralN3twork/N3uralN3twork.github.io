@@ -226,9 +226,16 @@
   {
     "objectID": "aboutme.html",
     "href": "aboutme.html",
-    "title": "About me",
+    "title": "About Me",
     "section": "",
-    "text": "Timeline\n\""
+    "text": "Remarks\nI also used to be a researcher that worked on developing a better understanding of a social phenomenon called the school-to-prison pipeline. It sounds depressing, but that’s because it really is.\nIn my free time, I work on projects like this website and - as of Oct. 3rd, 2022 - a project for performance metrics with researchers from Vietnam. I also enjoy learning about my field and keeping up with current advances in ML and DL. I don’t (usually) fully understand what most of the papers are doing, but I make attempts to research topics of interest.\n\n\nTimeline\n\""
+  },
+  {
+    "objectID": "publications.html",
+    "href": "publications.html",
+    "title": "Publications",
+    "section": "",
+    "text": "Examining Trauma and Crime by Gender and Sexual Orientation among Youth: Findings from the Add Health National Longitudinal Study\n\n\n\n\n\nAuthors: Yun, Tedor, Mallett, Quinn, Quinn\n\n\n\n🚧 This page is under construction. 🚧"
   },
   {
     "objectID": "explore.html",
@@ -285,13 +292,6 @@
     "title": "Explore and setup",
     "section": "Onward!",
     "text": "Onward!\nNow you are ready to start editing and publishing! The next chapter describes how starting off from the browser, using Markdown."
-  },
-  {
-    "objectID": "learning-more.html",
-    "href": "learning-more.html",
-    "title": "Learning more",
-    "section": "",
-    "text": "An excellent overview: Reproducible authoring with Quarto - Mine Çetinkaya-Rundel, Feb 2022 - slides, youtube\nA Quarto tip a day in June 2022, from Mine Çetinkaya-Rundel.\n\n\n\nOpenscapes Champions Lessons Series\nOpenscapes Approach Guide\n\nNASA Earthdata Cloud Cookbook\n\nSee many more examples at the quarto gallery!\n\n\n\nAre you making onboarding documentation? Check out The Fay Lab Manual (now in Quarto!) for inspiration on structure - you could also start there and make it your own."
   },
   {
     "objectID": "resumes.html",
