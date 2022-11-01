@@ -49,6 +49,8 @@ website:
         text: Transition from Rmd
       - href: resumes.qmd
         text: Resumes
+      - href: projects.qmd
+        text: Projects
       - href: publications.qmd
         text: Papers
 

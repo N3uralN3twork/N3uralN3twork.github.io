@@ -326,7 +326,7 @@
     "href": "publications.html",
     "title": "Publications",
     "section": "",
-    "text": "Examining Trauma and Crime by Gender and Sexual Orientation among Youth: Findings from the Add Health National Longitudinal Study\n\n\n\n\n\nAuthors: Yun, Tedor, Mallett, Quinn, Quinn\n\n\n\n🚧 This page is under construction. 🚧"
+    "text": "Examining Trauma and Crime by Gender and Sexual Orientation among Youth: Findings from the Add Health National Longitudinal Study\n\n\n\n\n\nAuthors: Yun, Tedor, Mallett, Quinn, Quinn\nPaper: Link to Paper - SAGE Journal\n\n\n\n🚧 This page is under construction. 🚧"
   },
   {
     "objectID": "aboutme.html#impressive",
@@ -334,5 +334,40 @@
     "title": "About me",
     "section": "Impressive",
     "text": "Impressive\nIf you’re still reading this, I appreciate it. You can reach out to me using the question-mark icon on the left-hand side."
+  },
+  {
+    "objectID": "projects.html",
+    "href": "projects.html",
+    "title": "Projects",
+    "section": "",
+    "text": "code\n\n\nML\n\n\nalgorithms\n\n\n\n\nA notebook on what XGBoost is and how it works, including a sample application to forest cover types.\n\n\n\n\n\n\nNov 1, 2022\n\n\nMatthias Quinn\n\n\n\n\n\n\n  \n\n\n\n\n\nUse callouts to draw attention to important complementary content without interupting the document flow\n\n\n\n\nFeatures\n\n\nAuthoring\n\n\n\n\nCallouts are an excellent way to draw extra attention to certain concepts, or to more clearly indicate that certain content is supplemental or applicable to only some scenarios.\n\n\n\n\n\n\nDec 1, 2021\n\n\nCharles Teague\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/index.html",
+    "href": "posts/index.html",
+    "title": "Project Posts",
+    "section": "",
+    "text": "No matching items"
+  },
+  {
+    "objectID": "posts/2022-11-01-feature-callouts/index.html",
+    "href": "posts/2022-11-01-feature-callouts/index.html",
+    "title": "Using Callouts",
+    "section": "",
+    "text": "Callouts are an excellent way to draw extra attention to certain concepts, or to more clearly indicate that certain content is supplemental or applicable to only some scenarios."
+  },
+  {
+    "objectID": "posts/2022-11-01-feature-callouts/index.html#callout-basics",
+    "href": "posts/2022-11-01-feature-callouts/index.html#callout-basics",
+    "title": "Using Callouts",
+    "section": "Callout Basics",
+    "text": "Callout Basics\nThere are five different types of callouts available.\n\nnote\ntip\nimportant\ncaution\nwarning\n\nThe color and icon will be different depending upon the type that you select."
+  },
+  {
+    "objectID": "posts/2022-11-01-feature-callouts/index.html#syntax",
+    "href": "posts/2022-11-01-feature-callouts/index.html#syntax",
+    "title": "Using Callouts",
+    "section": "Syntax",
+    "text": "Syntax\nCreate callouts in markdown using the following syntax (note that the first markdown heading used within the callout is used as the callout heading):\n:::{.callout-note}\nNote that there are five types of callouts, including:\n`note`, `tip`, `warning`, `caution`, and `important`.\n:::\n\n:::{.callout-tip}\n## Tip With Caption\n\nThis is an example of a callout with a caption.\n:::\nSee our documentation on Callouts, to learn more, including more about how to customize the appearance and behavior of callouts."
   }
 ]

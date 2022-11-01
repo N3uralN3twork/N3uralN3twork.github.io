@@ -1,0 +1,16 @@
+---
+title: "XGBoost"
+description: "A notebook on what XGBoost is and how it works, including a sample application to forest cover types."
+author: "Matthias Quinn"
+date: "11/01/2022"
+categories:
+  - code
+  - ML
+  - algorithms
+image: XGBoost_logo.png
+image-alt: XGBoost's logo
+---
+
+### XGBoost
+
+
