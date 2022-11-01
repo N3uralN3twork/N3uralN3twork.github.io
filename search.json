@@ -175,6 +175,27 @@
     "text": "Troubleshooting\nIf you have trouble rendering your website after for example changing the extenstion of a file from .md to .qmd, refreshing your RStudio often helps. Do this by clicking the project name at the upper right of the RStudio window (in this case, quarto-website-tutorial), and underneath the “close project” section, click the same name of your project: quarto-website-tutorial. This will relaunch your whole project afresh."
   },
   {
+    "objectID": "posts/feature-callouts/index.html",
+    "href": "posts/feature-callouts/index.html",
+    "title": "Using Callouts",
+    "section": "",
+    "text": "Callouts are an excellent way to draw extra attention to certain concepts, or to more clearly indicate that certain content is supplemental or applicable to only some scenarios."
+  },
+  {
+    "objectID": "posts/feature-callouts/index.html#callout-basics",
+    "href": "posts/feature-callouts/index.html#callout-basics",
+    "title": "Using Callouts",
+    "section": "Callout Basics",
+    "text": "Callout Basics\nThere are five different types of callouts available.\n\nnote\ntip\nimportant\ncaution\nwarning\n\nThe color and icon will be different depending upon the type that you select."
+  },
+  {
+    "objectID": "posts/feature-callouts/index.html#syntax",
+    "href": "posts/feature-callouts/index.html#syntax",
+    "title": "Using Callouts",
+    "section": "Syntax",
+    "text": "Syntax\nCreate callouts in markdown using the following syntax (note that the first markdown heading used within the callout is used as the callout heading):\n:::{.callout-note}\nNote that there are five types of callouts, including:\n`note`, `tip`, `warning`, `caution`, and `important`.\n:::\n\n:::{.callout-tip}\n## Tip With Caption\n\nThis is an example of a callout with a caption.\n:::\nSee our documentation on Callouts, to learn more, including more about how to customize the appearance and behavior of callouts."
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Homepage",
@@ -194,6 +215,13 @@
     "title": "Homepage",
     "section": "What is Quarto?",
     "text": "What is Quarto?\nQuarto helps you have your ideas and your code in one place, and present it in a beautiful way.\nQuarto unifies and extends the RMarkdown ecosystem - it unifies by combining the functionality of R Markdown, bookdown, distill, xaringian, etc into a single consistent system. And it extends in several ways: all features are possible beyond R too, including Python and Javascript. It also has more “guardrails”: accessibility and inclusion are centered in the design. Quarto is for people who love RMarkdown, and it’s for people who have never used RMarkdown."
+  },
+  {
+    "objectID": "projects.html",
+    "href": "projects.html",
+    "title": "Projects",
+    "section": "",
+    "text": "code\n\n\nML\n\n\nalgorithms\n\n\n\n\nA notebook on what XGBoost is and how it works, including a sample application to forest cover types.\n\n\n\n\n\n\nNov 1, 2022\n\n\nMatthias Quinn\n\n\n\n\n\n\n  \n\n\n\n\n\nUse callouts to draw attention to important complementary content without interupting the document flow\n\n\n\n\nFeatures\n\n\nAuthoring\n\n\n\n\nCallouts are an excellent way to draw extra attention to certain concepts, or to more clearly indicate that certain content is supplemental or applicable to only some scenarios.\n\n\n\n\n\n\nDec 1, 2021\n\n\nCharles Teague\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "transition-from-rmarkdown.html",
