@@ -16,8 +16,6 @@ In my free time, I work on projects like this website and - as of Oct. 3rd, 2022
 If you're still reading this, I appreciate it. You can reach out to me using the question-mark icon on the left-hand side.
 :::
 
-W.i.P.
-
 ### Timeline
 
 ```{=html}

@@ -58,23 +58,23 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Welcome",
+    "title": "Homepage",
     "section": "",
     "text": "Hello there.\nMy name is Matthias and I am a data analyst currently working in the insurance industry.\nI am an analytically minded developer with 5 years of experience in data analysis and 2 years of experience in model building. I hold a Master of Science in mathematics with a specialization in statistics, where I created software in Python for analyzing the validity of clustering models."
   },
   {
     "objectID": "index.html#goals",
     "href": "index.html#goals",
-    "title": "Welcome",
+    "title": "Homepage",
     "section": "Goals",
     "text": "Goals\nMy goals for this website are to learn more about frontend development as well as new technologies, like Quarto. I also wanted to have a more interactive method of discovering and keep track of my projects; opposed to the current method of static Word documents and mono repositories."
   },
   {
     "objectID": "index.html#what-is-quarto",
     "href": "index.html#what-is-quarto",
-    "title": "Welcome",
+    "title": "Homepage",
     "section": "What is Quarto?",
-    "text": "What is Quarto?\nQuarto helps you have your ideas and your code in one place, and present it in a beautiful way.\nQuarto unifies and extends the RMarkdown ecosystem - it unifies by combining the functionality of R Markdown, bookdown, distill, xaringian, etc into a single consistent system. And it extends in several ways: all features are possible beyond R too, including Python and Javascript. It also has more “guardrails”: accessibility and inclusion are centered in the design. Quarto is for people who love RMarkdown, and it’s for people who have never used RMarkdown.\nThe ability for Quarto to streamline collaboration has been so cool and important for our NASA Openscapes project. Quarto has been a common place for us to collaborate - across R and Python languages and coding expertise."
+    "text": "What is Quarto?\nQuarto helps you have your ideas and your code in one place, and present it in a beautiful way.\nQuarto unifies and extends the RMarkdown ecosystem - it unifies by combining the functionality of R Markdown, bookdown, distill, xaringian, etc into a single consistent system. And it extends in several ways: all features are possible beyond R too, including Python and Javascript. It also has more “guardrails”: accessibility and inclusion are centered in the design. Quarto is for people who love RMarkdown, and it’s for people who have never used RMarkdown."
   },
   {
     "objectID": "index.html#what-is-this-tutorial",
@@ -319,6 +319,6 @@
     "href": "resumes.html",
     "title": "Resumes",
     "section": "",
-    "text": "\""
+    "text": "Notice\n\n\n\nAdditional information coming soon!"
   }
 ]

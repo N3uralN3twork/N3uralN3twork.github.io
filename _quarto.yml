@@ -5,7 +5,7 @@ project:
   
 website: 
   page-navigation: true
-  title: "QED Website" 
+  title: "N3uralN3twork's Website" 
   site-url: "https://openscapes.github.io/quarto-website-tutorial" 
   repo-url: https://github.com/N3uralN3twork/n3uraln3twork.github.io
   repo-actions: [edit, issue]
@@ -15,7 +15,7 @@ website:
     left: "&copy; CC-By Matthias Quinn, 2022"
     
   sidebar:
-    logo: "images/openscapes_hex.png"
+    logo: "images/Transhumanism Logo for Website.png"
     pinned: true
     align: center
     tools: 
