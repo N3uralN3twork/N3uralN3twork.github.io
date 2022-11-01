@@ -245,6 +245,13 @@
     "text": "Troubleshooting\n\nGitHub Action fails, says you need RMarkdown but you don’t have R code!\nAnd you changed all .Rmds to .qmds!\nYou likely have a few setup code chunks from RMarkdown, that look like this:\n{r setup, include=FALSE}\nknitr::opts_chunk$set(echo = FALSE)\nYou can find them by opening each of your files and having a look, or use GitHub’s search for the keyword knitr"
   },
   {
+    "objectID": "aboutme.html",
+    "href": "aboutme.html",
+    "title": "About me",
+    "section": "",
+    "text": "Timeline\n\""
+  },
+  {
     "objectID": "explore.html",
     "href": "explore.html",
     "title": "Explore and setup",
@@ -306,5 +313,12 @@
     "title": "Learning more",
     "section": "",
     "text": "An excellent overview: Reproducible authoring with Quarto - Mine Çetinkaya-Rundel, Feb 2022 - slides, youtube\nA Quarto tip a day in June 2022, from Mine Çetinkaya-Rundel.\n\n\n\nOpenscapes Champions Lessons Series\nOpenscapes Approach Guide\n\nNASA Earthdata Cloud Cookbook\n\nSee many more examples at the quarto gallery!\n\n\n\nAre you making onboarding documentation? Check out The Fay Lab Manual (now in Quarto!) for inspiration on structure - you could also start there and make it your own."
+  },
+  {
+    "objectID": "resumes.html",
+    "href": "resumes.html",
+    "title": "Resumes",
+    "section": "",
+    "text": "Notice\n\n\n\nAdditional information coming soon!"
   }
 ]
