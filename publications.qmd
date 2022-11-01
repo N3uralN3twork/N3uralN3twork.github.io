@@ -13,9 +13,11 @@ about:
 :::
 
 ::: {.callout-tip collapse="true"}
-### ![Examining Trauma and Crime by Gender and Sexual Orientation among Youth: Findings from the Add Health National Longitudinal Study](images/paste-82AA7991.png){width="50"}[Examining Trauma and Crime by Gender and Sexual Orientation among Youth: Findings from the Add Health National Longitudinal Study](https://journals.sagepub.com/doi/10.1177/0011128721999342)
+### ![Examining Trauma and Crime by Gender and Sexual Orientation among Youth: Findings from the Add Health National Longitudinal Study](images/paste-82AA7991.png){width="50"}Examining Trauma and Crime by Gender and Sexual Orientation among Youth: Findings from the Add Health National Longitudinal Study
 
 **Authors:** Yun, Tedor, Mallett, Quinn, Quinn
+
+**Paper:** [Link to Paper - SAGE Journal](https://journals.sagepub.com/doi/10.1177/0011128721999342)
 :::
 
 🚧 This page is under construction. 🚧
