@@ -1,5 +1,7 @@
 project: 
   type: website
+  resources: 
+    - "*.pdf"
   
 website: 
   page-navigation: true
@@ -7,7 +9,6 @@ website:
   site-url: "https://openscapes.github.io/quarto-website-tutorial" 
   repo-url: https://github.com/N3uralN3twork/n3uraln3twork.github.io
   repo-actions: [edit, issue]
-  favicon: "images/Combo-Chart-Icon.png"
   
   page-footer:
     right: "This page is built with ❤️ and [Quarto](https://quarto.org/)."
@@ -45,12 +46,11 @@ website:
           - quarto-workflows/browser.md
           - quarto-workflows/rstudio.qmd
           - quarto-workflows/jupyter.md 
+      - learning-more.qmd
       - href: transition-from-rmarkdown.qmd
         text: Transition from Rmd
       - href: resumes.qmd
         text: Resumes
-      - href: publications.qmd
-        text: Papers
 
 
 format:

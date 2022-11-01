@@ -1,0 +1,21 @@
+---
+title: "Publications"
+about:
+  id: hero-heading
+  template: trestles
+  image: images/Three-Pronged-Microscope.jpg
+---
+
+::: {.callout-tip collapse="true"}
+### ![](images/paste-AC857DCC.png){width="50"}Explaining the school-to-prison pipeline via race and gender: The impact of trauma, school suspension, school dropout, and delinquency
+
+**Authors:** Tedor, Mallett, Quinn, Quinn
+:::
+
+::: {.callout-tip collapse="true"}
+### ![Examining Trauma and Crime by Gender and Sexual Orientation among Youth: Findings from the Add Health National Longitudinal Study](images/paste-82AA7991.png){width="50"}[Examining Trauma and Crime by Gender and Sexual Orientation among Youth: Findings from the Add Health National Longitudinal Study](https://journals.sagepub.com/doi/10.1177/0011128721999342)
+
+**Authors:** Yun, Tedor, Mallett, Quinn, Quinn
+:::
+
+🚧 This page is under construction. 🚧

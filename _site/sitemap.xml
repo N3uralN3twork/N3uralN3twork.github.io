@@ -2,15 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/explore.html</loc>
-    <lastmod>2022-11-01T02:27:47.053Z</lastmod>
+    <lastmod>2022-11-01T14:37:41.724Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/index.html</loc>
-    <lastmod>2022-11-01T02:26:23.971Z</lastmod>
+    <lastmod>2022-11-01T16:28:36.918Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/learning-more.html</loc>
-    <lastmod>2022-10-31T20:26:52.780Z</lastmod>
+    <lastmod>2022-11-01T15:16:04.604Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/quarto-workflows/browser.html</loc>
@@ -30,14 +30,18 @@
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/resumes.html</loc>
-    <lastmod>2022-11-01T02:27:27.590Z</lastmod>
+    <lastmod>2022-11-01T16:28:19.356Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/transition-from-rmarkdown.html</loc>
-    <lastmod>2022-10-31T20:27:34.457Z</lastmod>
+    <lastmod>2022-11-01T15:58:24.215Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/aboutme.html</loc>
-    <lastmod>2022-11-01T02:27:38.745Z</lastmod>
+    <lastmod>2022-11-01T16:28:28.630Z</lastmod>
+  </url>
+  <url>
+    <loc>https://openscapes.github.io/quarto-website-tutorial/publications.html</loc>
+    <lastmod>2022-11-01T16:27:10.442Z</lastmod>
   </url>
 </urlset>

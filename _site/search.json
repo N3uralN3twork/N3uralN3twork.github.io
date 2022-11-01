@@ -310,9 +310,9 @@
   {
     "objectID": "aboutme.html",
     "href": "aboutme.html",
-    "title": "About me",
+    "title": "About Me",
     "section": "",
-    "text": "Timeline\n\""
+    "text": "Remarks\nI also used to be a researcher that worked on developing a better understanding of a social phenomenon called the school-to-prison pipeline. It sounds depressing, but that’s because it really is.\nIn my free time, I work on projects like this website and - as of Oct. 3rd, 2022 - a project for performance metrics with researchers from Vietnam. I also enjoy learning about my field and keeping up with current advances in ML and DL. I don’t (usually) fully understand what most of the papers are doing, but I make attempts to research topics of interest.\n\n\nTimeline\n\""
   },
   {
     "objectID": "resumes.html",
@@ -320,5 +320,19 @@
     "title": "Resumes",
     "section": "",
     "text": "Notice\n\n\n\nAdditional information coming soon!"
+  },
+  {
+    "objectID": "publications.html",
+    "href": "publications.html",
+    "title": "Publications",
+    "section": "",
+    "text": "Examining Trauma and Crime by Gender and Sexual Orientation among Youth: Findings from the Add Health National Longitudinal Study\n\n\n\n\n\nAuthors: Yun, Tedor, Mallett, Quinn, Quinn\n\n\n\n🚧 This page is under construction. 🚧"
+  },
+  {
+    "objectID": "aboutme.html#impressive",
+    "href": "aboutme.html#impressive",
+    "title": "About me",
+    "section": "Impressive",
+    "text": "Impressive\nIf you’re still reading this, I appreciate it. You can reach out to me using the question-mark icon on the left-hand side."
   }
 ]

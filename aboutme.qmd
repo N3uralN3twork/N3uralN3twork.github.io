@@ -1,20 +1,53 @@
 ---
-title: "About me"
+title: "About Me"
+about:
+  id: hero-heading
+  template: trestles
+  image: images/red-and-orange-solar-flare.jpg
+  links:
+      - icon: globe
+        href: n3uraln3twork.github.io
+        text: "Website"
+      - icon: github
+        href: https://github.com/N3uralN3twork
+        text: "Personal Github"
+      - icon: linkedin
+        href: https://www.linkedin.com/in/matthiasquinn
+        text: "Personal Linkedin"
+      - icon: "question-circle"
+        href: mailto:miq_qedquinn@yahoo.com
+        text: "Contact Me"
 ---
 
-### Experience
+### Matthias Quinn
 
-I am currently a data analyst (or scientist, depending on the project).
+::: {#hero-heading}
+I am currently a data analyst (or scientist, depending on the project) working in the insurance industry. I've still have a lot to learn before I'm ready to transition to a full data science position, but I'm confident that - in the coming years - I'll be able to fully qualify for such a role at Progressive.
+
+## Education
+
+Cleveland State University \| Cleveland, OH
+
+\| M.S. in Statistics \| Sept 2020 - June 2021
+
+------------------------------------------------------------------------
+
+Cleveland State University \| Cleveland, OH
+
+\| B.A. in Finance \| Sept 2016 - June 2020
+
+## Experience
+
+Wengo Analytics \| Head Data Scientist \| April 2018 - present
+
+GeoScynce \| Chief Analyst \| Sept 2012 - April 2018
+:::
+
+### Remarks
 
 I also used to be a researcher that worked on developing a better understanding of a social phenomenon called the `school-to-prison pipeline`. It sounds depressing, but that's because it really is.
 
 In my free time, I work on projects like this website and - as of Oct. 3rd, 2022 - [a project for performance metrics](https://github.com/thieu1995/permetrics) with researchers from Vietnam. I also enjoy learning about my field and keeping up with current advances in ML and DL. I don't (usually) fully understand what most of the papers are doing, but I make attempts to research topics of interest.
-
-::: callout-tip
-## Impressive
-
-If you're still reading this, I appreciate it. You can reach out to me using the question-mark icon on the left-hand side.
-:::
 
 ### Timeline
 

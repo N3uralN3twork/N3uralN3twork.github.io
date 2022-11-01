@@ -20,5 +20,3 @@ My goals for this website are to learn more about frontend development as well a
 Quarto helps you have your ideas and your code in one place, and present it in a beautiful way.
 
 **Quarto unifies and extends the RMarkdown ecosystem** - it unifies by combining the functionality of R Markdown, bookdown, distill, xaringian, etc into a single consistent system. And it extends in several ways: all features are possible beyond R too, including Python and Javascript. It also has more "guardrails": accessibility and inclusion are centered in the design. Quarto is for people who love RMarkdown, and it's for people who have never used RMarkdown.
-
-
