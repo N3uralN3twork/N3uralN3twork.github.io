@@ -2,4 +2,24 @@
 title: "About me"
 ---
 
-### Lorem ipsum.
+### Experience
+
+I am currently a data analyst (or scientist, depending on the project).
+
+I also used to be a researcher that worked on developing a better understanding of a social phenomenon called the `school-to-prison pipeline`. It sounds depressing, but that's because it really is.
+
+In my free time, I work on projects like this website and - as of Oct. 3rd, 2022 - [a project for performance metrics](https://github.com/thieu1995/permetrics) with researchers from Vietnam. I also enjoy learning about my field and keeping up with current advances in ML and DL. I don't (usually) fully understand what most of the papers are doing, but I make attempts to research topics of interest.
+
+::: callout-tip
+## Impressive
+
+If you're still reading this, I appreciate it. You can reach out to me using the question-mark icon on the left-hand side.
+:::
+
+W.i.P.
+
+### Timeline
+
+```{=html}
+<iframe src="https://drive.google.com/file/d/1EH2i0cIKr_lwj8WsVP6J-B-8EJtK6s_w/preview" width="640" height="480" allow="autoplay"></iframe>"
+```
