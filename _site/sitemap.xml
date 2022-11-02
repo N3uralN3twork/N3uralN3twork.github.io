@@ -6,7 +6,7 @@
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/index.html</loc>
-    <lastmod>2022-11-01T22:10:00.710Z</lastmod>
+    <lastmod>2022-11-02T01:45:10.281Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/learning-more.html</loc>
@@ -30,7 +30,7 @@
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/resumes.html</loc>
-    <lastmod>2022-11-01T22:17:38.528Z</lastmod>
+    <lastmod>2022-11-02T00:52:44.745Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/transition-from-rmarkdown.html</loc>
@@ -38,7 +38,7 @@
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/aboutme.html</loc>
-    <lastmod>2022-11-01T21:31:31.527Z</lastmod>
+    <lastmod>2022-11-02T01:43:18.297Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/publications.html</loc>
@@ -46,7 +46,7 @@
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/projects.html</loc>
-    <lastmod>2022-11-01T22:22:10.943Z</lastmod>
+    <lastmod>2022-11-02T01:45:19.331Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/posts/index.html</loc>
@@ -59,5 +59,21 @@
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/posts/2022-11-01-feature-callouts/index.html</loc>
     <lastmod>2022-11-01T22:11:47.372Z</lastmod>
+  </url>
+  <url>
+    <loc>https://openscapes.github.io/quarto-website-tutorial/images/cluster-indices.html</loc>
+    <lastmod>2022-11-02T00:42:56.688Z</lastmod>
+  </url>
+  <url>
+    <loc>https://openscapes.github.io/quarto-website-tutorial/posts/feature-callouts/index.html</loc>
+    <lastmod>2022-11-02T00:42:57.441Z</lastmod>
+  </url>
+  <url>
+    <loc>https://openscapes.github.io/quarto-website-tutorial/posts/xgboost/xgboost.html</loc>
+    <lastmod>2022-11-02T01:45:33.848Z</lastmod>
+  </url>
+  <url>
+    <loc>https://openscapes.github.io/quarto-website-tutorial/posts/clustering-indices-project/cluster-indices.html</loc>
+    <lastmod>2022-11-02T01:45:06.898Z</lastmod>
   </url>
 </urlset>

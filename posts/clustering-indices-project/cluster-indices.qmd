@@ -1,0 +1,19 @@
+---
+title: "Cluster Validity Indices"
+description: "This project was the seminal work of my master's degree in statistics."
+author: "Matthias Quinn"
+date: "11/01/2022"
+code-fold: true
+code-line-numbers: true
+categories:
+  - code
+  - ML
+  - algorithms
+  - college
+image: clustering-algorithms-in-Machine-Learning.jpg
+image-alt: K-Means Example
+---
+
+
+
+
