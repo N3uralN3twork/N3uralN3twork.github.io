@@ -6,7 +6,7 @@
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/index.html</loc>
-    <lastmod>2022-11-02T23:05:03.804Z</lastmod>
+    <lastmod>2022-11-02T23:49:32.684Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/learning-more.html</loc>
@@ -38,7 +38,7 @@
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/aboutme.html</loc>
-    <lastmod>2022-11-02T23:05:15.062Z</lastmod>
+    <lastmod>2022-11-02T23:49:21.220Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/publications.html</loc>
@@ -46,7 +46,7 @@
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/projects.html</loc>
-    <lastmod>2022-11-02T01:45:19.331Z</lastmod>
+    <lastmod>2022-11-02T23:53:01.932Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/posts/index.html</loc>
@@ -70,10 +70,14 @@
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/posts/xgboost/xgboost.html</loc>
-    <lastmod>2022-11-02T01:45:33.848Z</lastmod>
+    <lastmod>2022-11-02T23:49:30.418Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/posts/clustering-indices-project/cluster-indices.html</loc>
     <lastmod>2022-11-02T01:45:06.898Z</lastmod>
+  </url>
+  <url>
+    <loc>https://openscapes.github.io/quarto-website-tutorial/posts/LogRegCaret/LogisticRegCaret.html</loc>
+    <lastmod>2022-11-02T23:53:16.193Z</lastmod>
   </url>
 </urlset>
