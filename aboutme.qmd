@@ -69,4 +69,4 @@ In my free time, I work on projects like this website and - as of Oct. 3rd, 2022
 ```
 ### Perception of Skills
 
-![As of November 2022, Made with ggplot2](assets/graphs/SkillsGraph.png){fig-align="center"}
+![As of November 2022, Made with ggplot2](images/SkillsGraph.png){fig-align="center"}
