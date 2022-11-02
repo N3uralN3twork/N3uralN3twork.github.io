@@ -47,11 +47,11 @@ Graduate Assistant \| Cleveland State University \| Aug. 2019 - Dec. 2021
 ### Tech Stack:
 
 ::: {#fig-languages layout-ncol="3"}
-![R](images/RStudio-Logo-Flat.png){width="113" height="48"}
+![R](images/RStudio-Logo-Flat.png){width="100" height="50"}
 
-![Python](images/Python-logo-notext.svg.png){width="113" height="48"}
+![Python](images/Python-logo-notext.svg.png){width="50"}
 
-![SQL](images/SQL-Logo-with-Database.png){width="113" height="48"}
+![SQL](images/SQL-Logo-with-Database.png){width="50"}
 
 Languages
 :::
