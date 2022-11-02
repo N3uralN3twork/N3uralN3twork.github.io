@@ -39,14 +39,11 @@ website:
         text: Welcome
       - href: aboutme.qmd
         text: Who am I?
-      - explore.qmd
       - section: quarto-workflows/index.qmd
         contents: 
           - quarto-workflows/browser.md
           - quarto-workflows/rstudio.qmd
-          - quarto-workflows/jupyter.md 
-      - href: transition-from-rmarkdown.qmd
-        text: Transition from Rmd
+          - quarto-workflows/jupyter.md
       - href: resumes.qmd
         text: Resumes
       - href: projects.qmd
