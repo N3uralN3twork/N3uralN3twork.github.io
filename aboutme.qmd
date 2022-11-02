@@ -1,5 +1,6 @@
 ---
 title: "About Me"
+description: "I'm available for data analysis and data visualization projects."
 about:
   id: hero-heading
   template: trestles
@@ -41,6 +42,18 @@ Cleveland State University \| Cleveland, OH
 Data Analyst \| Progressive Insurance \| July 2021 - Present
 
 Graduate Assistant \| Cleveland State University \| Aug. 2019 - Dec. 2021
+:::
+
+### Tech Stack:
+
+::: {#fig-languages layout-ncol="3"}
+![R](images/RStudio-Logo-Flat.png){width="113" height="48"}
+
+![Python](images/Python-logo-notext.svg.png){width="113" height="48"}
+
+![SQL](images/SQL-Logo-with-Database.png){width="113" height="48"}
+
+Languages
 :::
 
 ### Remarks
