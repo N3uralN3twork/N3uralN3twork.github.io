@@ -39,11 +39,6 @@ website:
         text: Welcome
       - href: aboutme.qmd
         text: Who am I?
-      - section: quarto-workflows/index.qmd
-        contents: 
-          - quarto-workflows/browser.md
-          - quarto-workflows/rstudio.qmd
-          - quarto-workflows/jupyter.md
       - href: resumes.qmd
         text: Resumes
       - href: projects.qmd
@@ -71,3 +66,4 @@ filters:
   - quarto
 
   
+
