@@ -152,7 +152,7 @@ Given forestry data from four wilderness areas in Roosevelt National Forest, cla
 The forest cover type problem requires a prediction of the type of trees that are growing on a plot of land from a variety of descriptive features that affect which species are able to grow in those conditions.An effective model would be able to accurately predict the cover type, allowing researchers to make these predictions without using remotely sensed data.There are 12 predictor variables that can be used to predict the cover type.Table 1 below summarizes each of these predictors. Each observation in the dataset consists of measurements from these variables from a 30 meter by 30 meter plot of land in northern Colorado.There are 581,012 observations in this dataset.The dataset was released in 1998.
 
 | Variable Name                      | Type         | Measurement Unit        | Description                                             |
-|------------------------------------|--------------|-------------------------|---------------------------------------------------------|
+|----------------|---------------|---------------|---------------------------|
 | Elevation                          | Quantitative | Meters                  | Elevation in Meters                                     |
 | Aspect                             | Quantitative | Azimuthal Angle         | Aspect in Degrees Azimuth                               |
 | Slope                              | Quantitative | Degrees                 | Slope in Degrees                                        |

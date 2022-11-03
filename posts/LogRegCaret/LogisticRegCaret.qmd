@@ -12,7 +12,7 @@ image: CarrotImage.jpg
 image-alt: caret in R
 ---
 
-[Logistic Regression](https://www.r-bloggers.com/evaluating-logistic-regression-models/ "R-bloggers")
+[Logistic Regression](https://www.r-bloggers.com/evaluating-logistic-regression-models/)
 
 # Goals:
 
@@ -30,11 +30,12 @@ This project will be using the *German Credit* dataset from the caret package. G
 
 ```{r echo = TRUE}
 library(caret)
+library(readr)
+library(jsonlite)
 data("GermanCredit")
-mydata <- read.csv("https://stats.idre.ucla.edu/stat/data/binary.csv")
+mydata <- read_csv("https://stats.idre.ucla.edu/stat/data/binary.csv")
 
 mydata$rank <- factor(mydata$rank)
-
 ```
 
 ## Step 1. Split the data into training and test sets
@@ -154,6 +155,5 @@ To interpret the probit coefficients and output:
 -   For a one unit increase in **gre**, the z-score of admission increases by 0.001.
 -   For a one unit increase in **gpa**, the z-score of admission increases by 0.478. \*Attending a rank 2 school decreases the z-score of admission by 0.4154 compared to a rank 1 school.
 -   Null deviance represents the difference between a full model and a model with just the y-intercept as a coefficient. The goal is for the model to have a low residual deviance.
-
 
 
