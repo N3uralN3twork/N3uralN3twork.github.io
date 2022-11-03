@@ -260,7 +260,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
    
   <ul>
   <li><a href="#goals" id="toc-goals" class="nav-link active" data-scroll-target="#goals">Goals:</a></li>
-  <li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes">Notes:</a></li>
+  <li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes">Notes:</a>
+  <ul class="collapse">
+  <li><a href="#step-1.-split-the-data-into-training-and-test-sets" id="toc-step-1.-split-the-data-into-training-and-test-sets" class="nav-link" data-scroll-target="#step-1.-split-the-data-into-training-and-test-sets">Step 1. Split the data into training and test sets</a></li>
+  <li><a href="#model-evaluation-and-diagnostics" id="toc-model-evaluation-and-diagnostics" class="nav-link" data-scroll-target="#model-evaluation-and-diagnostics">Model Evaluation and Diagnostics</a>
+  <ul class="collapse">
+  <li><a href="#likelihood-ratio-test" id="toc-likelihood-ratio-test" class="nav-link" data-scroll-target="#likelihood-ratio-test">1. Likelihood Ratio Test:</a></li>
+  <li><a href="#pseudo-r2" id="toc-pseudo-r2" class="nav-link" data-scroll-target="#pseudo-r2">2. Pseudo R^2</a></li>
+  <li><a href="#hosmer-lemeshow-test" id="toc-hosmer-lemeshow-test" class="nav-link" data-scroll-target="#hosmer-lemeshow-test">3. Hosmer-Lemeshow Test</a></li>
+  <li><a href="#variable-importance" id="toc-variable-importance" class="nav-link" data-scroll-target="#variable-importance">4. Variable Importance</a></li>
+  <li><a href="#confusion-matrix" id="toc-confusion-matrix" class="nav-link" data-scroll-target="#confusion-matrix">5. Confusion Matrix</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#probit-regression" id="toc-probit-regression" class="nav-link" data-scroll-target="#probit-regression">Probit Regression:</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/N3uralN3twork/n3uraln3twork.github.io/edit/main/posts/logistic-regress-caret/logregcaret.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/N3uralN3twork/n3uraln3twork.github.io/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -287,12 +299,298 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Predicted probability of an event occurring: <span class="math inline">p = 1/(1+\exp^{-z})</span></li>
 </ul>
 <p>This project will be using the <em>German Credit</em> dataset from the caret package. Goal is to predict whether a consumer is good or bad for business.</p>
+<p>This project will be using the <em>German Credit</em> dataset from the caret package. Goal is to predict whether a consumer is good or bad for business.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(stats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(caret)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: ggplot2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: lattice</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">library</span>(jsonlite)</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="fu">data</span>(<span class="st">"GermanCredit"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4"></a>mydata <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://stats.idre.ucla.edu/stat/data/binary.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 400 Columns: 4</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (4): admit, gre, gpa, rank
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>mydata<span class="sc">$</span>rank <span class="ot">&lt;-</span> <span class="fu">factor</span>(mydata<span class="sc">$</span>rank)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<section id="step-1.-split-the-data-into-training-and-test-sets" class="level2">
+<h2 class="anchored" data-anchor-id="step-1.-split-the-data-into-training-and-test-sets">Step 1. Split the data into training and test sets</h2>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">set.seed</span>(<span class="dv">12345789</span>)</span>
+<span id="cb8-2"><a href="#cb8-2"></a>inTrain <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(<span class="at">y =</span> GermanCredit<span class="sc">$</span>Class, <span class="at">p =</span> <span class="fl">0.6</span>, <span class="at">list =</span> <span class="cn">FALSE</span>, )</span>
+<span id="cb8-3"><a href="#cb8-3"></a>training <span class="ot">&lt;-</span> GermanCredit[inTrain, ]</span>
+<span id="cb8-4"><a href="#cb8-4"></a>testing  <span class="ot">&lt;-</span> GermanCredit[<span class="sc">-</span>inTrain, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>To create the logistic model, we’ll use the <em>train</em> function from caret.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>lmodel <span class="ot">&lt;-</span> <span class="fu">train</span>(Class <span class="sc">~</span> Age <span class="sc">+</span> ForeignWorker <span class="sc">+</span> Property.RealEstate <span class="sc">+</span> Housing.Own <span class="sc">+</span> CreditHistory.Critical,</span>
+<span id="cb9-2"><a href="#cb9-2"></a>                <span class="at">data =</span> training,</span>
+<span id="cb9-3"><a href="#cb9-3"></a>                <span class="at">method =</span> <span class="st">"glm"</span>,</span>
+<span id="cb9-4"><a href="#cb9-4"></a>                <span class="at">family =</span> <span class="st">"binomial"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>To obtain the odds for the coefficients and remove the log:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">exp</span>(<span class="fu">coef</span>(lmodel<span class="sc">$</span>finalModel))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>           (Intercept)                    Age          ForeignWorker 
+             3.0516947              1.0095028              0.2494196 
+   Property.RealEstate            Housing.Own CreditHistory.Critical 
+             1.7752920              1.7580389              2.2363912 </code></pre>
+</div>
+</div>
+<p>Keep in mind that you can’t just read the coefficients like you would in simple linear regression.</p>
+<p>For example, our model is suggesting that for every one unit increase in <em>Age</em>, the <strong>(odds)</strong> of the consumer having good credit increases by a factor of 1.02</p>
+<p>95% Confidence Interval for terms:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>logistic <span class="ot">=</span> <span class="fu">glm</span>(Class <span class="sc">~</span> Age <span class="sc">+</span> ForeignWorker <span class="sc">+</span> Property.RealEstate <span class="sc">+</span> Housing.Own <span class="sc">+</span> CreditHistory.Critical,</span>
+<span id="cb12-2"><a href="#cb12-2"></a>                <span class="at">data =</span> training,</span>
+<span id="cb12-3"><a href="#cb12-3"></a>                <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
+<span id="cb12-4"><a href="#cb12-4"></a></span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="fu">cbind</span>(<span class="at">OR =</span> <span class="fu">exp</span>(<span class="fu">coef</span>(logistic)), <span class="fu">exp</span>(<span class="fu">confint</span>(logistic)), <span class="at">pValue =</span> (<span class="fu">summary</span>(logistic)<span class="sc">$</span>coefficients[, <span class="dv">4</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Waiting for profiling to be done...</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                              OR      2.5 %     97.5 %       pValue
+(Intercept)            3.0516947 0.74027688 20.9221296 0.1700607984
+Age                    1.0095028 0.99357880  1.0262071 0.2501534852
+ForeignWorker          0.2494196 0.03925941  0.8803206 0.0651729645
+Property.RealEstate    1.7752920 1.15611482  2.7758529 0.0100252083
+Housing.Own            1.7580389 1.18604549  2.6003291 0.0047917432
+CreditHistory.Critical 2.2363912 1.45002355  3.5270854 0.0003723358</code></pre>
+</div>
+</div>
+<p>Essentially, if the confidence interval contains 1, it is not very helpful</p>
+<p>##Making Predictions: To make predictions, simple use the <em>predict</em> function from base R.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>predictions <span class="ot">=</span> <span class="fu">predict</span>(lmodel, <span class="at">newdata =</span> testing, <span class="at">type =</span> <span class="st">"prob"</span>)</span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="fu">head</span>(predictions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>         Bad      Good
+2  0.2547727 0.7452273
+6  0.4854772 0.5145228
+10 0.2040837 0.7959163
+15 0.5020246 0.4979754
+17 0.1683434 0.8316566
+18 0.3710473 0.6289527</code></pre>
+</div>
+</div>
+</section>
+<section id="model-evaluation-and-diagnostics" class="level2">
+<h2 class="anchored" data-anchor-id="model-evaluation-and-diagnostics">Model Evaluation and Diagnostics</h2>
+<p>Is this model any good? How well does it fit our data? Which predictors are the most important?</p>
+<section id="likelihood-ratio-test" class="level3">
+<h3 class="anchored" data-anchor-id="likelihood-ratio-test">1. Likelihood Ratio Test:</h3>
+<p>Tests whether the full model or a lesser model is the better fit for the data. A smaller p-value provides sufficient evidence that the full model is better than a reduced model.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>mod_fit_one <span class="ot">&lt;-</span> <span class="fu">glm</span>(Class <span class="sc">~</span> Age <span class="sc">+</span> ForeignWorker <span class="sc">+</span> Property.RealEstate <span class="sc">+</span> Housing.Own <span class="sc">+</span> </span>
+<span id="cb17-2"><a href="#cb17-2"></a>                     CreditHistory.Critical,</span>
+<span id="cb17-3"><a href="#cb17-3"></a>                   <span class="at">data=</span>training,</span>
+<span id="cb17-4"><a href="#cb17-4"></a>                   <span class="at">family=</span><span class="st">"binomial"</span>)</span>
+<span id="cb17-5"><a href="#cb17-5"></a>mod_fit_two <span class="ot">&lt;-</span> <span class="fu">glm</span>(Class <span class="sc">~</span> Age <span class="sc">+</span> ForeignWorker,</span>
+<span id="cb17-6"><a href="#cb17-6"></a>                   <span class="at">data=</span>training,</span>
+<span id="cb17-7"><a href="#cb17-7"></a>                   <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"logit"</span>))</span>
+<span id="cb17-8"><a href="#cb17-8"></a></span>
+<span id="cb17-9"><a href="#cb17-9"></a><span class="fu">anova</span>(mod_fit_one, mod_fit_two, <span class="at">test =</span><span class="st">"Chisq"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table
+
+Model 1: Class ~ Age + ForeignWorker + Property.RealEstate + Housing.Own + 
+    CreditHistory.Critical
+Model 2: Class ~ Age + ForeignWorker
+  Resid. Df Resid. Dev Df Deviance  Pr(&gt;Chi)    
+1       594     691.14                          
+2       597     723.12 -3  -31.976 5.294e-07 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p><strong>Conclusion</strong> The full model is a better fit than a reduced model.</p>
+</section>
+<section id="pseudo-r2" class="level3">
+<h3 class="anchored" data-anchor-id="pseudo-r2">2. Pseudo R^2</h3>
+<p>Linear regression has the well-known <span class="math inline">R^{2}</span>. However, logistic regression does not, so we’ll use something called McFadden’s <span class="math inline">R^{2}</span>, which is given by: <span class="math inline">1-\frac{ln(LM)}{ln(L0)}</span> where ln(LM) is the log likelihood value for the fitted model and ln(L0) is the log likelihood for the null model with just the intercept. Values closer to 0 indicate less predictive power and values closer to 1 indicate more predictive power.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">library</span>(pscl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Classes and Methods for R developed in the
+Political Science Computational Laboratory
+Department of Political Science
+Stanford University
+Simon Jackman
+hurdle and zeroinfl functions by Achim Zeileis</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">pR2</span>(mod_fit_one)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>fitting null model for pseudo-r2</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          llh       llhNull            G2      McFadden          r2ML 
+-345.57110076 -366.51858123   41.89496095    0.05715257    0.06744294 
+         r2CU 
+   0.09562580 </code></pre>
+</div>
+</div>
+<p>The output above indicates that are model has low predictive power</p>
+</section>
+<section id="hosmer-lemeshow-test" class="level3">
+<h3 class="anchored" data-anchor-id="hosmer-lemeshow-test">3. Hosmer-Lemeshow Test</h3>
+<p>This test examines whether the proportion of events are similar to the predicted probabilities of occurrence in subgroups of the data using a chi-square test. <strong>Interpretation:</strong> Small values with large p-values indicate a good fit to the data while large values with p-values below 0.05 indicate a poor fit. Null hypothesis: the model fits the data</p>
+</section>
+<section id="variable-importance" class="level3">
+<h3 class="anchored" data-anchor-id="variable-importance">4. Variable Importance</h3>
+<p>Measures the absolute value of the t-statistic for each model parameter</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">varImp</span>(lmodel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>glm variable importance
+
+                       Overall
+CreditHistory.Critical  100.00
+Housing.Own              69.35
+Property.RealEstate      59.15
+ForeignWorker            28.81
+Age                       0.00</code></pre>
+</div>
+</div>
+</section>
+<section id="confusion-matrix" class="level3">
+<h3 class="anchored" data-anchor-id="confusion-matrix">5. Confusion Matrix</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>preds <span class="ot">=</span> <span class="fu">predict</span>(lmodel, <span class="at">newdata =</span> testing)</span>
+<span id="cb26-2"><a href="#cb26-2"></a><span class="fu">confusionMatrix</span>(<span class="at">data =</span> preds, <span class="at">reference =</span> testing<span class="sc">$</span>Class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Confusion Matrix and Statistics
+
+          Reference
+Prediction Bad Good
+      Bad   12   15
+      Good 108  265
+                                          
+               Accuracy : 0.6925          
+                 95% CI : (0.6447, 0.7374)
+    No Information Rate : 0.7             
+    P-Value [Acc &gt; NIR] : 0.651           
+                                          
+                  Kappa : 0.0596          
+                                          
+ Mcnemar's Test P-Value : &lt;2e-16          
+                                          
+            Sensitivity : 0.1000          
+            Specificity : 0.9464          
+         Pos Pred Value : 0.4444          
+         Neg Pred Value : 0.7105          
+             Prevalence : 0.3000          
+         Detection Rate : 0.0300          
+   Detection Prevalence : 0.0675          
+      Balanced Accuracy : 0.5232          
+                                          
+       'Positive' Class : Bad             
+                                          </code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="probit-regression" class="level1">
+<h1>Probit Regression:</h1>
+<p><span class="math inline">E(Y|X) = P(Y=1|X)</span></p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>myprobit <span class="ot">&lt;-</span> <span class="fu">glm</span>(admit <span class="sc">~</span> gre <span class="sc">+</span> gpa <span class="sc">+</span> rank,</span>
+<span id="cb28-2"><a href="#cb28-2"></a>                <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"probit"</span>),</span>
+<span id="cb28-3"><a href="#cb28-3"></a>                <span class="at">data =</span> mydata)</span>
+<span id="cb28-4"><a href="#cb28-4"></a><span class="fu">summary</span>(myprobit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = admit ~ gre + gpa + rank, family = binomial(link = "probit"), 
+    data = mydata)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.6163  -0.8710  -0.6389   1.1560   2.1035  
+
+Coefficients:
+             Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept) -2.386836   0.673946  -3.542 0.000398 ***
+gre          0.001376   0.000650   2.116 0.034329 *  
+gpa          0.477730   0.197197   2.423 0.015410 *  
+rank2       -0.415399   0.194977  -2.131 0.033130 *  
+rank3       -0.812138   0.208358  -3.898 9.71e-05 ***
+rank4       -0.935899   0.245272  -3.816 0.000136 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 499.98  on 399  degrees of freedom
+Residual deviance: 458.41  on 394  degrees of freedom
+AIC: 470.41
+
+Number of Fisher Scoring iterations: 4</code></pre>
+</div>
+</div>
+<p>As is evident, all model terms are statistically significant at <span class="math inline">\alpha = 0.05</span></p>
+<p>To interpret the probit coefficients and output:</p>
+<ul>
+<li>For a one unit increase in <strong>gre</strong>, the z-score of admission increases by 0.001.</li>
+<li>For a one unit increase in <strong>gpa</strong>, the z-score of admission increases by 0.478. *Attending a rank 2 school decreases the z-score of admission by 0.4154 compared to a rank 1 school.</li>
+<li>Null deviance represents the difference between a full model and a model with just the y-intercept as a coefficient. The goal is for the model to have a low residual deviance.</li>
+</ul>
 
 
 </section>
