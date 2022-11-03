@@ -1,0 +1,14 @@
+{
+  "hash": "3b14056bd910db297a12944ce72553a8",
+  "result": {
+    "markdown": "---\ntitle: \"Logistic Regression with caret\"\ndescription: \"A quick notebook on how to create and interpret LR models.\"\nauthor: \"Matthias Quinn\"\ndate: \"10/26/2019\"\ncategories:\n  - code\n  - ML\n  - algorithms\n  - college\nimage: CarrotImage.jpg\nimage-alt: caret in R\n---\n\n\n[Logistic Regression](https://www.r-bloggers.com/evaluating-logistic-regression-models/)\n\n# Goals:\n\n1.  Learn the basics of a logistic regression\n2.  Learn how to implement logistic regression in R with Caret\n\n# Notes:\n\n-   Logistic Regression is suited for categorical response variables and one or more predictor variables.\n-   $Log(Odds) = \\beta1*X1+...\\beta N*Xn$\n-   The log(odds) ratio is $ln[p/(1-p)]$\n-   Predicted probability of an event occurring: $p = 1/(1+\\exp^{-z})$\n\nThis project will be using the *German Credit* dataset from the caret package. Goal is to predict whether a consumer is good or bad for business.\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(stats)\n```\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
