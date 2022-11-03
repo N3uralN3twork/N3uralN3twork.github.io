@@ -16,7 +16,7 @@ image-alt: caret in R
 
 # Goals:
 
-1.  Learn what logistic regression is
+1.  Learn the basics of a logistic regression
 2.  Learn how to implement logistic regression in R with Caret
 
 # Notes:
