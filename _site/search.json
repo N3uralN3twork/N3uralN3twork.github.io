@@ -32,7 +32,7 @@
     "href": "posts/logistic-regress-caret/logregcaret.html",
     "title": "Logistic Regression with caret",
     "section": "",
-    "text": "Logistic Regression"
+    "text": "Goals:\n\nLearn what logistic regression is\nLearn how to implement logistic regression in R with Caret\n\n\n\nNotes:\n\nLogistic Regression is suited for categorical response variables and one or more predictor variables.\nLog(Odds) = \\beta1*X1+...\\beta N*Xn\nThe log(odds) ratio is ln[p/(1-p)]\nPredicted probability of an event occurring: p = 1/(1+\\exp^{-z})\n\nThis project will be using the German Credit dataset from the caret package. Goal is to predict whether a consumer is good or bad for business.\n\n\nCode\nlibrary(jsonlite)"
   },
   {
     "objectID": "posts/logistic-regress-caret/logregcaret.html#step-1.-split-the-data-into-training-and-test-sets",
