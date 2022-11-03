@@ -1,19 +1,159 @@
 ---
-title: "XGBoost"
-description: "A notebook on what XGBoost is and how it works, including a sample application to forest cover types."
-author: "Matthias Quinn, Matthew Brigham"
-date: "12/08/2021"
+title: "Logistic Regression with caret"
+description: "A quick notebook on how to create and interpret LR models."
+author: "Matthias Quinn"
+date: "10/26/2019"
 categories:
   - code
   - ML
   - algorithms
   - college
-image: XGBoost_logo.png
-image-alt: XGBoost's logo
+image: CarrotImage.jpg
+image-alt: caret in R
 ---
 
-```{r}
+[Logistic Regression](https://www.r-bloggers.com/evaluating-logistic-regression-models/)
+
+# Goals:
+
+1.  Learn what logistic regression is
+2.  Learn how to implement logistic regression in R with Caret
+
+# Notes:
+
+-   Logistic Regression is suited for categorical response variables and one or more predictor variables.
+-   $Log(Odds) = \beta1*X1+...\beta N*Xn$
+-   The log(odds) ratio is $ln[p/(1-p)]$
+-   Predicted probability of an event occurring: $p = 1/(1+\exp^{-z})$
+
+This project will be using the *German Credit* dataset from the caret package. Goal is to predict whether a consumer is good or bad for business.
+
+```{r, echo = TRUE, warning=FALSE}
+library(caret)
 library(readr)
-library(ggplot2)
+library(jsonlite)
+data("GermanCredit")
+mydata <- read_csv("https://stats.idre.ucla.edu/stat/data/binary.csv")
+
+mydata$rank <- factor(mydata$rank)
 ```
+
+## Step 1. Split the data into training and test sets
+
+```{r, echo = TRUE, results='hide'}
+set.seed(12345789)
+inTrain <- createDataPartition(y = GermanCredit$Class, p = 0.6, list = FALSE, )
+training <- GermanCredit[inTrain, ]
+testing  <- GermanCredit[-inTrain, ]
+```
+
+To create the logistic model, we'll use the *train* function from caret.
+
+```{r}
+lmodel <- train(Class ~ Age + ForeignWorker + Property.RealEstate + Housing.Own + CreditHistory.Critical,
+                data = training,
+                method = "glm",
+                family = "binomial")
+```
+
+To obtain the odds for the coefficients and remove the log:
+
+```{r}
+exp(coef(lmodel$finalModel))
+```
+
+Keep in mind that you can't just read the coefficients like you would in simple linear regression.
+
+For example, our model is suggesting that for every one unit increase in *Age*, the **(odds)** of the consumer having good credit increases by a factor of 1.02
+
+95% Confidence Interval for terms:
+
+```{r}
+logistic = glm(Class ~ Age + ForeignWorker + Property.RealEstate + Housing.Own + CreditHistory.Critical,
+                data = training,
+                family = "binomial")
+
+cbind(OR = exp(coef(logistic)), exp(confint(logistic)), pValue = (summary(logistic)$coefficients[, 4]))
+```
+
+Essentially, if the confidence interval contains 1, it is not very helpful
+
+##Making Predictions: To make predictions, simple use the *predict* function from base R.
+
+```{r}
+predictions = predict(lmodel, newdata = testing, type = "prob")
+head(predictions)
+```
+
+## Model Evaluation and Diagnostics
+
+Is this model any good? How well does it fit our data? Which predictors are the most important?
+
+### 1. Likelihood Ratio Test:
+
+Tests whether the full model or a lesser model is the better fit for the data. A smaller p-value provides sufficient evidence that the full model is better than a reduced model.
+
+```{r}
+mod_fit_one <- glm(Class ~ Age + ForeignWorker + Property.RealEstate + Housing.Own + 
+                     CreditHistory.Critical,
+                   data=training,
+                   family="binomial")
+mod_fit_two <- glm(Class ~ Age + ForeignWorker,
+                   data=training,
+                   family = binomial(link = "logit"))
+
+anova(mod_fit_one, mod_fit_two, test ="Chisq")
+```
+
+**Conclusion** The full model is a better fit than a reduced model.
+
+### 2. Pseudo R\^2
+
+Linear regression has the well-known $R^{2}$. However, logistic regression does not, so we'll use something called McFadden's $R^{2}$, which is given by: $1-\frac{ln(LM)}{ln(L0)}$ where ln(LM) is the log likelihood value for the fitted model and ln(L0) is the log likelihood for the null model with just the intercept. Values closer to 0 indicate less predictive power and values closer to 1 indicate more predictive power.
+
+```{r, warning=FALSE}
+library(pscl)
+pR2(mod_fit_one)
+```
+
+The output above indicates that are model has low predictive power
+
+### 3. Hosmer-Lemeshow Test
+
+This test examines whether the proportion of events are similar to the predicted probabilities of occurrence in subgroups of the data using a chi-square test. **Interpretation:** Small values with large p-values indicate a good fit to the data while large values with p-values below 0.05 indicate a poor fit. Null hypothesis: the model fits the data
+
+### 4. Variable Importance
+
+Measures the absolute value of the t-statistic for each model parameter
+
+```{r}
+varImp(lmodel)
+```
+
+### 5. Confusion Matrix
+
+```{r}
+preds = predict(lmodel, newdata = testing)
+confusionMatrix(data = preds, reference = testing$Class)
+```
+
+# Probit Regression:
+
+$E(Y|X) = P(Y=1|X)$
+
+```{r}
+myprobit <- glm(admit ~ gre + gpa + rank,
+                family = binomial(link = "probit"),
+                data = mydata)
+summary(myprobit)
+```
+
+As is evident, all model terms are statistically significant at $\alpha = 0.05$
+
+To interpret the probit coefficients and output:
+
+-   For a one unit increase in **gre**, the z-score of admission increases by 0.001.
+-   For a one unit increase in **gpa**, the z-score of admission increases by 0.478. \*Attending a rank 2 school decreases the z-score of admission by 0.4154 compared to a rank 1 school.
+-   Null deviance represents the difference between a full model and a model with just the y-intercept as a coefficient. The goal is for the model to have a low residual deviance.
+
 
