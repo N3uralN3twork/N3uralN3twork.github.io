@@ -40,7 +40,7 @@ mydata$rank <- factor(mydata$rank)
 ## Step 1. Split the data into training and test sets
 
 ```{r echo = TRUE, results='hide'}
-set.seed
+set.seed(12345789)
 inTrain <- createDataPartition(y = GermanCredit$Class, p = 0.6, list = FALSE, )
 training <- GermanCredit[inTrain, ]
 testing  <- GermanCredit[-inTrain, ]
@@ -59,7 +59,6 @@ To obtain the odds for the coefficients and remove the log:
 
 ```{r}
 exp(coef(lmodel$finalModel))
-
 ```
 
 Keep in mind that you can't just read the coefficients like you would in simple linear regression.
@@ -111,7 +110,7 @@ anova(mod_fit_one, mod_fit_two, test ="Chisq")
 
 Linear regression has the well-known $R^{2}$. However, logistic regression does not, so we'll use something called McFadden's $R^{2}$, which is given by: $1-\frac{ln(LM)}{ln(L0)}$ where ln(LM) is the log likelihood value for the fitted model and ln(L0) is the log likelihood for the null model with just the intercept. Values closer to 0 indicate less predictive power and values closer to 1 indicate more predictive power.
 
-```{r}
+```{r, warning=FALSE}
 library(pscl)
 pR2(mod_fit_one)
 ```
@@ -155,3 +154,6 @@ To interpret the probit coefficients and output:
 -   For a one unit increase in **gre**, the z-score of admission increases by 0.001.
 -   For a one unit increase in **gpa**, the z-score of admission increases by 0.478. \*Attending a rank 2 school decreases the z-score of admission by 0.4154 compared to a rank 1 school.
 -   Null deviance represents the difference between a full model and a model with just the y-intercept as a coefficient. The goal is for the model to have a low residual deviance.
+
+
+
