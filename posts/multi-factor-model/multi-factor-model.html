@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Matthias Quinn, Touw, Lux">
+<meta name="dcterms.date" content="2019-04-04">
+<meta name="description" content="This project is a financial case study on mutual funds and using MFM to predict risk-adjusted scores of execess returns.">
+
+<title>N3uralN3twork’s Website - Multi-factor Model</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../images/Combo-Chart-Icon.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<style>
+    .quarto-title-block .quarto-title-banner {
+      background: #FFAC1C;
+    }
+    </style>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
+
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Multi-factor Model</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title d-none d-lg-block">Multi-factor Model</h1>
+                  <div>
+        <div class="description">
+          This project is a financial case study on mutual funds and using MFM to predict risk-adjusted scores of execess returns.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">code</div>
+                <div class="quarto-category">finance</div>
+                <div class="quarto-category">college</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Matthias Quinn, Touw, Lux </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">April 4, 2019</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-center sidebar-header">
+      <a href="../../" class="sidebar-logo-link">
+      <img src="../../images/QED Logo.jpg" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+      <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/N3uralN3twork/n3uraln3twork.github.io" title="Website" class="sidebar-tool px-1"><i class="bi bi-globe"></i></a>
+    <a href="https://github.com/N3uralN3twork" title="Personal Github" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+    <a href="https://www.linkedin.com/in/matthiasquinn" title="Personal Linkedin" class="sidebar-tool px-1"><i class="bi bi-linkedin"></i></a>
+    <a href="mailto:miq_qedquinn@yahoo.com" title="Contact Me" class="sidebar-tool px-1"><i class="bi bi-question-circle"></i></a>
+  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">Welcome</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../aboutme.html" class="sidebar-item-text sidebar-link">Who am I?</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../resumes.html" class="sidebar-item-text sidebar-link">Resumes</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../projects.html" class="sidebar-item-text sidebar-link">Projects</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../publications.html" class="sidebar-item-text sidebar-link">Papers</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#theoretical-multifactor-model" id="toc-theoretical-multifactor-model" class="nav-link active" data-scroll-target="#theoretical-multifactor-model">Theoretical Multifactor Model:</a>
+  <ul class="collapse">
+  <li><a href="#variables" id="toc-variables" class="nav-link" data-scroll-target="#variables">Variables:</a></li>
+  </ul></li>
+  <li><a href="#fund-truthfulness" id="toc-fund-truthfulness" class="nav-link" data-scroll-target="#fund-truthfulness">Fund Truthfulness:</a>
+  <ul class="collapse">
+  <li><a href="#dtmvx-8300" id="toc-dtmvx-8300" class="nav-link" data-scroll-target="#dtmvx-8300">DTMVX (8300):</a></li>
+  <li><a href="#dvpex-9183" id="toc-dvpex-9183" class="nav-link" data-scroll-target="#dvpex-9183">DVPEX (9183):</a></li>
+  <li><a href="#glcgx-13813" id="toc-glcgx-13813" class="nav-link" data-scroll-target="#glcgx-13813">GLCGX (13813):</a></li>
+  <li><a href="#trbcx-26985" id="toc-trbcx-26985" class="nav-link" data-scroll-target="#trbcx-26985">TRBCX (26985):</a></li>
+  </ul></li>
+  <li><a href="#cost-of-equity-for-apple-inc" id="toc-cost-of-equity-for-apple-inc" class="nav-link" data-scroll-target="#cost-of-equity-for-apple-inc">Cost of Equity for Apple Inc:</a></li>
+  <li><a href="#sources" id="toc-sources" class="nav-link" data-scroll-target="#sources">Sources</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/N3uralN3twork/n3uraln3twork.github.io/edit/main/posts/multi-factor-model/multi-factor-model.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/N3uralN3twork/n3uraln3twork.github.io/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<div class="columns">
+<div class="column" style="width:40%;">
+<section id="goal" class="level2">
+<h2 class="anchored" data-anchor-id="goal">GOAL</h2>
+<p>Utilize what we learned in our advanced investments class to predict and make decisions on whether a variety of funds were providing its investors excess returns (or <span class="math inline">\alpha</span>).</p>
+</section>
+</div><div class="column" style="width:10%;">
+<!-- empty column to create gap -->
+</div><div class="column" style="width:40%;">
+<section id="result" class="level2">
+<h2 class="anchored" data-anchor-id="result">RESULT</h2>
+<p>We made the recommendation to buy AAPL stock because its cost of equity was low compared to what our results had placed it on.</p>
+</section>
+</div>
+</div>
+<section id="theoretical-multifactor-model" class="level2">
+<h2 class="anchored" data-anchor-id="theoretical-multifactor-model">Theoretical Multifactor Model:</h2>
+<p><span class="math display">
+R - R_f = \alpha + \beta_{1}(K_M - R_f) + \beta_{2}(SMB) + \beta_{3}(HML) + \beta_{4}(MOM)
+</span></p>
+<section id="variables" class="level3">
+<h3 class="anchored" data-anchor-id="variables">Variables:</h3>
+<ul>
+<li>MKTRF: <span class="math inline">R_M - R_f</span>, is the excess return on the market</li>
+</ul>
+<!-- -->
+<ul>
+<li><p>SMB: the average return on small portfolios minus the average return on big portfolios</p></li>
+<li><p>HML: the average return on high book-to-market equity firms minus the average return on low book-to-market firms</p></li>
+<li><p>UMD: tendency to invest in recent winners over recent losers</p></li>
+</ul>
+</section>
+</section>
+<section id="fund-truthfulness" class="level2">
+<h2 class="anchored" data-anchor-id="fund-truthfulness">Fund Truthfulness:</h2>
+<section id="dtmvx-8300" class="level3">
+<h3 class="anchored" data-anchor-id="dtmvx-8300">DTMVX (8300):</h3>
+<p>The DTMVX mutual fund invests in mid- and small-cap U.S. stocks, providing cheaper alternatives to competitors, and low value stocks. A linear regression on the excess returns between the period of January 2000 to December 2004 was run to determine if the fund was able to generate significant alpha and to analyze the fund’s holdings relative to the fund’s mandate.</p>
+<ul>
+<li><p>There is insufficient evidence to propose, at the 5% level of significance, that the mutual fund was able to generate statistically significant alpha during the holding period. (<span class="math inline">p=0.8935</span>)</p></li>
+<li><p>There is sufficient evidence to propose, at the 5% level of significance, that the mutual fund invests more aggressively in small cap firms than large cap firms, suggesting the fund managers have kept the fund’s mandate. (<span class="math inline">p &lt; 0.001</span>)</p>
+<p>There is sufficient evidence to propose, at the 5% level of significance, that the mutual fund invests more aggressively in high value firms than low value firms, suggesting the fund managers have kept the fund’s mandate. (<span class="math inline">p &lt; 0.001</span>)</p></li>
+<li><p>There is sufficient evidence to propose, at the 5% level of significance, that the mutual fund invest more in past losers over past winners, suggesting the fund managers have not kept the fund’s mandate. (<span class="math inline">p &lt; 0.001</span>)</p></li>
+</ul>
+</section>
+<section id="dvpex-9183" class="level3">
+<h3 class="anchored" data-anchor-id="dvpex-9183">DVPEX (9183):</h3>
+<p>According to the prospectus, the DVPEX mutual fund aims to provide “a high level of capital appreciation through investment in a diversified portfolio of common stocks of small to medium-sized companies.”</p>
+<ul>
+<li><p>There is sufficient evidence to propose, at the 5% level of significance, that the mutual fund was not able to generate statistically significant alpha during the holding period. (<span class="math inline">p=0.0169</span>)</p></li>
+<li><p>There is sufficient evidence to propose, at the 5% level of significance, that the mutual fund invests more aggressively in small cap firms than large cap firms, suggesting the fund managers have kept the fund’s mandate. (<span class="math inline">p &lt; 0.001</span>)</p></li>
+<li><p>There is sufficient evidence to propose, at the 5% level of significance, that the mutual fund invests more aggressively in high value firms than low value firms, suggesting the fund managers have kept the fund’s mandate. (<span class="math inline">p &lt; 0.001</span>)</p></li>
+<li><p>There is insufficient evidence to propose, at the 5% level of significance, that the mutual fund invest more in past losers over past winners, so it is uncertain whether the fund managers have a preference in losers or winners. It should be noted that failing to reject the null hypothesis does not prove that true value of this beta is equal to zero (although such a value is still a possibility), so further testing should be conducted on the fund’s preferences. (<span class="math inline">p = 0.0633</span>)</p></li>
+</ul>
+</section>
+<section id="glcgx-13813" class="level3">
+<h3 class="anchored" data-anchor-id="glcgx-13813">GLCGX (13813):</h3>
+<p>The GLCGX mutual fund from Goldman Sach’s invest in large cap, high growth, low value stocks with higher risk than just a normal index fund like SPY. Top fund holdings include Apple, Amazon, and Microsoft and top sectors include technology and healthcare. A linear regression on the excess returns between the period of January 2000 to December 2004 was run to determine if the fund was able to generate significant alpha and to analyze the fund’s holdings relative to the fund’s mandate.</p>
+<ul>
+<li><p>There is insufficient evidence to propose, at the 5% level of significance, that the mutual fund was able to generate statistically significant alpha during the holding period. (<span class="math inline">p=0.4205</span>)</p></li>
+<li><p>There is sufficient evidence to propose, at the 5% level of significance, that the mutual fund invests in higher risks stocks than the broad market, suggesting the fund managers have kept the fund’s mandate for high growth. (<span class="math inline">p &lt; 0.001</span>). However, it should be noted that the 95% confidence interval of β_1 is between 0.96048 and 1.12554, indicating that the fund may be more neutral than aggressive in its investment positioning.</p></li>
+<li><p>There is sufficient evidence to propose, at the 5% level of significance, that the mutual fund invests more aggressively in large cap firms than small cap firms, suggesting the fund managers have kept the fund’s mandate. (<span class="math inline">p &lt; 0.0002</span>)</p></li>
+<li><p>There is sufficient evidence to propose, at the 5% level of significance, that the mutual fund invests more aggressively in low value firms than high value firms, suggesting the fund managers have kept the fund’s mandate. (<span class="math inline">p &lt; 0.001</span>)</p></li>
+<li><p>There is insufficient evidence to propose, at the 5% level of significance, that the mutual fund invest more in past losers over past winners, suggesting the fund managers have not kept the fund’s mandate. (<span class="math inline">p &lt; 0.001</span>) It should be noted that the null hypothesis for all of the factors’ betas is equal to 0, so this indicates that there is not enough proof that the fund has a particular preference in losers over winners. This is in line with the fund’s mandate as it does closely mimic the overall market.</p></li>
+</ul>
+</section>
+<section id="trbcx-26985" class="level3">
+<h3 class="anchored" data-anchor-id="trbcx-26985">TRBCX (26985):</h3>
+<p>The TRBCX mutual fund from T. Rowe Price invests in very high growth, very large stocks, while staying away from high value firms. According to Morningstar, 53.48% of the fund is in giant market cap firms and 43.85% is in large cap firms. For sector weights, 22.96% is in consumer cyclical, 29.02% is in technology, and 20.5% is in healthcare.</p>
+<ul>
+<li><p>There is insufficient evidence to propose, at the 5% level of significance, that the mutual fund was able to generate statistically significant alpha during the holding period. (<span class="math inline">p=0.1417</span>)</p></li>
+<li><p>There is sufficient evidence to propose, at the 5% level of significance, that the mutual fund invests more aggressively in large cap firms than small cap firms, suggesting the fund managers have kept the fund’s mandate. (<span class="math inline">p &lt; 0.001</span>)</p></li>
+<li><p>There is sufficient evidence to propose, at the 5% level of significance, that the mutual fund invests more aggressively in low value firms than high value firms, suggesting the fund managers have kept the fund’s mandate. (<span class="math inline">p = 0.0216</span>) It is recommended that further testing should be done on the effect size of this factor, considering the p-value would not be significant at the more rigorous 1% level of significance.</p></li>
+<li><p>There is insufficient evidence to propose, at the 5% level of significance, that the mutual fund invest more in past losers over past winners, so it is uncertain whether the fund managers have a preference in losers or winners. It should be noted that failing to reject the null hypothesis does not prove that true value of this beta is equal to zero (although such a value is still a possibility), so further testing should be conducted on the fund’s preferences. (<span class="math inline">p = 0.5335</span>)</p></li>
+</ul>
+</section>
+</section>
+<section id="cost-of-equity-for-apple-inc" class="level2">
+<h2 class="anchored" data-anchor-id="cost-of-equity-for-apple-inc">Cost of Equity for Apple Inc:</h2>
+<p><span class="math display">
+\hat{Cost of Equity} = R_f + \beta_{1}(\hat{MKTRF}) + \beta_{2}(\hat{SMB}) + \beta_{3}(\hat{HML}) + \beta_{4}(\hat{MOM})
+</span></p>
+<p>We chose the stock of Apple, using data from 1999 - 2004, and estimated a cost of equity of 1.53%. In January of 1999, Apple stock was priced at $1.46, remaining consistent until the end of 1999. During March of 2000, the stock reached its highest price of $4.82, dropping drastically to $1.43 in October of 2000, remaining at similar prices until 2004. We felt that the cost of equity was very low because of the drastic price drop and the relatively constant price from then onward to 2004.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="AAPL%20Stock%20Price.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Apple Stock Price Over Time</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="sources" class="level2">
+<h2 class="anchored" data-anchor-id="sources">Sources</h2>
+<ul>
+<li><a href="https://stackoverflow.com/questions/74162212/two-columns-layout-in-quarto">SO - Two Column Layout in Quarto</a></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">© CC-By Matthias Quinn, 2022</div>   
+    <div class="nav-footer-right">This page is built with ❤️ and <a href="https://quarto.org/">Quarto</a>.</div>
+  </div>
+</footer>
+
+
+
+</body></html>
