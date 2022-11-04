@@ -4,6 +4,7 @@
     "items": [
       "/posts/clustering-indices-project/cluster-indices.html",
       "/posts/xgboost/xgboost.html",
+      "/posts/naive-bayes/NaiveBayes.html",
       "/posts/logistic-regress-caret/logregcaret.html"
     ]
   }
