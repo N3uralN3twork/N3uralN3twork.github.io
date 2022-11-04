@@ -16,6 +16,7 @@ image-alt: Naive Bayes in R
 
 ```{r Introduction, results='hide', echo = TRUE, warning=FALSE, include=FALSE}
 library(modeldata)
+library(klaR)
 library(rsample)
 library(dplyr)
 library(caret)

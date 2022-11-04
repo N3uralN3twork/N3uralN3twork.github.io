@@ -53,7 +53,7 @@
     "href": "posts/naive-bayes/NaiveBayes.html",
     "title": "Naive Bayes",
     "section": "",
-    "text": "Naive Bayes is a supervised machine learning algorithm base on Bayes Theorem.\nNaive because it assumes all of the predictor variables to be completely independent of each other.\nBayes Rule:\nP(A|B) = \\frac{P(B|A)P(A)}{P(B}\nIn Naive Bayes, there are multiple predictor variables and more than 1 output class.\nThe objective of a Naive Bayes algorithm is to measure the conditional probability of an event with a feature vector\nProblem Statement:\nPredict employee attrition\nCreate training (70%) and test (30%) sets and utilize reproducibility.\nDistribution of Attrition rates across train and test sets.\nNotice that they are very similar."
+    "text": "Source\nNaive Bayes is a supervised machine learning algorithm base on Bayes Theorem.\nNaive because it assumes all of the predictor variables to be completely independent of each other.\nBayes Rule:\nP(A|B) = \\frac{P(B|A)P(A)}{P(B}\nIn Naive Bayes, there are multiple predictor variables and more than 1 output class.\nThe objective of a Naive Bayes algorithm is to measure the conditional probability of an event with a feature vector\nProblem Statement:\nPredict employee attrition\nCreate training (70%) and test (30%) sets and utilize reproducibility.\nDistribution of Attrition rates across train and test sets.\nNotice that they are very similar."
   },
   {
     "objectID": "posts/naive-bayes/NaiveBayes.html#advantages-and-shortcoming",
