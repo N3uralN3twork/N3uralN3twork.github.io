@@ -1,0 +1,31 @@
+---
+title: "Miscellaneous"
+description: "A test notebook for multi-column outputs"
+author: "Matthias Quinn"
+date: "11/04/2022"
+categories:
+  - code
+---
+:::: {.columns}
+
+::: {.column width="40%"}
+## GOAL
+
+This project will focus on the famous XGBoost system and its application on a moderately large dataset. Starting with a history of the system, then exploring the algorithm itself, and finally ending with an application to forest cover types, this project will hopefully provide a framework on which to base further research and applications.
+:::
+
+::: {.column width="10%"}
+<!-- empty column to create gap -->
+:::
+
+::: {.column width="40%"}
+## RESULT
+
+Hello there my friend!
+:::
+
+::::
+
+
+## Sources
+* [SO - Two Column Layout in Quarto](https://stackoverflow.com/questions/74162212/two-columns-layout-in-quarto)

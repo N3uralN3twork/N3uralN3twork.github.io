@@ -1,0 +1,115 @@
+---
+title: "Multi-factor Model"
+description: "This project is a financial case study on mutual funds and using MFM to predict risk-adjusted scores of execess returns."
+author: "Matthias Quinn, Touw, Lux"
+date: "04/04/2019"
+categories:
+  - code
+  - finance
+  - college
+image: "factor-models-1.jpg"
+image-alt: "Multi-factor Model"
+---
+
+::: columns
+::: {.column width="40%"}
+## GOAL
+
+Utilize what we learned in our advanced investments class to predict and make decisions on whether a variety of funds were providing its investors excess returns (or $\alpha$).
+:::
+
+::: {.column width="10%"}
+<!-- empty column to create gap -->
+:::
+
+::: {.column width="40%"}
+## RESULT
+
+We made the recommendation to buy AAPL stock because its cost of equity was low compared to what our results had placed it on.
+:::
+:::
+
+## Theoretical Multifactor Model:
+
+$$
+R - R_f = \alpha + \beta_{1}(K_M - R_f) + \beta_{2}(SMB) + \beta_{3}(HML) + \beta_{4}(MOM)
+$$
+
+### Variables:
+
+-   MKTRF: $R_M - R_f$, is the excess return on the market
+
+```{=html}
+<!-- -->
+```
+-   SMB: the average return on small portfolios minus the average return on big portfolios
+
+-   HML: the average return on high book-to-market equity firms minus the average return on low book-to-market firms
+
+-   UMD: tendency to invest in recent winners over recent losers
+
+## Fund Truthfulness:
+
+### DTMVX (8300):
+
+The DTMVX mutual fund invests in mid- and small-cap U.S. stocks, providing cheaper alternatives to competitors, and low value stocks. A linear regression on the excess returns between the period of January 2000 to December 2004 was run to determine if the fund was able to generate significant alpha and to analyze the fund's holdings relative to the fund's mandate.
+
+-   There is insufficient evidence to propose, at the 5% level of significance, that the mutual fund was able to generate statistically significant alpha during the holding period. ($p=0.8935$)
+
+-   There is sufficient evidence to propose, at the 5% level of significance, that the mutual fund invests more aggressively in small cap firms than large cap firms, suggesting the fund managers have kept the fund's mandate. ($p < 0.001$)
+
+    There is sufficient evidence to propose, at the 5% level of significance, that the mutual fund invests more aggressively in high value firms than low value firms, suggesting the fund managers have kept the fund's mandate. ($p < 0.001$)
+
+-   There is sufficient evidence to propose, at the 5% level of significance, that the mutual fund invest more in past losers over past winners, suggesting the fund managers have not kept the fund's mandate. ($p < 0.001$)
+
+### DVPEX (9183):
+
+According to the prospectus, the DVPEX mutual fund aims to provide "a high level of capital appreciation through investment in a diversified portfolio of common stocks of small to medium-sized companies."
+
+-   There is sufficient evidence to propose, at the 5% level of significance, that the mutual fund was not able to generate statistically significant alpha during the holding period. ($p=0.0169$)
+
+-   There is sufficient evidence to propose, at the 5% level of significance, that the mutual fund invests more aggressively in small cap firms than large cap firms, suggesting the fund managers have kept the fund's mandate. ($p < 0.001$)
+
+-   There is sufficient evidence to propose, at the 5% level of significance, that the mutual fund invests more aggressively in high value firms than low value firms, suggesting the fund managers have kept the fund's mandate. ($p < 0.001$)
+
+-   There is insufficient evidence to propose, at the 5% level of significance, that the mutual fund invest more in past losers over past winners, so it is uncertain whether the fund managers have a preference in losers or winners. It should be noted that failing to reject the null hypothesis does not prove that true value of this beta is equal to zero (although such a value is still a possibility), so further testing should be conducted on the fund's preferences. ($p = 0.0633$)
+
+### GLCGX (13813):
+
+The GLCGX mutual fund from Goldman Sach's invest in large cap, high growth, low value stocks with higher risk than just a normal index fund like SPY. Top fund holdings include Apple, Amazon, and Microsoft and top sectors include technology and healthcare. A linear regression on the excess returns between the period of January 2000 to December 2004 was run to determine if the fund was able to generate significant alpha and to analyze the fund's holdings relative to the fund's mandate.
+
+-   There is insufficient evidence to propose, at the 5% level of significance, that the mutual fund was able to generate statistically significant alpha during the holding period. ($p=0.4205$)
+
+-   There is sufficient evidence to propose, at the 5% level of significance, that the mutual fund invests in higher risks stocks than the broad market, suggesting the fund managers have kept the fund's mandate for high growth. ($p < 0.001$). However, it should be noted that the 95% confidence interval of β_1 is between 0.96048 and 1.12554, indicating that the fund may be more neutral than aggressive in its investment positioning.
+
+-   There is sufficient evidence to propose, at the 5% level of significance, that the mutual fund invests more aggressively in large cap firms than small cap firms, suggesting the fund managers have kept the fund's mandate. ($p < 0.0002$)
+
+-   There is sufficient evidence to propose, at the 5% level of significance, that the mutual fund invests more aggressively in low value firms than high value firms, suggesting the fund managers have kept the fund's mandate. ($p < 0.001$)
+
+-   There is insufficient evidence to propose, at the 5% level of significance, that the mutual fund invest more in past losers over past winners, suggesting the fund managers have not kept the fund's mandate. ($p < 0.001$) It should be noted that the null hypothesis for all of the factors' betas is equal to 0, so this indicates that there is not enough proof that the fund has a particular preference in losers over winners. This is in line with the fund's mandate as it does closely mimic the overall market.
+
+### TRBCX (26985):
+
+The TRBCX mutual fund from T. Rowe Price invests in very high growth, very large stocks, while staying away from high value firms. According to Morningstar, 53.48% of the fund is in giant market cap firms and 43.85% is in large cap firms. For sector weights, 22.96% is in consumer cyclical, 29.02% is in technology, and 20.5% is in healthcare.
+
+-   There is insufficient evidence to propose, at the 5% level of significance, that the mutual fund was able to generate statistically significant alpha during the holding period. ($p=0.1417$)
+
+-   There is sufficient evidence to propose, at the 5% level of significance, that the mutual fund invests more aggressively in large cap firms than small cap firms, suggesting the fund managers have kept the fund's mandate. ($p < 0.001$)
+
+-   There is sufficient evidence to propose, at the 5% level of significance, that the mutual fund invests more aggressively in low value firms than high value firms, suggesting the fund managers have kept the fund's mandate. ($p = 0.0216$) It is recommended that further testing should be done on the effect size of this factor, considering the p-value would not be significant at the more rigorous 1% level of significance.
+
+-   There is insufficient evidence to propose, at the 5% level of significance, that the mutual fund invest more in past losers over past winners, so it is uncertain whether the fund managers have a preference in losers or winners. It should be noted that failing to reject the null hypothesis does not prove that true value of this beta is equal to zero (although such a value is still a possibility), so further testing should be conducted on the fund's preferences. ($p = 0.5335$)
+
+## Cost of Equity for Apple Inc:
+
+$$
+\hat{Cost of Equity} = R_f + \beta_{1}(\hat{MKTRF}) + \beta_{2}(\hat{SMB}) + \beta_{3}(\hat{HML}) + \beta_{4}(\hat{MOM})
+$$
+
+We chose the stock of Apple, using data from 1999 - 2004, and estimated a cost of equity of 1.53%. In January of 1999, Apple stock was priced at \$1.46, remaining consistent until the end of 1999. During March of 2000, the stock reached its highest price of \$4.82, dropping drastically to \$1.43 in October of 2000, remaining at similar prices until 2004. We felt that the cost of equity was very low because of the drastic price drop and the relatively constant price from then onward to 2004.
+
+![Apple Stock Price Over Time](AAPL%20Stock%20Price.png){fig-align="center"}
+
+## Sources
+
+-   [SO - Two Column Layout in Quarto](https://stackoverflow.com/questions/74162212/two-columns-layout-in-quarto)

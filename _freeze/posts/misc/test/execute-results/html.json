@@ -1,0 +1,16 @@
+{
+  "hash": "f3f5b1aec180a888c6581ada1461654a",
+  "result": {
+    "markdown": "---\ntitle: \"Miscellaneous\"\ndescription: \"A test notebook for multi-column outputs\"\nauthor: \"Matthias Quinn\"\ndate: \"11/04/2022\"\ncategories:\n  - code\n---\n\n\n\n\n::: {align=\"center\"}\n  <span class=\"h3\">Engine Size vs Fuel Consumption</span>\n::: {}\n\n::: {class=\"d-flex flex-wrap-reverse justify-content-center\"}\n  ::::: {}\n\n    ::: {.cell}\n    ::: {.cell-output .cell-output-stdout}\n    ```\n                       engine economy grossPower weight\n    Hornet 4 Drive        4.2    11.0      82.03   1458\n    Merc 450SL            4.5    13.6     134.23   1692\n    Mazda RX4             2.6    11.2      82.03   1188\n    Maserati Bora         4.9    15.7     249.81   1619\n    Toyota Corolla        1.2     6.9      48.47    832\n    Datsun 710            1.8    10.3      69.35   1052\n    Cadillac Fleetwood    7.7    22.6     152.87   2381\n    Chrysler Imperial     7.2    16.0     171.51   2424\n    Honda Civic           1.2     7.7      38.78    733\n    AMC Javelin           5.0    15.5     111.86   1558\n    ```\n    :::\n    :::\n\n  ::::: {}\n\n  ::::: {.graph}\n\n    ::: {.cell}\n    ::: {.cell-output-display}\n    ![](test_files/figure-html/unnamed-chunk-3-1.png){width=672}\n    :::\n    :::\n\n  ::::: {}\n::: {}",
+    "supporting": [
+      "test_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
