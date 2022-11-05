@@ -2,50 +2,50 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/posts/random-schemas/random-schemas.html</loc>
-    <lastmod>2022-11-05T19:06:44.520Z</lastmod>
+    <lastmod>2022-11-05T19:40:47.083Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/posts/naive-bayes/NaiveBayes.html</loc>
-    <lastmod>2022-11-05T19:06:58.107Z</lastmod>
+    <lastmod>2022-11-05T19:40:59.575Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/posts/xgboost/xgboost.html</loc>
-    <lastmod>2022-11-05T19:06:59.107Z</lastmod>
+    <lastmod>2022-11-05T19:41:00.463Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/posts/multi-factor-model/multi-factor-model.html</loc>
-    <lastmod>2022-11-05T19:06:59.839Z</lastmod>
+    <lastmod>2022-11-05T19:41:01.123Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/posts/logistic-regress-caret/logregcaret.html</loc>
-    <lastmod>2022-11-05T19:07:00.803Z</lastmod>
+    <lastmod>2022-11-05T19:41:02.015Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/posts/misc/test.html</loc>
-    <lastmod>2022-11-05T19:07:01.271Z</lastmod>
+    <lastmod>2022-11-05T19:41:02.479Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/posts/clustering-indices-project/cluster-indices.html</loc>
-    <lastmod>2022-11-05T19:07:01.763Z</lastmod>
+    <lastmod>2022-11-05T19:41:02.935Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/index.html</loc>
-    <lastmod>2022-11-05T19:07:02.235Z</lastmod>
+    <lastmod>2022-11-05T19:41:03.375Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/projects.html</loc>
-    <lastmod>2022-11-05T19:07:02.939Z</lastmod>
+    <lastmod>2022-11-05T19:41:04.019Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/aboutme.html</loc>
-    <lastmod>2022-11-05T19:07:03.463Z</lastmod>
+    <lastmod>2022-11-05T19:41:04.483Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/publications.html</loc>
-    <lastmod>2022-11-05T19:07:03.947Z</lastmod>
+    <lastmod>2022-11-05T19:41:04.947Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/resumes.html</loc>
-    <lastmod>2022-11-05T19:07:04.399Z</lastmod>
+    <lastmod>2022-11-05T19:41:05.371Z</lastmod>
   </url>
 </urlset>
