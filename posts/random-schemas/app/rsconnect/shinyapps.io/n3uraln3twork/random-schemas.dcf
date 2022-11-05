@@ -4,10 +4,10 @@ username:
 account: n3uraln3twork
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
-appId: 7530054
-bundleId: 6477730
+appId: 7534175
+bundleId: 6479618
 url: https://n3uraln3twork.shinyapps.io/random-schemas/
-when: 1667614498.92081
-lastSyncTime: 1667614498.92082
+when: 1667674761.83177
+lastSyncTime: 1667674761.83178
 asMultiple: FALSE
 asStatic: FALSE

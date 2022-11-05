@@ -14,8 +14,8 @@ library(dplyr)        # For the row_number and unite functions
 library(tidyr)        # For the row_count function
 library(shinythemes)  # For aesthetics
 library(shinyWidgets) # For aesthetics
-library(DT)           # For displaying the data table
 library(randomizr)    # For the block_ra function
+library(DT)           # For neater-looking output
 
 ################################################################################
 ###                           NOTES:                                         ###
@@ -347,17 +347,6 @@ ui <- fluidPage(
                       numericInput(inputId = "BlockSize",
                                    label = "Please input the number of subjects per block:",
                                    value = 1),
-
-                      switchInput(inputId = "Copy",
-                                  label = "Reproducible",
-                                  labelWidth = "80px",
-                                  value = FALSE),
-                      
-                      conditionalPanel(
-                        condition = "input.Copy == TRUE",
-                        numericInput(inputId = "SeedNum",
-                                     label = "Seed:",
-                                     value = 123)),
                       
                       # Ownership
                       tags$strong("Author: Matt Quinn",
@@ -460,16 +449,14 @@ server <- function(input, output, session){
         NSubjects = input$NSubjects,
         RRatio = input$RRatio,
         BlockSize = input$BlockSize,
-        if (input$Copy == TRUE){
-          seed = input$SeedNum}
-        else {
-          seed = NULL})})
+        seed = NULL
+        )})
 
     # Output the schema:
     output$table <- DT::renderDataTable({
         FINAL()}
     )
-
+    
     # Instructions via HTML:
     observeEvent(input$Instructions, {
         show_alert(
