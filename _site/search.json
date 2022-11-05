@@ -151,7 +151,7 @@
     "href": "projects.html",
     "title": "Projects",
     "section": "",
-    "text": "code\n\n\n\n\nA test notebook for multi-column outputs\n\n\n\n\n\n\nNov 4, 2022\n\n\nMatthias Quinn\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\ncode\n\n\nML\n\n\nalgorithms\n\n\ncollege\n\n\n\n\nThis project was the seminal work of my master’s degree in statistics.\n\n\n\n\n\n\nNov 1, 2022\n\n\nMatthias Quinn\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\ncode\n\n\nML\n\n\nalgorithms\n\n\ncollege\n\n\n\n\nA notebook on what XGBoost is and how it works, including a sample application to forest cover types.\n\n\n\n\n\n\nDec 8, 2021\n\n\nMatthias Quinn, Matthew Brigham\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\ncode\n\n\nML\n\n\nalgorithms\n\n\ncollege\n\n\n\n\nA quick notebook on how to create and interpret naive bayes models.\n\n\n\n\n\n\nJan 29, 2020\n\n\nMatthias Quinn\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\ncode\n\n\nML\n\n\nalgorithms\n\n\ncollege\n\n\n\n\nA quick notebook on how to create and interpret LR models.\n\n\n\n\n\n\nOct 26, 2019\n\n\nMatthias Quinn\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\ncode\n\n\nfinance\n\n\ncollege\n\n\n\n\nThis project is a financial case study on mutual funds and using MFM to predict risk-adjusted scores of execess returns.\n\n\n\n\n\n\nApr 4, 2019\n\n\nMatthias Quinn, Touw, Lux\n\n\n\n\n\n\nNo matching items"
+    "text": "code\n\n\n\n\nA test notebook for multi-column outputs\n\n\n\n\n\n\nNov 4, 2022\n\n\nMatthias Quinn\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\ncode\n\n\nML\n\n\nalgorithms\n\n\ncollege\n\n\n\n\nThis project was the seminal work of my master’s degree in statistics.\n\n\n\n\n\n\nNov 1, 2022\n\n\nMatthias Quinn\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\ncode\n\n\nML\n\n\nalgorithms\n\n\ncollege\n\n\n\n\nA notebook on what XGBoost is and how it works, including a sample application to forest cover types.\n\n\n\n\n\n\nDec 8, 2021\n\n\nMatthias Quinn, Matthew Brigham\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\ncode\n\n\nstatistics\n\n\ndesigns\n\n\ncollege\n\n\n\n\nThis project is a full demonstration of designing an experiment, with an application in Shiny.\n\n\n\n\n\n\nSep 18, 2020\n\n\nMatthias Quinn\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\ncode\n\n\nML\n\n\nalgorithms\n\n\ncollege\n\n\n\n\nA quick notebook on how to create and interpret naive bayes models.\n\n\n\n\n\n\nJan 29, 2020\n\n\nMatthias Quinn\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\ncode\n\n\nML\n\n\nalgorithms\n\n\ncollege\n\n\n\n\nA quick notebook on how to create and interpret LR models.\n\n\n\n\n\n\nOct 26, 2019\n\n\nMatthias Quinn\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\ncode\n\n\nfinance\n\n\ncollege\n\n\n\n\nThis project is a financial case study on mutual funds and using MFM to predict risk-adjusted scores of execess returns.\n\n\n\n\n\n\nApr 4, 2019\n\n\nMatthias Quinn, Touw, Lux\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "publications.html",
@@ -166,5 +166,12 @@
     "title": "Resumes",
     "section": "",
     "text": "Notice\n\n\n\nAdditional information coming soon!"
+  },
+  {
+    "objectID": "posts/random-schemas/random-schemas.html",
+    "href": "posts/random-schemas/random-schemas.html",
+    "title": "Randomization Schemas",
+    "section": "",
+    "text": "Let’s say we’re a researcher interested in deciding which treatment to give to our target audience. Since we want to make sure we follow proper guidelines, we decide to reach out to a friend of ours, a statistician, for advice.\nShe says that a good practice would be to create a credible, experimental design to find what we’re looking for. This project is essentially a reproducible example of our goals with the following condition:\n\nWrite a completely randomized design schema for S subjects at T sites in blocks of B where randomization is N:D in terms of treatment to control.\n\n\nRunning Example:\n30 subjects at site one in blocks of 6 where the randomization of treatment to control is 1:1\n\n\nSolution:\nSetting a seed is necessary for reproducibility.\nAlso, having explainable code was a requirement for this project, as the client may have wanted to know how to make changes in the future."
   }
 ]

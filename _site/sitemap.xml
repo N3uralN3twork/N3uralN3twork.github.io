@@ -2,11 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/aboutme.html</loc>
-    <lastmod>2022-11-04T18:17:06.665Z</lastmod>
+    <lastmod>2022-11-05T02:30:39.653Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/index.html</loc>
-    <lastmod>2022-11-04T18:17:07.239Z</lastmod>
+    <lastmod>2022-11-05T02:35:05.852Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/posts/clustering-indices-project/cluster-indices.html</loc>
@@ -22,7 +22,7 @@
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/posts/multi-factor-model/multi-factor-model.html</loc>
-    <lastmod>2022-11-04T18:17:09.894Z</lastmod>
+    <lastmod>2022-11-04T23:39:55.039Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/posts/naive-bayes/NaiveBayes.html</loc>
@@ -34,7 +34,7 @@
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/projects.html</loc>
-    <lastmod>2022-11-04T18:17:12.357Z</lastmod>
+    <lastmod>2022-11-05T02:35:19.875Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/publications.html</loc>
@@ -43,5 +43,9 @@
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/resumes.html</loc>
     <lastmod>2022-11-04T18:17:13.286Z</lastmod>
+  </url>
+  <url>
+    <loc>https://openscapes.github.io/quarto-website-tutorial/posts/random-schemas/random-schemas.html</loc>
+    <lastmod>2022-11-05T02:35:25.574Z</lastmod>
   </url>
 </urlset>

@@ -1,0 +1,60 @@
+---
+title: "Randomization Schemas"
+description: "This project is a full demonstration of designing an experiment, with an application in Shiny."
+author: "Matthias Quinn"
+date: "09/18/2020"
+categories:
+  - code
+  - statistics
+  - designs
+  - college
+image: "RShinyLogo.jpeg"
+image-alt: "Made with Shiny"
+format: html
+server: shiny
+cache: true
+---
+
+::: columns
+::: {.column width="40%"}
+## GOAL
+
+Produce the same schema that you have, which represents the desired study design. The input to your programs should be the parameters of # of sites, # of subjects/site, a randomization ratio, and various stratification levels.
+:::
+
+::: {.column width="10%"}
+<!-- empty column to create gap -->
+:::
+
+::: {.column width="40%"}
+## RESULT
+
+A reactive application that creates a design schema, given the researchers design parameters. 
+
+This project was finished in about 5 weeks.
+:::
+:::
+
+Let's say we're a researcher interested in deciding which treatment to give to our target audience. Since we want to make sure we follow proper guidelines, we decide to reach out to a friend of ours, a statistician, for advice.
+
+She says that a good practice would be to create a credible, experimental design to find what we're looking for. This project is essentially a reproducible example of our goals with the following condition:
+
+1. Write a completely randomized design schema for $S$ subjects at $T$ sites in blocks of $B$ where randomization is $N:D$ in terms of treatment to control.
+
+### Running Example:
+$30$ subjects at site one in blocks of $6$ where the randomization of treatment to control is $1:1$
+
+### Solution:
+Setting a seed is necessary for reproducibility.
+
+Also, having explainable code was a requirement for this project, as the client may have wanted to know how to make changes in the future.
+
+```{=html}
+ <iframe id="example1" src="https://n3uraln3twork.shinyapps.io/random-schemas/" style="border: none; width: 100%; height: 720px" frameborder="0"></iframe>
+```
+
+
+
+
+
+

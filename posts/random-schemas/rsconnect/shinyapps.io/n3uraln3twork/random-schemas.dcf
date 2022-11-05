@@ -1,0 +1,14 @@
+name: random-schemas
+title: random-schemas
+username:
+account: n3uraln3twork
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 7529875
+bundleId: 6477616
+url: https://n3uraln3twork.shinyapps.io/random-schemas/
+when: 1667610193.95972
+lastSyncTime: 1667610193.95973
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: random-schemas.qmd|RShinyLogo.jpeg

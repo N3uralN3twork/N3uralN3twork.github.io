@@ -39,9 +39,8 @@ $$
 
 -   MKTRF: $R_M - R_f$, is the excess return on the market
 
-```{=html}
 <!-- -->
-```
+
 -   SMB: the average return on small portfolios minus the average return on big portfolios
 
 -   HML: the average return on high book-to-market equity firms minus the average return on low book-to-market firms
