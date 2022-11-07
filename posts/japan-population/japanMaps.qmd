@@ -1,0 +1,149 @@
+---
+title: "Japanese Population Decline over Time (Leaflet)"
+description: "This post is a demonstration of map-making with Leaflet in R."
+author: "Matthias Quinn"
+date: "11/06/2022"
+categories:
+  - code
+  - maps
+image: "LeafletLogo.png"
+image-alt: "Made with Leaflet in R"
+format: html
+cache: true
+---
+
+::: columns
+::: {.column width="40%"}
+## GOAL
+
+Learn how to create an interactive choropleth map using Leaflet.
+:::
+
+::: {.column width="10%"}
+<!-- empty column to create gap -->
+:::
+
+::: {.column width="40%"}
+## RESULT
+
+A reactive map, made with Leaflet, that displays Japan's population distribution and other statistics in a presentable format.
+:::
+:::
+
+The main purpose of this project was to remember how to use Leaflet in R. I had remembered that I started this project about 2 years ago and could not figure out, for the life of me, how to create an interactive choropleth map.
+
+For some background, I had done static maps before using ggplot2, but I wanted to learn something new and that's when I stumbled upon Leaflet. In all honesty, the most difficult piece was finding the data to draw the borders of a given area, which I now know is hosted by UC Davis.
+
+If only I knew that a couple of years ago...
+
+```{r global options, include = FALSE}
+knitr::opts_chunk$set(warning=FALSE, message=FALSE)
+```
+
+```{r load libraries, warning=FALSE, message=FALSE}
+library(dplyr)
+library(geojsonio)
+library(leaflet)
+library(sp)
+library(stringr)
+```
+
+### Read in the Population Data:
+
+This dataset comes from [Japan's Bureau of Statistics](https://www.stat.go.jp/english/index.html).
+
+It contains data from 2005 and sometimes up to 2020 (depending on what was collected).
+
+The website has a handy search tool to find data somebody might be interested in.
+
+```{r read pop data}
+dfJPop <- jsonlite::fromJSON("https://raw.githubusercontent.com/N3uralN3twork/R-Projects/master/Map%20Making/Japan/JapanPop.json") %>%
+  as.data.frame()
+```
+
+
+### Read in Japan's geojson data:
+This is a relatively new format that was found on the [UC Davis website](www.google.com).
+
+It's basically the coordinates needed to construct borders around Japan's prefectures.
+
+I'm not entirely sure how the extension works, but it's like JSON, but for shape files.
+
+```{r read boundaries}
+japanGEO <- rgdal::readOGR(dsn = "https://raw.githubusercontent.com/N3uralN3twork/R-Projects/master/Map%20Making/Japan/japanGeoData.geojson")
+```
+
+```{r}
+names(japanGEO)
+class(japanGEO)
+```
+
+The first goal is to create an informative popup for each of the prefectures:
+```{r create popup}
+dfJPop <- dfJPop %>%
+    mutate(popup = str_c("<strong>", Prefecture, "</strong>",
+                                     "<br/>",
+                                     "Kanji: ", Kanji,
+                                     "<br/>",
+                                     "Population: ", TotalPop2019,
+                                     "<br/>",
+                                     "4Y Change: ", (TotalPop2019 - TotalPop2015),
+                                     "<br/>",
+                                     "M:F Ratio: ", round((TotalPopMale2019 / TotalPopFemale2019), digits = 3)
+                         ))
+```
+
+
+### Joining together the disparate datasets:
+At this point in the notebook, we have two objects:
+
+1. A borders dataset (geojson)
+
+2. A population dataset (dataframe)
+
+We need to combine/join them in order to plot anything meaningful.
+
+```{r}
+names(dfJPop)
+```
+
+```{r}
+names(japanGEO)
+```
+
+This step combines the original borders (geojson) to the data at hand (dataframe).
+```{r combine datasets}
+dfJapan <- merge(japanGEO, dfJPop, by = "id")
+```
+
+
+### Creating Japan's Population Density Map:
+The following is based on the Leaflet package, a port of the famous Javascript library.
+
+```{r create map}
+pal <- colorNumeric("RdYlBu", domain = log10(dfJapan$TotalPop2019), reverse = TRUE)
+
+leaflet(dfJapan) %>%
+  addTiles() %>%
+  addPolygons(
+    fillColor = ~pal(log10(TotalPop2019)),
+    weight = 2,
+    opacity = 1,
+    color = "white",
+    dashArray = "3",
+    fillOpacity = 1,
+    popup = ~popup) %>%
+  addLegend(pal = pal, values = ~log10(TotalPop2019), opacity = 1.0,
+    labFormat = labelFormat(transform = function(x) round(10^x)), title = "2019 Tot. Pop. (Log10)")
+```
+
+### Sources:
+[RStudio - Leaflet Tutorial](https://rstudio.github.io/leaflet/json)
+
+[Data Sources](https://www.stat.go.jp/english/index.html)
+
+
+
+
+
+
