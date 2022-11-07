@@ -160,6 +160,7 @@
       "Hash": "2f56b7e2f0d534f3c4022e48c33835ce",
       "Requirements": [
         "Rcpp",
+        "curl",
         "jsonlite"
       ]
     },
@@ -375,11 +376,20 @@
       "Hash": "2408d291bf25a9a6c27d912bcfe6ce0c",
       "Requirements": [
         "R6",
+        "curl",
         "httpcode",
         "jsonlite",
         "mime",
         "urltools"
       ]
+    },
+    "curl": {
+      "Package": "curl",
+      "Version": "4.3.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "0eb86baa62f06e8855258fa5a8048667",
+      "Requirements": []
     },
     "data.table": {
       "Package": "data.table",
@@ -1555,6 +1565,7 @@
       "Repository": "CRAN",
       "Hash": "737312265e542d243f003b9625482e09",
       "Requirements": [
+        "curl",
         "digest",
         "jsonlite",
         "openssl",
