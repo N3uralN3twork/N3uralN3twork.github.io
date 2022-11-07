@@ -3,6 +3,7 @@ title: "Japanese Population Decline over Time (Leaflet)"
 description: "This post is a demonstration of map-making with Leaflet in R."
 author: "Matthias Quinn"
 date: "11/06/2022"
+code-copy: true
 categories:
   - code
   - maps
