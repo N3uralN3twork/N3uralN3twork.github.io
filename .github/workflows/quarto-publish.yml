@@ -27,12 +27,6 @@ jobs:
         with:
           r-version: '4.2.1'
           
-      - name: Install R Dependencies
-        uses: r-lib/actions/setup-renv@v2
-        with:
-          extra-packages: any::rcmdcheck
-          needs: check
-          
       - name: Publish to GitHub Pages (and render)
         uses: quarto-dev/quarto-actions/publish@v2
         with:
