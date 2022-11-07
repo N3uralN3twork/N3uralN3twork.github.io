@@ -42,7 +42,6 @@ knitr::opts_chunk$set(warning=FALSE, message=FALSE)
 
 ```{r load libraries, warning=FALSE, message=FALSE}
 library(dplyr)
-library(geojsonio)
 library(leaflet)
 library(sp)
 library(stringr)
@@ -146,4 +145,9 @@ leaflet(dfJapan) %>%
 
 
 
+
+
+```{r}
+# ! packrat:::recursivePackageDependencies("dplyr",lib.loc = .libPaths()[1], ignores = NULL)
+```
 
