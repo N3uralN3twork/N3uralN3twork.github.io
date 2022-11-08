@@ -4,9 +4,9 @@ project:
 execute: 
   freeze: true
   
-website: 
+website:
   page-navigation: true
-  title: "N3uralN3twork's Website" 
+  title: "N3uralN3twork's Website"
   site-url: "https://openscapes.github.io/quarto-website-tutorial" 
   repo-url: https://github.com/N3uralN3twork/n3uraln3twork.github.io
   repo-actions: [edit, issue]
@@ -53,8 +53,8 @@ website:
 format:
   html:
     theme:
-      light: [cosmo, theme.scss] # from https://github.com/sta210-s22/website/blob/main/_quarto.yml
-      dark: [cosmo, theme-dark.scss]
+      light: [journal] # from https://github.com/sta210-s22/website/blob/main/_quarto.yml
+      dark: [cyborg]
     code-copy: true
     code-overflow: wrap
     toc: true
@@ -69,4 +69,6 @@ filters:
   - quarto
 
   
+
+
 
