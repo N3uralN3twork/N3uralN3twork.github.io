@@ -2,6 +2,7 @@
   {
     "listing": "/projects.html",
     "items": [
+      "/posts/sample-size-app/powerAnalysis.html",
       "/posts/japan-population/japanMaps.html",
       "/posts/clustering-indices-project/cluster-indices.html",
       "/posts/xgboost/xgboost.html",

@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Matthias Quinn">
-<meta name="dcterms.date" content="2022-11-01">
-<meta name="description" content="This project was the seminal work of my master’s degree in statistics.">
+<meta name="dcterms.date" content="2022-11-13">
+<meta name="description" content="This post is a walkthrough of various power analyses in R.">
 
-<title>N3uralN3twork’s Website - Cluster Validity Indices</title>
+<title>N3uralN3twork’s Website - Power Analysis Calculator</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -69,6 +69,22 @@ ul.task-list li input[type="checkbox"] {
     }
     </style>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 </head>
 
@@ -78,7 +94,7 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Cluster Validity Indices</h1>
+      <h1 class="quarto-secondary-nav-title">Power Analysis Calculator</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -89,17 +105,16 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title d-none d-lg-block">Cluster Validity Indices</h1>
+      <h1 class="title d-none d-lg-block">Power Analysis Calculator</h1>
                   <div>
         <div class="description">
-          This project was the seminal work of my master’s degree in statistics.
+          This post is a walkthrough of various power analyses in R.
         </div>
       </div>
                           <div class="quarto-categories">
                 <div class="quarto-category">code</div>
-                <div class="quarto-category">ML</div>
-                <div class="quarto-category">algorithms</div>
-                <div class="quarto-category">college</div>
+                <div class="quarto-category">statistics</div>
+                <div class="quarto-category">designs</div>
               </div>
                   </div>
   </div>
@@ -117,7 +132,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">November 1, 2022</p>
+        <p class="date">November 13, 2022</p>
       </div>
     </div>
       
@@ -176,7 +191,13 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#sources" id="toc-sources" class="nav-link active" data-scroll-target="#sources">Sources</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/N3uralN3twork/n3uraln3twork.github.io/edit/main/posts/sample-size-app/powerAnalysis.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/N3uralN3twork/n3uraln3twork.github.io/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
@@ -184,8 +205,55 @@ ul.task-list li input[type="checkbox"] {
 
 
 
+<div class="columns">
+<div class="column" style="width:40%;">
+<section id="goal" class="level2">
+<h2 class="anchored" data-anchor-id="goal">GOAL</h2>
+<p>Learn how to use R’s Shiny to conduct power analyses for various scenarios.</p>
+</section>
+</div><div class="column" style="width:10%;">
+<!-- empty column to create gap -->
+</div><div class="column" style="width:40%;">
+<section id="result" class="level2">
+<h2 class="anchored" data-anchor-id="result">RESULT</h2>
+<p>A reactive application, made with Shiny, to help users conduct a small sample of scenarios.</p>
+</section>
+</div>
+</div>
+<p>I’m often asked, as a part of my job, to figure out how many entities/people are needed to see a significant effect on some process or metric. These seemingly simple requests can have a profound effect on where business leaders decide to go with a project, if at all. Thus, the reasoning behind this calculator is to provide people with a no-code interface to some common statistical tests.</p>
+<p>A couple of months ago (2022), I was asked to give a few presentations to my team and a couple of outside business folks on how to properly conduct a power analysis. I wasn’t the strongest at performing such tests, as I had no formal training on how to do one and was taught more theoretical aspects, but I went ahead and researched on my own. Along the way, I began to realize that - unless you know what you’re doing - it was very easy to be given some sample numbers and given an output. Unfortunately, the validity of the inputs was not always bulletproof. Sometimes, the requester wasn’t quite sure of the numbers he/she was presenting, so it would lead to some discussions around his/her purposes.</p>
+<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Advice
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Power analyses are easy to conduct, but can be difficult to prove.</p>
+</div>
+</div>
+<p>The most difficult part of the project was figuring out the UI, as I was inspired by G*Power’s user interface, but I didn’t necessarily want a straight copy. So, I settled for a seemingly simple approach.</p>
+<ol type="1">
+<li>Figure out your research question</li>
+<li>Figure out what type of test you want to / need to conduct</li>
+<li>Gather your assumptions and inputs</li>
+<li>Choose and enter the requirements</li>
+<li>Receive results</li>
+</ol>
+<p>Honestly, the most difficult steps are <span class="math inline">2</span> and <span class="math inline">3</span>, as mentioned earlier. Thus, it’s imperative that a user understands what he/she is doing before receiving the results. As an example, a request was made to me to figure out how many days an A/B test would have to run to provide statistically significant results. I performed a power analysis and came back with my estimate on how long it would take to achieve a provable result.</p>
+<p><span class="math display">
+35 \ days
+</span></p>
+<p>As it turns out, upon further questioning, the requester told me that the test was only going to run for a <strong>maximum</strong> of <span class="math inline">30</span> days. There wasn’t any way for results to be statistically verifiable. Instead of lying to her, I was upfront and told her that she wasn’t going to get what she wanted in just <span class="math inline">30</span> days, which paid off for me in the end. She understood what I said after just a little more convincing, and the sandbox went off without any problems.</p>
+<section id="sources" class="level3">
+<h3 class="anchored" data-anchor-id="sources">Sources</h3>
+<p><a href="https://shiny.rstudio.com/articles/css.html">Shiny - Using custom CSS in your app</a></p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
