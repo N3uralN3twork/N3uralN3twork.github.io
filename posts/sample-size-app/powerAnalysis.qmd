@@ -1,0 +1,64 @@
+---
+title: "Power Analysis Calculator"
+description: "This post is a walkthrough of various power analyses in R."
+author: "Matthias Quinn"
+date: "11/13/2022"
+affiliation: Progressive Insurance
+code-copy: true
+categories:
+  - code
+  - statistics
+  - designs
+image: "Precision Consulting - Power Analysis Logo.jpg"
+image-alt: "Copyright of Precision Consulting"
+format: html
+cache: true
+---
+
+::: columns
+::: {.column width="40%"}
+## GOAL
+
+Learn how to use R's Shiny to conduct power analyses for various scenarios.
+:::
+
+::: {.column width="10%"}
+<!-- empty column to create gap -->
+:::
+
+::: {.column width="40%"}
+## RESULT
+
+A reactive application, made with Shiny, to help users conduct a small sample of scenarios.
+:::
+:::
+
+I'm often asked, as a part of my job, to figure out how many entities/people are needed to see a significant effect on some process or metric. These seemingly simple requests can have a profound effect on where business leaders decide to go with a project, if at all. Thus, the reasoning behind this calculator is to provide people with a no-code interface to some common statistical tests.
+
+A couple of months ago (2022), I was asked to give a few presentations to my team and a couple of outside business folks on how to properly conduct a power analysis. I wasn't the strongest at performing such tests, as I had no formal training on how to do one and was taught more theoretical aspects, but I went ahead and researched on my own. Along the way, I began to realize that - unless you know what you're doing - it was very easy to be given some sample numbers and given an output. Unfortunately, the validity of the inputs was not always bulletproof. Sometimes, the requester wasn't quite sure of the numbers he/she was presenting, so it would lead to some discussions around his/her purposes.
+
+::: callout-caution
+## Advice
+
+Power analyses are easy to conduct, but can be difficult to prove.
+:::
+
+The most difficult part of the project was figuring out the UI, as I was inspired by G\*Power's user interface, but I didn't necessarily want a straight copy. So, I settled for a seemingly simple approach.
+
+1.  Figure out your research question
+2.  Figure out what type of test you want to / need to conduct
+3.  Gather your assumptions and inputs
+4.  Choose and enter the requirements
+5.  Receive results
+
+Honestly, the most difficult steps are $2$ and $3$, as mentioned earlier. Thus, it's imperative that a user understands what he/she is doing before receiving the results. As an example, a request was made to me to figure out how many days an A/B test would have to run to provide statistically significant results. I performed a power analysis and came back with my estimate on how long it would take to achieve a provable result.
+
+$$
+35 \ days
+$$
+
+As it turns out, upon further questioning, the requester told me that the test was only going to run for a **maximum** of $30$ days. There wasn't any way for results to be statistically verifiable. Instead of lying to her, I was upfront and told her that she wasn't going to get what she wanted in just $30$ days, which paid off for me in the end. She understood what I said after just a little more convincing, and the sandbox went off without any problems.
+
+### Sources
+
+[Shiny - Using custom CSS in your app](https://shiny.rstudio.com/articles/css.html)

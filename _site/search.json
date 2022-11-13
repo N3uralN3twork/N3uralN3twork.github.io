@@ -151,7 +151,7 @@
     "href": "projects.html",
     "title": "Projects",
     "section": "",
-    "text": "code\n\n\nmaps\n\n\n\n\nThis post is a demonstration of map-making with Leaflet in R.\n\n\n\n\n\n\nNov 6, 2022\n\n\nMatthias Quinn\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\ncode\n\n\nML\n\n\nalgorithms\n\n\ncollege\n\n\n\n\nThis project was the seminal work of my master’s degree in statistics.\n\n\n\n\n\n\nNov 1, 2022\n\n\nMatthias Quinn\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\ncode\n\n\nML\n\n\nalgorithms\n\n\ncollege\n\n\n\n\nA notebook on what XGBoost is and how it works, including a sample application to forest cover types.\n\n\n\n\n\n\nDec 8, 2021\n\n\nMatthias Quinn, Matthew Brigham\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\ncode\n\n\nstatistics\n\n\ndesigns\n\n\ncollege\n\n\n\n\nThis project is a full demonstration of designing an experiment, with an application in Shiny.\n\n\n\n\n\n\nSep 18, 2020\n\n\nMatthias Quinn\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\ncode\n\n\nML\n\n\nalgorithms\n\n\ncollege\n\n\n\n\nA quick notebook on how to create and interpret naive bayes models.\n\n\n\n\n\n\nJan 29, 2020\n\n\nMatthias Quinn\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\ncode\n\n\nML\n\n\nalgorithms\n\n\ncollege\n\n\n\n\nA quick notebook on how to create and interpret LR models.\n\n\n\n\n\n\nOct 26, 2019\n\n\nMatthias Quinn\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\ncode\n\n\nfinance\n\n\ncollege\n\n\n\n\nThis project is a financial case study on mutual funds and using MFM to predict risk-adjusted scores of execess returns.\n\n\n\n\n\n\nApr 4, 2019\n\n\nMatthias Quinn, Touw, Lux\n\n\n\n\n\n\nNo matching items"
+    "text": "code\n\n\nstatistics\n\n\ndesigns\n\n\n\n\nThis post is a walkthrough of various power analyses in R.\n\n\n\n\n\n\nNov 13, 2022\n\n\nMatthias Quinn\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\ncode\n\n\nmaps\n\n\n\n\nThis post is a demonstration of map-making with Leaflet in R.\n\n\n\n\n\n\nNov 6, 2022\n\n\nMatthias Quinn\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\ncode\n\n\nML\n\n\nalgorithms\n\n\ncollege\n\n\n\n\nThis project was the seminal work of my master’s degree in statistics.\n\n\n\n\n\n\nNov 1, 2022\n\n\nMatthias Quinn\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\ncode\n\n\nML\n\n\nalgorithms\n\n\ncollege\n\n\n\n\nA notebook on what XGBoost is and how it works, including a sample application to forest cover types.\n\n\n\n\n\n\nDec 8, 2021\n\n\nMatthias Quinn, Matthew Brigham\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\ncode\n\n\nstatistics\n\n\ndesigns\n\n\ncollege\n\n\n\n\nThis project is a full demonstration of designing an experiment, with an application in Shiny.\n\n\n\n\n\n\nSep 18, 2020\n\n\nMatthias Quinn\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\ncode\n\n\nML\n\n\nalgorithms\n\n\ncollege\n\n\n\n\nA quick notebook on how to create and interpret naive bayes models.\n\n\n\n\n\n\nJan 29, 2020\n\n\nMatthias Quinn\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\ncode\n\n\nML\n\n\nalgorithms\n\n\ncollege\n\n\n\n\nA quick notebook on how to create and interpret LR models.\n\n\n\n\n\n\nOct 26, 2019\n\n\nMatthias Quinn\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\ncode\n\n\nfinance\n\n\ncollege\n\n\n\n\nThis project is a financial case study on mutual funds and using MFM to predict risk-adjusted scores of execess returns.\n\n\n\n\n\n\nApr 4, 2019\n\n\nMatthias Quinn, Touw, Lux\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "publications.html",
@@ -166,5 +166,47 @@
     "title": "Resumes",
     "section": "",
     "text": "Notice\n\n\n\nAdditional information coming soon!"
+  },
+  {
+    "objectID": "posts/sample-size-app/SampleSizeCalc.html",
+    "href": "posts/sample-size-app/SampleSizeCalc.html",
+    "title": "Sample Size Calculator",
+    "section": "",
+    "text": "Warning: package 'ggplot2' was built under R version 4.2.2\n\n\nWarning: package 'dplyr' was built under R version 4.2.2\n\n\n\nAttaching package: 'dplyr'\n\n\nThe following objects are masked from 'package:stats':\n\n    filter, lag\n\n\nThe following objects are masked from 'package:base':\n\n    intersect, setdiff, setequal, union\n\n\nWarning: package 'scales' was built under R version 4.2.2\n\n\nWarning: package 'rvg' was built under R version 4.2.2\n\n\nWarning: package 'ggiraph' was built under R version 4.2.2\n\n\n\nTest family\nEnter the type of test to conduct:\n\n\n\n\n\n\n\n\n\n%\n\n\n\nEnter the statistical test to perform:\n\n\nShiny applications not supported in static R Markdown documents"
+  },
+  {
+    "objectID": "posts/sample-size-app/Application/SampleSizes.html",
+    "href": "posts/sample-size-app/Application/SampleSizes.html",
+    "title": "Sample Sizes",
+    "section": "",
+    "text": "This Quarto document is made interactive using Shiny. Interactive documents allow readers to modify parameters and see the results immediately. Learn more about Shiny interactive documents at https://quarto.org/docs/interactive/shiny/."
+  },
+  {
+    "objectID": "posts/sample-size-app/Application/SampleSizes.html#inputs-and-outputs",
+    "href": "posts/sample-size-app/Application/SampleSizes.html#inputs-and-outputs",
+    "title": "Sample Sizes",
+    "section": "Inputs and Outputs",
+    "text": "Inputs and Outputs\nYou can embed Shiny inputs and outputs in your document. Outputs are automatically updated whenever inputs change. This demonstrates how a standard R plot can be made interactive:\n\n\n\nNumber of bins:"
+  },
+  {
+    "objectID": "posts/sample-size-app/Application/SampleSizeCalc.html",
+    "href": "posts/sample-size-app/Application/SampleSizeCalc.html",
+    "title": "Sample Size Calculator",
+    "section": "",
+    "text": "Warning: package 'ggplot2' was built under R version 4.2.2\n\n\nWarning: package 'dplyr' was built under R version 4.2.2\n\n\n\nAttaching package: 'dplyr'\n\n\nThe following objects are masked from 'package:stats':\n\n    filter, lag\n\n\nThe following objects are masked from 'package:base':\n\n    intersect, setdiff, setequal, union\n\n\nWarning: package 'scales' was built under R version 4.2.2\n\n\nWarning: package 'rvg' was built under R version 4.2.2\n\n\nWarning: package 'ggiraph' was built under R version 4.2.2\n\n\n\nTest family\nEnter the type of test to conduct:\n\n\n\n\n\n\n\n\n\n%\n\n\n\nEnter the statistical test to perform:\n\n\nShiny applications not supported in static R Markdown documents"
+  },
+  {
+    "objectID": "posts/sample-size-app/powerAnalysis.html",
+    "href": "posts/sample-size-app/powerAnalysis.html",
+    "title": "Power Analysis Calculator",
+    "section": "",
+    "text": "I’m often asked, as a part of my job, to figure out how many entities/people are needed to see a significant effect on some process or metric. These seemingly simple requests can have a profound effect on where business leaders decide to go with a project, if at all. Thus, the reasoning behind this calculator is to provide people with a no-code interface to some common statistical tests.\nA couple of months ago (2022), I was asked to give a few presentations to my team and a couple of outside business folks on how to properly conduct a power analysis. I wasn’t the strongest at performing such tests, as I had no formal training on how to do one and was taught more theoretical aspects, but I went ahead and researched on my own. Along the way, I began to realize that - unless you know what you’re doing - it was very easy to be given some sample numbers and given an output. Unfortunately, the validity of the inputs was not always bulletproof. Sometimes, the requester wasn’t quite sure of the numbers he/she was presenting, so it would lead to some discussions around his/her purposes.\n\n\n\n\n\n\nAdvice\n\n\n\nPower analyses are easy to conduct, but can be difficult to prove.\n\n\nThe most difficult part of the project was figuring out the UI, as I was inspired by G*Power’s user interface, but I didn’t necessarily want a straight copy. So, I settled for a seemingly simple approach.\n\nFigure out your research question\nFigure out what type of test you want to / need to conduct\nGather your assumptions and inputs\nChoose and enter the requirements\nReceive results\n\nHonestly, the most difficult steps are 2 and 3, as mentioned earlier. Thus, it’s imperative that a user understands what he/she is doing before receiving the results. As an example, a request was made to me to figure out how many days an A/B test would have to run to provide statistically significant results. I performed a power analysis and came back with my estimate on how long it would take to achieve a provable result.\n\n35 \\ days\n\nAs it turns out, upon further questioning, the requester told me that the test was only going to run for a maximum of 30 days. There wasn’t any way for results to be statistically verifiable. Instead of lying to her, I was upfront and told her that she wasn’t going to get what she wanted in just 30 days, which paid off for me in the end. She understood what I said after just a little more convincing, and the sandbox went off without any problems.\n\nSources\nShiny - Using custom CSS in your app"
+  },
+  {
+    "objectID": "posts/index.html",
+    "href": "posts/index.html",
+    "title": "My Projects",
+    "section": "",
+    "text": "No matching items"
   }
 ]
