@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Matthias Quinn">
-<meta name="dcterms.date" content="2022-11-13">
-<meta name="description" content="This post is a walkthrough of various power analyses in R.">
+<meta name="dcterms.date" content="2022-11-20">
+<meta name="description" content="This project serves as an introduction to PyTorch and tensors.">
 
-<title>N3uralN3twork’s Website - Power Analysis Calculator</title>
+<title>N3uralN3twork’s Website - PyTorch Tensors</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,6 +23,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -63,28 +126,7 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Submit"
   }
 }</script>
-<style>
-    .quarto-title-block .quarto-title-banner {
-      background: #FFAC1C;
-    }
-    </style>
 
-  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
-  <script>document.addEventListener("DOMContentLoaded", function () {
- var mathElements = document.getElementsByClassName("math");
- var macros = [];
- for (var i = 0; i < mathElements.length; i++) {
-  var texText = mathElements[i].firstChild;
-  if (mathElements[i].tagName == "SPAN") {
-   katex.render(texText.data, mathElements[i], {
-    displayMode: mathElements[i].classList.contains('display'),
-    throwOnError: false,
-    macros: macros,
-    fleqn: false
-   });
-}}});
-  </script>
-  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 </head>
 
@@ -94,7 +136,7 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Power Analysis Calculator</h1>
+      <h1 class="quarto-secondary-nav-title">PyTorch Tensors</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -102,45 +144,7 @@ ul.task-list li input[type="checkbox"] {
   </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
-      <h1 class="title d-none d-lg-block">Power Analysis Calculator</h1>
-                  <div>
-        <div class="description">
-          This post is a walkthrough of various power analyses in R.
-        </div>
-      </div>
-                          <div class="quarto-categories">
-                <div class="quarto-category">code</div>
-                <div class="quarto-category">statistics</div>
-                <div class="quarto-category">designs</div>
-              </div>
-                  </div>
-  </div>
-    
-  
-  <div class="quarto-title-meta">
-
-      <div>
-      <div class="quarto-title-meta-heading">Author</div>
-      <div class="quarto-title-meta-contents">
-               <p>Matthias Quinn </p>
-            </div>
-    </div>
-      
-      <div>
-      <div class="quarto-title-meta-heading">Published</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date">November 13, 2022</p>
-      </div>
-    </div>
-    
-      
-    </div>
-    
-  
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-center sidebar-header">
@@ -201,301 +205,125 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#purpose-of-power-analysis" id="toc-purpose-of-power-analysis" class="nav-link active" data-scroll-target="#purpose-of-power-analysis">Purpose of Power Analysis</a></li>
-  <li><a href="#effect-sizes" id="toc-effect-sizes" class="nav-link" data-scroll-target="#effect-sizes">Effect Sizes</a>
+  <li><a href="#tensors" id="toc-tensors" class="nav-link active" data-scroll-target="#tensors">Tensors</a>
   <ul class="collapse">
-  <li><a href="#how-to-estimate-the-effect-size-options" id="toc-how-to-estimate-the-effect-size-options" class="nav-link" data-scroll-target="#how-to-estimate-the-effect-size-options">How to estimate the effect size (Options)</a></li>
-  </ul></li>
-  <li><a href="#table-of-tests-and-functions" id="toc-table-of-tests-and-functions" class="nav-link" data-scroll-target="#table-of-tests-and-functions">Table of Tests and Functions</a>
-  <ul class="collapse">
-  <li><a href="#sources" id="toc-sources" class="nav-link" data-scroll-target="#sources">Sources</a></li>
+  <li><a href="#load-in-the-libraries" id="toc-load-in-the-libraries" class="nav-link" data-scroll-target="#load-in-the-libraries">Load in the libraries</a></li>
+  <li><a href="#initializing-a-tensor" id="toc-initializing-a-tensor" class="nav-link" data-scroll-target="#initializing-a-tensor">Initializing a Tensor</a></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/N3uralN3twork/n3uraln3twork.github.io/edit/main/posts/sample-size-app/powerAnalysis.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/N3uralN3twork/n3uraln3twork.github.io/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/N3uralN3twork/n3uraln3twork.github.io/edit/main/PyTorch/tensors/tensors.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/N3uralN3twork/n3uraln3twork.github.io/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">PyTorch Tensors</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">code</div>
+    <div class="quarto-category">ML</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    This project serves as an introduction to PyTorch and tensors.
+  </div>
+</div>
 
 
+<div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Matthias Quinn </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 20, 2022</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
 
 <div class="columns">
 <div class="column" style="width:40%;">
 <section id="goal" class="level2">
 <h2 class="anchored" data-anchor-id="goal">GOAL</h2>
-<p>Learn how to use R’s Shiny to conduct power analyses for various scenarios.</p>
+<p>Learn more about the Machine Learning framework known as PyTorch.</p>
 </section>
 </div><div class="column" style="width:10%;">
 <!-- empty column to create gap -->
 </div><div class="column" style="width:40%;">
 <section id="result" class="level2">
 <h2 class="anchored" data-anchor-id="result">RESULT</h2>
-<p>A reactive application, made with Shiny, to help users conduct a small sample of scenarios.</p>
+<p>A better understanding of PyTorch and what tensors are.</p>
 </section>
 </div>
 </div>
-<p>I’m often asked, as a part of my job, to figure out how many entities/people are needed to see a significant effect on some process or metric. These seemingly simple requests can have a profound effect on where business leaders decide to go with a project, if at all. Thus, the reasoning behind this calculator is to provide people with a no-code interface to some common statistical tests.</p>
-<p>A couple of months ago (2022), I was asked to give a few presentations to my team and a couple of outside business folks on how to properly conduct a power analysis. I wasn’t the strongest at performing such tests, as I had no formal training on how to do one and was taught more theoretical aspects, but I went ahead and researched on my own. Along the way, I began to realize that - unless you know what you’re doing - it was very easy to be given some sample numbers and given an output. Unfortunately, the validity of the inputs was not always bulletproof. Sometimes, the requester wasn’t quite sure of the numbers he/she was presenting, so it would lead to some discussions around his/her purposes.</p>
-<div class="callout-caution callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<p>This walkthrough is my interpretation of the official <a href="https://pytorch.org/tutorials/beginner/basics/tensor_tutorial.html">PyTorch tutorial on tensors.</a></p>
+<section id="tensors" class="level2">
+<h2 class="anchored" data-anchor-id="tensors">Tensors</h2>
+<p>Tensors are a data structure similar to arrays and matrices. PyTorch uses tensors to encode both the inputs and outputs of a model as well as model parameters.</p>
+<p>Tensors are like <a href="https://numpy.org/">NumPy</a> arrays, but tensors can be run on GPUs and are also optimized for automatic differentiation.</p>
+<section id="load-in-the-libraries" class="level3">
+<h3 class="anchored" data-anchor-id="load-in-the-libraries">Load in the libraries</h3>
+<div class="cell" data-execution_count="1">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="im">import</span> torch</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
-<div class="callout-caption-container flex-fill">
-Advice
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Power analyses are easy to conduct, but can be difficult to prove.</p>
-</div>
-</div>
-<p>The most difficult part of the project was figuring out the UI, as I was inspired by G*Power’s user interface, but I didn’t necessarily want a straight copy. So, I settled for a seemingly simple approach.</p>
-<ol type="1">
-<li>Figure out your research question</li>
-<li>Figure out what type of test you want to / need to conduct</li>
-<li>Gather your assumptions and inputs</li>
-<li>Choose and enter the requirements</li>
-<li>Receive results</li>
-</ol>
-<p>Honestly, the most difficult steps are <span class="math inline">2</span> and <span class="math inline">3</span>, as mentioned earlier. Thus, it’s imperative that a user understands what he/she is doing before receiving the results. As an example, a request was made to me to figure out how many days an A/B test would have to run to provide statistically significant results. I performed a power analysis and came back with my estimate on how long it would take to achieve a provable result.</p>
-<p><span class="math display">
-35 \ days
-</span></p>
-<p>As it turns out, upon further questioning, the requester told me that the test was only going to run for a <strong>maximum</strong> of <span class="math inline">30</span> days. There wasn’t any way for results to be statistically verifiable. Instead of lying to her, I was upfront and told her that she wasn’t going to get what she wanted in just <span class="math inline">30</span> days, which paid off for me in the end. She understood what I said after just a little more convincing, and the sandbox went off without any problems.</p>
-<section id="purpose-of-power-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="purpose-of-power-analysis">Purpose of Power Analysis</h2>
-<p>When designing experiments, a key question to keep in mind is:</p>
-<p><code>How many animals/subjects do I need for my experiment?</code></p>
-<p>To small of a sample size can under detect the effect of interest; too large of a sample size, and you be lead to wasting unnecessary resources.</p>
-<div class="callout-important callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Goal
-</div>
-</div>
-<div class="callout-body-container callout-body" data-collaps="true">
-<p>We want to have enough samples to reasonably detect an effect if it really is there without wasting limited resources on too many samples.</p>
-</div>
-</div>
-<dl>
-<dt>Effect size</dt>
-<dd>
-<p>The magnitude of the effect under the alternative hypothesis</p>
-<p>The larger the effect, the easier it is to detect and thus requires fewer samples</p>
-</dd>
-<dt>Power</dt>
-<dd>
-<p>The probability of correctly rejecting the null hypothesis if it is false</p>
-<p>Power is equal to <span class="math inline">1-\beta</span> where <span class="math inline">\beta</span> is the probability of a Type II error (FN)</p>
-<p>Higher power allows for a better chance of detecting a true effect, if it exists</p>
-<p>A standard power is equal to <span class="math inline">0.80</span></p>
-</dd>
-<dt>Significance level (<span class="math inline">\alpha</span>)</dt>
-<dd>
-<p>The probability of falsely rejecting the null hypothesis even though it is true</p>
-<p>The lower the significance level, the more likely you are to avoid a false positive and the more samples are needed</p>
-<p>A standard significance level is equal to <span class="math inline">0.05</span></p>
-</dd>
-</dl>
 </section>
-<section id="effect-sizes" class="level2">
-<h2 class="anchored" data-anchor-id="effect-sizes">Effect Sizes</h2>
-<p>The effect size in a power analysis is dependent on the sample data at hand.</p>
-<section id="how-to-estimate-the-effect-size-options" class="level3">
-<h3 class="anchored" data-anchor-id="how-to-estimate-the-effect-size-options">How to estimate the effect size (Options)</h3>
-<ol type="1">
-<li>Use background information to get means and variation, then calculate the effect size directly</li>
-<li>Use background information from similar studies to get means and variation, then calculate the effect size directly</li>
-<li>With no prior information, make an estimated guess on the effect size expected</li>
-</ol>
-<p><span class="math display">
-Effect Size = \frac {\mu_{1} - \mu_{2}}{\sigma}
-</span></p>
-</section>
-</section>
-<section id="table-of-tests-and-functions" class="level2">
-<h2 class="anchored" data-anchor-id="table-of-tests-and-functions">Table of Tests and Functions</h2>
-<table class="table">
-<caption>Table of Statistical Tests and R Functions</caption>
-<colgroup>
-<col style="width: 17%">
-<col style="width: 27%">
-<col style="width: 17%">
-<col style="width: 17%">
-<col style="width: 20%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>ID</th>
-<th>Name of Test</th>
-<th>In R?</th>
-<th>Package</th>
-<th>Function</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1</td>
-<td>One Mean t-test</td>
-<td>Yes</td>
-<td>pwr</td>
-<td>pwr.t.test</td>
-</tr>
-<tr class="even">
-<td>2</td>
-<td>Two Means t-test</td>
-<td>Yes</td>
-<td>pwr</td>
-<td>pwr.t.test</td>
-</tr>
-<tr class="odd">
-<td>3</td>
-<td>Paired t-test</td>
-<td>Yes</td>
-<td>pwr</td>
-<td>pwr.t.test</td>
-</tr>
-<tr class="even">
-<td>4</td>
-<td>One-way ANOVA</td>
-<td>Yes</td>
-<td>pwr</td>
-<td>pwr.anova.test</td>
-</tr>
-<tr class="odd">
-<td>5</td>
-<td>Single proportion test</td>
-<td>Yes</td>
-<td>pwr</td>
-<td>pwr.p.test</td>
-</tr>
-<tr class="even">
-<td>6</td>
-<td>Two proportions test</td>
-<td>Yes</td>
-<td>pwr</td>
-<td>pwr.2p.test</td>
-</tr>
-<tr class="odd">
-<td>7</td>
-<td>Chi-squared test</td>
-<td>Yes</td>
-<td>pwr</td>
-<td>pwr.chisq.test</td>
-</tr>
-<tr class="even">
-<td>8</td>
-<td>Simple Linear Regression</td>
-<td>Yes</td>
-<td>pwr</td>
-<td>pwr.f2.test</td>
-</tr>
-<tr class="odd">
-<td>9</td>
-<td>Multiple Linear Regression</td>
-<td>Yes</td>
-<td>pwr</td>
-<td>pwr.f2.test</td>
-</tr>
-<tr class="even">
-<td>10</td>
-<td>Correlation</td>
-<td>Yes</td>
-<td>pwr</td>
-<td>pwr.r.test</td>
-</tr>
-<tr class="odd">
-<td>11</td>
-<td>One Mean Wilcoxon Test</td>
-<td>Yes*</td>
-<td>pwr</td>
-<td>pwr.t.test + 15%</td>
-</tr>
-<tr class="even">
-<td>12</td>
-<td>Mann-Whitney Test</td>
-<td>Yes*</td>
-<td>pwr</td>
-<td>pwr.t.test + 15%</td>
-</tr>
-<tr class="odd">
-<td>13</td>
-<td>Paired Wilcoxon Test</td>
-<td>Yes*</td>
-<td>pwr</td>
-<td>pwr.t.test + 15%</td>
-</tr>
-<tr class="even">
-<td>14</td>
-<td>Kruskal-Wallace Test</td>
-<td>Yes*</td>
-<td>pwr</td>
-<td>pwr.anova.test + 15%</td>
-</tr>
-<tr class="odd">
-<td>15</td>
-<td>Repeated Measures ANOVA</td>
-<td>Yes</td>
-<td>WebPower</td>
-<td>wp.rmanova</td>
-</tr>
-<tr class="even">
-<td>16</td>
-<td>Multi-way ANOVA</td>
-<td>Yes</td>
-<td>WebPower</td>
-<td>wp.kanova</td>
-</tr>
-<tr class="odd">
-<td>17</td>
-<td>Multi-way ANOVA</td>
-<td>Yes</td>
-<td>WebPower</td>
-<td>wp.kanova</td>
-</tr>
-<tr class="even">
-<td>18</td>
-<td>Logistic Regression</td>
-<td>Yes</td>
-<td>WebPower</td>
-<td>wp.logistic</td>
-</tr>
-<tr class="odd">
-<td>19</td>
-<td>Poisson Regression</td>
-<td>Yes</td>
-<td>WebPower</td>
-<td>wp.poisson</td>
-</tr>
-<tr class="even">
-<td>20</td>
-<td>Multilevel Modelling: CRT</td>
-<td>Yes</td>
-<td>WebPower</td>
-<td>wp.crt2arm</td>
-</tr>
-<tr class="odd">
-<td>21</td>
-<td>Multilevel Modelling: MRT</td>
-<td>Yes</td>
-<td>WebPower</td>
-<td>wp.mrt2arm</td>
-</tr>
-<tr class="even">
-<td>22</td>
-<td>GLMM</td>
-<td>Yes**</td>
-<td>Simr &amp; lme4</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<section id="sources" class="level3">
-<h3 class="anchored" data-anchor-id="sources">Sources</h3>
-<p><a href="https://shiny.rstudio.com/articles/css.html">Shiny - Using custom CSS in your app</a></p>
+<section id="initializing-a-tensor" class="level3">
+<h3 class="anchored" data-anchor-id="initializing-a-tensor">Initializing a Tensor</h3>
+<p>Tensors can be initialized in various ways, like so:</p>
+<p><strong>Directly from data:</strong></p>
+<div class="cell" data-execution_count="2">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>data <span class="op">=</span> [[<span class="dv">1</span>, <span class="dv">2</span>],[<span class="dv">3</span>, <span class="dv">4</span>]]</span>
+<span id="cb2-2"><a href="#cb2-2"></a>x_data <span class="op">=</span> torch.tensor(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><strong>From a NumPy array:</strong></p>
+<div class="cell" data-execution_count="3">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>np_array <span class="op">=</span> np.array(data)</span>
+<span id="cb3-2"><a href="#cb3-2"></a>x_np <span class="op">=</span> torch.from_numpy(np_array)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><strong>From another tensor:</strong></p>
+<div class="cell" data-execution_count="4">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>x_ones <span class="op">=</span> torch.ones_like(x_data) <span class="co"># retains the properties of x_data</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="bu">print</span>(<span class="ss">f"Ones Tensor: </span><span class="ch">\n</span><span class="ss"> </span><span class="sc">{</span>x_ones<span class="sc">}</span><span class="ss"> </span><span class="ch">\n</span><span class="ss">"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3"></a></span>
+<span id="cb4-4"><a href="#cb4-4"></a>x_rand <span class="op">=</span> torch.rand_like(x_data, dtype<span class="op">=</span>torch.<span class="bu">float</span>) <span class="co"># overrides the datatype of x_data</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="bu">print</span>(<span class="ss">f"Random Tensor: </span><span class="ch">\n</span><span class="ss"> </span><span class="sc">{</span>x_rand<span class="sc">}</span><span class="ss"> </span><span class="ch">\n</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Ones Tensor: 
+ tensor([[1, 1],
+        [1, 1]]) 
+
+Random Tensor: 
+ tensor([[0.4359, 0.1517],
+        [0.9181, 0.1814]]) 
+</code></pre>
+</div>
+</div>
 
 
 </section>

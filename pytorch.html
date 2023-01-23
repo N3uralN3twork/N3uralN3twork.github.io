@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>N3uralN3twork’s Website - Resumes</title>
+<title>N3uralN3twork’s Website - PyTorch</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -29,9 +29,11 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./projects.html" rel="next">
-<link href="./aboutme.html" rel="prev">
+<link href="./publications.html" rel="next">
+<link href="./projects.html" rel="prev">
 <link href="./images/Combo-Chart-Icon.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-listing/list.min.js"></script>
+<script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -62,7 +64,52 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Submit"
   }
 }</script>
+<script>
 
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 </head>
 
@@ -72,7 +119,7 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Resumes</h1>
+      <h1 class="quarto-secondary-nav-title">PyTorch</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -114,7 +161,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./resumes.html" class="sidebar-item-text sidebar-link active">Resumes</a>
+  <a href="./resumes.html" class="sidebar-item-text sidebar-link">Resumes</a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -124,7 +171,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pytorch.html" class="sidebar-item-text sidebar-link">PyTorch</a>
+  <a href="./pytorch.html" class="sidebar-item-text sidebar-link active">PyTorch</a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -137,25 +184,14 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#welcome" id="toc-welcome" class="nav-link active" data-scroll-target="#welcome">Historical Documents</a>
-  <ul class="collapse">
-  <li><a href="#current-resume" id="toc-current-resume" class="nav-link" data-scroll-target="#current-resume">Current Resume:</a></li>
-  <li><a href="#oldest-resume-on-file" id="toc-oldest-resume-on-file" class="nav-link" data-scroll-target="#oldest-resume-on-file">Oldest Resume on File:</a></li>
-  </ul></li>
-  </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/N3uralN3twork/n3uraln3twork.github.io/edit/main/resumes.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/N3uralN3twork/n3uraln3twork.github.io/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
-    </div>
+        
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(2)</span></div><div class="category" data-category="ML">ML <span class="quarto-category-count">(1)</span></div><div class="category" data-category="code">code <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Resumes</h1>
-<p class="subtitle lead">Sorted by creation date</p>
+<h1 class="title d-none d-lg-block">PyTorch</h1>
 </div>
 
 
@@ -170,34 +206,80 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="welcome" class="level2">
-<h2 class="anchored" data-anchor-id="welcome">Historical Documents</h2>
-<section id="current-resume" class="level3">
-<h3 class="anchored" data-anchor-id="current-resume">Current Resume:</h3>
-<iframe src="https://drive.google.com/file/d/1Rki-0qytwnbDy3rZk7shYRK-2_7sm8Kw/preview" width="640" height="480" allow="autoplay"></iframe>
-</section>
-<section id="oldest-resume-on-file" class="level3">
-<h3 class="anchored" data-anchor-id="oldest-resume-on-file">Oldest Resume on File:</h3>
-<iframe src="https://drive.google.com/file/d/12p5DItosgHALez5W04ei4UDI4odYfUbW/preview" width="640" height="480" allow="autoplay"></iframe>
-<div class="callout-tip callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Notice
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Additional information coming soon!</p>
-</div>
-</div>
 
 
-</section>
-</section>
 
-</main> <!-- /main -->
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-listing-file-modified-sort="1674435639153" data-listing-reading-time-sort="2.525">
+<div class="thumbnail">
+<a href="./PyTorch/tensors/tensor_tutorial.html">
+<div class="thumbnail-image">
+
+</div>
+</a><p><a href="./PyTorch/tensors/tensor_tutorial.html"></a></p>
+</div>
+<div class="body">
+<a href="./PyTorch/tensors/tensor_tutorial.html">
+<h3 class="no-anchor listing-title">
+Tensors
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+<code>Learn the Basics &lt;intro.html&gt;</code>_ || <code>Quickstart &lt;quickstart_tutorial.html&gt;</code>_ || <strong>Tensors</strong> || <code>Datasets &amp; DataLoaders &lt;data_tutorial.html&gt;</code>_ || <code>Transforms &lt;transforms_tutorial.html&gt;</code>_…<code></code><code></code><code></code><code></code>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./PyTorch/tensors/tensor_tutorial.html"> </a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="code,ML" data-listing-date-sort="1668902400000" data-listing-file-modified-sort="1674435639153" data-listing-reading-time-sort="0.75">
+<div class="thumbnail">
+<p><a href="./PyTorch/tensors/tensors.html"> <img src="./PyTorch/tensors/Tensors Visual Logo.jpeg" class="thumnail-image" alt="Copyright Furkan Gulsen"> </a></p>
+</div>
+<div class="body">
+<a href="./PyTorch/tensors/tensors.html">
+<h3 class="no-anchor listing-title">
+PyTorch Tensors
+</h3>
+<div class="listing-subtitle">
+
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('code'); return false;">
+code
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('ML'); return false;">
+ML
+</div>
+</div>
+<a href="./PyTorch/tensors/tensors.html">
+<div class="listing-description">
+<p>This project serves as an introduction to PyTorch and tensors.</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./PyTorch/tensors/tensors.html">
+<div class="listing-date">
+Nov 20, 2022
+</div>
+<div class="listing-author">
+Matthias Quinn
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -448,13 +530,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./aboutme.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Who am I?</span>
+      <a href="./projects.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Projects</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./projects.html" class="pagination-link">
-        <span class="nav-page-text">Projects</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./publications.html" class="pagination-link">
+        <span class="nav-page-text">Papers</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
