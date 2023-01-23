@@ -1,0 +1,8 @@
+---
+title: "PyTorch"
+listing:
+  contents: PyTorch
+  sort: "date desc"
+  type: default
+  categories: true
+---

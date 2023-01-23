@@ -85,13 +85,12 @@ server <- function(input, output, session){
     else if (input$tests == "correlation" && input$correlationDesign == "Two groups") {
       powerAnalysis = pwr.r.test(n = switchNA(input$n), r = switchNA(input$corr),
                                  sig.level = switchNA(input$sig.level), power = switchNA(input$power),
-                                 alternative = input$alternative
-      ) 
+                                 alternative = input$alternative) 
     }
   })
   
   output$curves <- renderPlot({
-    plot(results())
+    plot(results(), xlim = c(-100, 100), ylim = c(-100, 100))
   })
   
   AllInputs <- reactive(

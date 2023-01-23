@@ -1,0 +1,11 @@
+{
+  "hash": "b921982b46013f3acf202756f91b94ea",
+  "result": {
+    "markdown": "---\ntitle: PyTorch Tensors\ndescription: This project serves as an introduction to PyTorch and tensors.\nauthor: Matthias Quinn\ndate: 11/20/2022\ncategories:\n  - code\n  - ML\nimage: Tensors Visual Logo.jpeg\nimage-alt: Copyright Furkan Gulsen\nformat: html\nexecute:\n  cache: true\n---\n\n::: columns\n::: {.column width=\"40%\"}\n## GOAL\n\nLearn more about the Machine Learning framework known as PyTorch.\n:::\n\n::: {.column width=\"10%\"}\n<!-- empty column to create gap -->\n:::\n\n::: {.column width=\"40%\"}\n## RESULT\n\nA better understanding of PyTorch and what tensors are.\n:::\n:::\n\nThis walkthrough is my interpretation of the official [PyTorch tutorial on tensors.](https://pytorch.org/tutorials/beginner/basics/tensor_tutorial.html)\n\n## Tensors\n\nTensors are a data structure similar to arrays and matrices. PyTorch uses tensors to encode both the inputs and outputs of a model as well as model parameters.\n\nTensors are like [NumPy](https://numpy.org/) arrays, but tensors can be run on GPUs and are also optimized for automatic differentiation.\n\n### Load in the libraries\n\n::: {.cell execution_count=1}\n``` {.python .cell-code}\nimport numpy as np\nimport torch\n```\n:::\n\n\n### Initializing a Tensor\nTensors can be initialized in various ways, like so:\n\n**Directly from data:**\n\n::: {.cell execution_count=2}\n``` {.python .cell-code}\ndata = [[1, 2],[3, 4]]\nx_data = torch.tensor(data)\n```\n:::\n\n\n**From a NumPy array:**\n\n::: {.cell execution_count=3}\n``` {.python .cell-code}\nnp_array = np.array(data)\nx_np = torch.from_numpy(np_array)\n```\n:::\n\n\n**From another tensor:**\n\n::: {.cell execution_count=4}\n``` {.python .cell-code}\nx_ones = torch.ones_like(x_data) # retains the properties of x_data\nprint(f\"Ones Tensor: \\n {x_ones} \\n\")\n\nx_rand = torch.rand_like(x_data, dtype=torch.float) # overrides the datatype of x_data\nprint(f\"Random Tensor: \\n {x_rand} \\n\")\n```\n\n::: {.cell-output .cell-output-stdout}\n```\nOnes Tensor: \n tensor([[1, 1],\n        [1, 1]]) \n\nRandom Tensor: \n tensor([[0.4359, 0.1517],\n        [0.9181, 0.1814]]) \n\n```\n:::\n:::\n\n\n",
+    "supporting": [
+      "tensors_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

@@ -46,6 +46,8 @@ website:
         text: Resumes
       - href: projects.qmd
         text: Projects
+      - href: pytorch.qmd
+        text: PyTorch
       - href: publications.qmd
         text: Papers
 
