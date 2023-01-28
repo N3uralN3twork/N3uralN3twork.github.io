@@ -131,6 +131,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       background: #FFAC1C;
     }
     </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+        <script type="text/javascript">
+        window.PlotlyConfig = {MathJaxConfig: 'local'};
+        if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}
+        if (typeof require !== 'undefined') {
+        require.undef("plotly");
+        requirejs.config({
+            paths: {
+                'plotly': ['https://cdn.plot.ly/plotly-2.18.0.min']
+            }
+        });
+        require(['plotly'], function(Plotly) {
+            window._Plotly = Plotly;
+        });
+        }
+        </script>
+        
 
   <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
@@ -332,8 +351,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#r2-index" id="toc-r2-index" class="nav-link" data-scroll-target="#r2-index">5.2.6 <span class="math inline">R^{2}</span> Index:</a></li>
   <li><a href="#wemmert-gancarski-index-1" id="toc-wemmert-gancarski-index-1" class="nav-link" data-scroll-target="#wemmert-gancarski-index-1">5.2.7 Wemmert-Gancarski Index:</a></li>
   <li><a href="#wg-index" id="toc-wg-index" class="nav-link" data-scroll-target="#wg-index">WG Index:</a></li>
+  <li><a href="#xie-beni-index-1" id="toc-xie-beni-index-1" class="nav-link" data-scroll-target="#xie-beni-index-1">5.2.8 Xie-Beni Index:</a></li>
+  <li><a href="#speed-testing-the-xie-beni-index" id="toc-speed-testing-the-xie-beni-index" class="nav-link" data-scroll-target="#speed-testing-the-xie-beni-index">Speed-testing the Xie-Beni Index:</a></li>
   </ul></li>
   </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">6. Conclusion</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/N3uralN3twork/n3uraln3twork.github.io/edit/main/posts/clustering-indices-project/cluster-indices.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/N3uralN3twork/n3uraln3twork.github.io/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -846,9 +868,14 @@ The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the valu
 <span id="cb3-9"><a href="#cb3-9"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
 <span id="cb3-10"><a href="#cb3-10"></a><span class="im">import</span> plotly.graph_objects <span class="im">as</span> go</span>
 <span id="cb3-11"><a href="#cb3-11"></a></span>
-<span id="cb3-12"><a href="#cb3-12"></a>sns.set_context(<span class="st">'poster'</span>)</span>
-<span id="cb3-13"><a href="#cb3-13"></a>sns.set_palette(<span class="st">'Paired'</span>, <span class="dv">10</span>)</span>
-<span id="cb3-14"><a href="#cb3-14"></a>sns.set_color_codes()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="im">from</span> scipy.spatial.distance <span class="im">import</span> pdist, cdist, euclidean</span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_blobs</span>
+<span id="cb3-14"><a href="#cb3-14"></a><span class="im">from</span> timeit <span class="im">import</span> default_timer <span class="im">as</span> timer</span>
+<span id="cb3-15"><a href="#cb3-15"></a>pd.set_option(<span class="st">'display.max_columns'</span>, <span class="dv">30</span>)</span>
+<span id="cb3-16"><a href="#cb3-16"></a></span>
+<span id="cb3-17"><a href="#cb3-17"></a>sns.set_context(<span class="st">'poster'</span>)</span>
+<span id="cb3-18"><a href="#cb3-18"></a>sns.set_palette(<span class="st">'Paired'</span>, <span class="dv">10</span>)</span>
+<span id="cb3-19"><a href="#cb3-19"></a>sns.set_color_codes()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Creating sample data-frames to cluster via <strong>NumPy:</strong></p>
@@ -863,6 +890,42 @@ The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the valu
 <section id="indices-performance" class="level2">
 <h2 class="anchored" data-anchor-id="indices-performance"><strong>5.2 Indices Performance</strong></h2>
 <p>This part will pertain to demonstrating the efficiency of the various clustering metrics offered by the proposed library. In addition, it will detail the various methods used to improve upon the efficiency of previous implementations, if they exist.</p>
+<div class="cell" data-execution_count="4">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">def</span> benchmark_algorithm(dataset_sizes, indice_function, function_args, function_kwds,</span>
+<span id="cb5-2"><a href="#cb5-2"></a>                        n_columns<span class="op">=</span><span class="dv">10</span>, n_clusters<span class="op">=</span><span class="dv">3</span>, max_time<span class="op">=</span><span class="dv">100</span>, repeats<span class="op">=</span><span class="dv">3</span>):</span>
+<span id="cb5-3"><a href="#cb5-3"></a>    </span>
+<span id="cb5-4"><a href="#cb5-4"></a>    <span class="co"># * Initialize the result with NaNs so that any unfilled entries </span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>    <span class="co"># * will be considered NULL when we convert to a pandas dataframe at the end</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>    result <span class="op">=</span> np.nan <span class="op">*</span> np.ones((<span class="bu">len</span>(dataset_sizes), repeats))</span>
+<span id="cb5-7"><a href="#cb5-7"></a>    <span class="cf">for</span> index, size <span class="kw">in</span> <span class="bu">enumerate</span>(dataset_sizes):</span>
+<span id="cb5-8"><a href="#cb5-8"></a>        <span class="cf">for</span> s <span class="kw">in</span> <span class="bu">range</span>(repeats):</span>
+<span id="cb5-9"><a href="#cb5-9"></a>            <span class="co"># * Use sklearns make_blobs to generate a random dataset with specified size</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a>            <span class="co"># * dimension and number of clusters</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a>            data, labels <span class="op">=</span> make_blobs(n_samples<span class="op">=</span>size, </span>
+<span id="cb5-12"><a href="#cb5-12"></a>                                      n_features<span class="op">=</span>n_columns, </span>
+<span id="cb5-13"><a href="#cb5-13"></a>                                      centers<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb5-14"><a href="#cb5-14"></a></span>
+<span id="cb5-15"><a href="#cb5-15"></a>            <span class="co"># * Start the clustering with a timer</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a>            start_time <span class="op">=</span> timer()</span>
+<span id="cb5-17"><a href="#cb5-17"></a>            indice_function(data, labels, <span class="op">*</span>function_args, <span class="op">**</span>function_kwds)</span>
+<span id="cb5-18"><a href="#cb5-18"></a>            time_taken <span class="op">=</span> np.<span class="bu">round</span>(timer() <span class="op">-</span> start_time, <span class="dv">4</span>)</span>
+<span id="cb5-19"><a href="#cb5-19"></a>            <span class="bu">print</span>(<span class="ss">f"Run complete for size: </span><span class="sc">{</span>size<span class="sc">}</span><span class="ss">; took </span><span class="sc">{</span>np<span class="sc">.</span><span class="bu">round</span>(time_taken, <span class="dv">4</span>)<span class="sc">}</span><span class="ss"> seconds"</span>)</span>
+<span id="cb5-20"><a href="#cb5-20"></a>            <span class="co"># * If we are taking more than max_time then abort -- we don't</span></span>
+<span id="cb5-21"><a href="#cb5-21"></a>            <span class="co"># * want to spend excessive time on slow algorithms</span></span>
+<span id="cb5-22"><a href="#cb5-22"></a>            <span class="cf">if</span> time_taken <span class="op">&gt;</span> max_time:</span>
+<span id="cb5-23"><a href="#cb5-23"></a>                result[index, s] <span class="op">=</span> time_taken</span>
+<span id="cb5-24"><a href="#cb5-24"></a>                <span class="cf">return</span> pd.DataFrame(np.vstack([dataset_sizes.repeat(repeats), </span>
+<span id="cb5-25"><a href="#cb5-25"></a>                                               result.flatten()]).T, columns<span class="op">=</span>[<span class="st">'Size'</span>,<span class="st">'Seconds'</span>])</span>
+<span id="cb5-26"><a href="#cb5-26"></a>            <span class="cf">else</span>:</span>
+<span id="cb5-27"><a href="#cb5-27"></a>                result[index, s] <span class="op">=</span> time_taken</span>
+<span id="cb5-28"><a href="#cb5-28"></a>        </span>
+<span id="cb5-29"><a href="#cb5-29"></a>    <span class="co"># * Return the result as a dataframe for easier handling with seaborn afterwards</span></span>
+<span id="cb5-30"><a href="#cb5-30"></a>    <span class="cf">return</span> pd.DataFrame(np.vstack([dataset_sizes.repeat(repeats), </span>
+<span id="cb5-31"><a href="#cb5-31"></a>                                   result.flatten()]).T, columns<span class="op">=</span>[<span class="st">'Size'</span>,<span class="st">'Seconds'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 <section id="ball-hall-index-1" class="level3">
 <h3 class="anchored" data-anchor-id="ball-hall-index-1">5.2.1 Ball-Hall Index:</h3>
 <p>The <a href="#bhindex">Ball-Hall Index</a> is a relatively simple index that is essentially the mean dispersion of all points, relative to the cluster they belong to. As such, the index can be computed in <span class="math inline">O(nm)</span> time, making it ideal for larger datasets since it only requires computing the centroids of each cluster and the distances of each point within each cluster.</p>
@@ -872,7 +935,7 @@ The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the valu
 </section>
 <section id="c-index" class="level3">
 <h3 class="anchored" data-anchor-id="c-index">5.2.2 <span class="math inline">C</span> Index:</h3>
-<p>The author does not believe the <em>NbClust</em> library calculates the <span class="math inline">C</span> index correctly. For instance, while the source code for the <span class="math inline">C</span> index correctly calculates the number of within-cluster distances, <span class="math inline">N_W</span>, it does not correctly compute the sum of the <span class="math inline">N_W</span> largest/smallest pairwise distances, <span class="math inline">S_{min}</span> and <span class="math inline">S_{max}</span> respectively. In addition, it does not utilize a sorting/partitioning method of any kind, which is necessary for finding the largest/smallest pairwise distances.</p>
+<p>The author does <strong>not</strong> believe the <em>NbClust</em> library calculates the <span class="math inline">C</span> index correctly. For instance, while the source code for the <span class="math inline">C</span> index correctly calculates the number of within-cluster distances, <span class="math inline">N_W</span>, it does not correctly compute the sum of the <span class="math inline">N_W</span> largest/smallest pairwise distances, <span class="math inline">S_{min}</span> and <span class="math inline">S_{max}</span> respectively. In addition, it does not utilize a sorting/partitioning method of any kind, which is necessary for finding the largest/smallest pairwise distances.</p>
 <p>To alleviate this problem, I rewrote the index to account for all parts of the original equation, from <a href="#C_Index">Hubert and Levin, 1976</a>.</p>
 <p>In terms of performance, the <em>NbClust</em> implementation will not be considered, for reasons listed above. It should be noted that a previous implementation of the <span class="math inline">C</span> index was made available in the Python language by John Vorsten in 2020, around the same time that I was working on this very project.</p>
 <p>As stated previously, the <span class="math inline">C</span> index can be computed in <span class="math inline">O(m^{2}(n + log_2m))</span> time, which can be prohibitive if the number of variables used in the clustering is large. For reference, when <span class="math inline">N = 10,000</span>, the number of pairwise distances is <span class="math inline">49,995,000</span>; for <span class="math inline">N</span> observations, the number of pairwise distances is <span class="math inline">N(N-1)/2</span>. Using the above example, the mean time to compute the index via John’s implementation was <strong>27.5</strong> seconds, compared to the proposed library’s mean run-time of <strong>8.31</strong> seconds.</p>
@@ -900,7 +963,7 @@ The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the valu
 <section id="r2-index" class="level3">
 <h3 class="anchored" data-anchor-id="r2-index">5.2.6 <span class="math inline">R^{2}</span> Index:</h3>
 <p>The <a href="#r2index"><span class="math inline">R^{2}</span> Index</a> has the usual interpretation of the amount of variation explained by the clustering solution. It should also be noted that the <span class="math inline">R^{2}</span> index is not the best method of criterion if your clustering solution is irregularly shaped or highly elongated.</p>
-<p>Regarding the time complexity, the original implementation of the algorithm ran in <span class="math inline">O(k*n^{2}*m^{2})</span> time. This is because the algorithm has to, for each cluster <span class="math inline">k</span> and for each variable <span class="math inline">m</span>: compute the euclidean distance between the cluster center and the observation <span class="math inline">n</span>, write the product to an array, and then sum the result. The reasoning for the <span class="math inline">O(n^{2})</span> in the computation is because the euclidean distance requires <span class="math inline">O(nm)</span> time to be computed. For datasets with lots of observations and many variables to cluster, this time can be infeasible to work with.</p>
+<p>Regarding the time complexity, the original implementation of the algorithm ran in <span class="math inline">O(k*n^{2}*m^{2})</span> time. This is because the algorithm has to, for each cluster <span class="math inline">k</span> and for each variable <span class="math inline">m</span>: compute the euclidean distance between the cluster center and the observation <span class="math inline">n</span>, write the product to an array, and then sum the result. The reasoning for the <span class="math inline">O(n^{2})</span> in the computation is because the euclidean distance requires <span class="math inline">O(nm)</span> time to be computed. For datasets with lots of observations and many variables to cluster, this time can be unfeasible to work with.</p>
 <p>The new algorithm offers a <span class="math inline">812x</span> speedup in compute time, since it does not rely on a double for-loop or the computation of euclidean distances. Rather, it takes the raw data matrix and labels and computes a series of matrix multiplications.</p>
 </section>
 <section id="wemmert-gancarski-index-1" class="level3">
@@ -911,10 +974,486 @@ The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the valu
 <section id="wg-index" class="level3">
 <h3 class="anchored" data-anchor-id="wg-index">WG Index:</h3>
 <iframe src="https://drive.google.com/file/d/1hCsoy6wW3fzN05MJmcvlS8xuaGJjeiai/preview" width="1400" height="480" allow="autoplay" align="center"></iframe>
+<p>Regarding the computational cost of computing the WG index, the modified OpenEnsembles version of the WG index had a mean run time of <span class="math inline">2.74</span> seconds; this is in stark contrast to the author’s proposed implementation that runs in <span class="math inline">0.118</span> seconds. The proposal is not only more than <span class="math inline">23</span> times faster than the previous implementation, but it also uses less memory as well (not a significant difference). Using the same setup as the other indices previously described, the mean amount of memory used per run for the new algorithm was around <span class="math inline">0.578</span> MiB, compared to the original implementation’s <span class="math inline">0.622</span> MiB memory usage; or <span class="math inline">8\%</span> less memory.</p>
+<p>It should be noted that there were two resource-demanding tasks in the proposed implementation: namely, finding a quotient and finding the distances from each point to its centroid. Finding the quotient between the distance from a point to its barycenter and the minimum distance from a point and all of the other barycenters took, on average, only <span class="math inline">0.0013</span> seconds. Finding the distances from all of the points to their centroids resulted in a mean run time of about <span class="math inline">0.003</span> seconds, using the same setup as above. Finally, the same tasks that were bottlenecks for the new version were also present in the old implementation, but the key difference lies in how those obstacles were handled.</p>
+</section>
+<section id="xie-beni-index-1" class="level3">
+<h3 class="anchored" data-anchor-id="xie-beni-index-1">5.2.8 Xie-Beni Index:</h3>
+<p>The <a href="#xbindex">Xie-Beni Index</a> defines the inter-cluster separation as the minimum square distance between cluster centers, and the intra-cluster compactness as the mean square distance between each data object and its cluster center.</p>
+<p>In terms of computational complexity, the original implementation of the Xie-Beni index ran in <span class="math inline">O(k*n^{2}*m^{2})</span> time. With similar reasoning as the <span class="math inline">R^{2}</span> index, this can be costly to run for larger datasets, especially if the true clustering solution is not fuzzy, which this index was specifically created for. The updated implementation of the index runs in <span class="math inline">O(n^{2})</span> time, necessary for the computation of the distance matrix. In addition, the new algorithm offers up to a <span class="math inline">291x</span> speedup compared to the author’s previous application.</p>
+</section>
+<section id="speed-testing-the-xie-beni-index" class="level3">
+<h3 class="anchored" data-anchor-id="speed-testing-the-xie-beni-index">Speed-testing the Xie-Beni Index:</h3>
+<div class="cell" data-execution_count="5">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Old version:</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">def</span> oldXB(X, labels):</span>
+<span id="cb6-3"><a href="#cb6-3"></a>    X <span class="op">=</span> pd.DataFrame(X)</span>
+<span id="cb6-4"><a href="#cb6-4"></a>    numCluster <span class="op">=</span> <span class="bu">int</span>(<span class="bu">max</span>(labels) <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb6-5"><a href="#cb6-5"></a>    numObject <span class="op">=</span> <span class="bu">len</span>(labels)</span>
+<span id="cb6-6"><a href="#cb6-6"></a>    sumNorm <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a>    list_centers <span class="op">=</span> []</span>
+<span id="cb6-8"><a href="#cb6-8"></a></span>
+<span id="cb6-9"><a href="#cb6-9"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(numCluster):</span>
+<span id="cb6-10"><a href="#cb6-10"></a>        <span class="co"># get all members from cluster i</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a>        indices <span class="op">=</span> [t <span class="cf">for</span> t, x <span class="kw">in</span> <span class="bu">enumerate</span>(labels) <span class="cf">if</span> x <span class="op">==</span> i]</span>
+<span id="cb6-12"><a href="#cb6-12"></a>        clusterMember <span class="op">=</span> X.iloc[indices, :]</span>
+<span id="cb6-13"><a href="#cb6-13"></a>        <span class="co"># compute the cluster center</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a>        clusterCenter <span class="op">=</span> np.mean(clusterMember, <span class="dv">0</span>)</span>
+<span id="cb6-15"><a href="#cb6-15"></a>        list_centers.append(clusterCenter)</span>
+<span id="cb6-16"><a href="#cb6-16"></a>        <span class="co"># iterate through each member of the cluster</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a>        <span class="cf">for</span> member <span class="kw">in</span> clusterMember.iterrows():</span>
+<span id="cb6-18"><a href="#cb6-18"></a>            sumNorm <span class="op">=</span> sumNorm <span class="op">+</span> np.power(euclidean(member[<span class="dv">1</span>], clusterCenter), <span class="dv">2</span>)</span>
+<span id="cb6-19"><a href="#cb6-19"></a></span>
+<span id="cb6-20"><a href="#cb6-20"></a>    minDis <span class="op">=</span> <span class="bu">min</span>(pdist(list_centers))</span>
+<span id="cb6-21"><a href="#cb6-21"></a></span>
+<span id="cb6-22"><a href="#cb6-22"></a>    <span class="co"># compute the fitness</span></span>
+<span id="cb6-23"><a href="#cb6-23"></a>    score <span class="op">=</span> sumNorm <span class="op">/</span> (numObject <span class="op">*</span> <span class="bu">pow</span>(minDis, <span class="dv">2</span>))</span>
+<span id="cb6-24"><a href="#cb6-24"></a>    <span class="cf">return</span> score</span>
+<span id="cb6-25"><a href="#cb6-25"></a></span>
+<span id="cb6-26"><a href="#cb6-26"></a><span class="kw">def</span> centers2(X, labels):</span>
+<span id="cb6-27"><a href="#cb6-27"></a>    x <span class="op">=</span> pd.DataFrame(X)</span>
+<span id="cb6-28"><a href="#cb6-28"></a>    labels <span class="op">=</span> np.array(labels)</span>
+<span id="cb6-29"><a href="#cb6-29"></a>    k <span class="op">=</span> <span class="bu">int</span>(np.<span class="bu">max</span>(labels) <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb6-30"><a href="#cb6-30"></a>    n_cols <span class="op">=</span> x.shape[<span class="dv">1</span>]</span>
+<span id="cb6-31"><a href="#cb6-31"></a>    centers <span class="op">=</span> np.array(np.zeros(shape<span class="op">=</span>(k, n_cols)))</span>
+<span id="cb6-32"><a href="#cb6-32"></a></span>
+<span id="cb6-33"><a href="#cb6-33"></a>    <span class="co"># Getting the centroids:</span></span>
+<span id="cb6-34"><a href="#cb6-34"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(k):</span>
+<span id="cb6-35"><a href="#cb6-35"></a>        centers[i, :] <span class="op">=</span> np.mean(x.iloc[labels <span class="op">==</span> i], axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb6-36"><a href="#cb6-36"></a></span>
+<span id="cb6-37"><a href="#cb6-37"></a>    <span class="cf">return</span> centers</span>
+<span id="cb6-38"><a href="#cb6-38"></a></span>
+<span id="cb6-39"><a href="#cb6-39"></a><span class="co"># New version:</span></span>
+<span id="cb6-40"><a href="#cb6-40"></a><span class="kw">def</span> myXB(X, labels):</span>
+<span id="cb6-41"><a href="#cb6-41"></a>    <span class="co">"My version of computing the Xie-Beni index."</span></span>
+<span id="cb6-42"><a href="#cb6-42"></a>    </span>
+<span id="cb6-43"><a href="#cb6-43"></a>    nrows <span class="op">=</span> X.shape[<span class="dv">0</span>]</span>
+<span id="cb6-44"><a href="#cb6-44"></a></span>
+<span id="cb6-45"><a href="#cb6-45"></a>    <span class="co"># Get the centroids:</span></span>
+<span id="cb6-46"><a href="#cb6-46"></a>    centroids <span class="op">=</span> centers2(X, labels)</span>
+<span id="cb6-47"><a href="#cb6-47"></a></span>
+<span id="cb6-48"><a href="#cb6-48"></a>    <span class="co"># Computing the WGSS:</span></span>
+<span id="cb6-49"><a href="#cb6-49"></a>    <span class="kw">def</span> getMinDist(obs, code_book):</span>
+<span id="cb6-50"><a href="#cb6-50"></a>            dist <span class="op">=</span> cdist(obs, code_book)</span>
+<span id="cb6-51"><a href="#cb6-51"></a>            code <span class="op">=</span> dist.argmin(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb6-52"><a href="#cb6-52"></a>            min_dist <span class="op">=</span> dist[np.arange(<span class="bu">len</span>(code)), code]</span>
+<span id="cb6-53"><a href="#cb6-53"></a>            <span class="cf">return</span> min_dist</span>
+<span id="cb6-54"><a href="#cb6-54"></a>                </span>
+<span id="cb6-55"><a href="#cb6-55"></a>    euc_distance_to_centroids <span class="op">=</span> getMinDist(X, centroids)</span>
+<span id="cb6-56"><a href="#cb6-56"></a></span>
+<span id="cb6-57"><a href="#cb6-57"></a>    WGSS <span class="op">=</span> np.<span class="bu">sum</span>(euc_distance_to_centroids<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb6-58"><a href="#cb6-58"></a></span>
+<span id="cb6-59"><a href="#cb6-59"></a>    <span class="co"># Computing the minimum squared distance to the centroids:</span></span>
+<span id="cb6-60"><a href="#cb6-60"></a>    MinSqCentroidDist <span class="op">=</span> np.<span class="bu">min</span>(pdist(centroids, metric<span class="op">=</span><span class="st">'sqeuclidean'</span>))</span>
+<span id="cb6-61"><a href="#cb6-61"></a></span>
+<span id="cb6-62"><a href="#cb6-62"></a>    <span class="co"># COmputing the XB index:</span></span>
+<span id="cb6-63"><a href="#cb6-63"></a>    xb <span class="op">=</span> (<span class="dv">1</span> <span class="op">/</span> nrows) <span class="op">*</span> (WGSS <span class="op">/</span> MinSqCentroidDist)</span>
+<span id="cb6-64"><a href="#cb6-64"></a></span>
+<span id="cb6-65"><a href="#cb6-65"></a>    <span class="cf">return</span> xb</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="6">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>oldxb <span class="op">=</span> benchmark_algorithm(dataset_sizes, oldXB, (), {})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 500; took 0.0439 seconds
+Run complete for size: 500; took 0.0422 seconds
+Run complete for size: 500; took 0.0408 seconds
+Run complete for size: 1000; took 0.0748 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 1000; took 0.0761 seconds
+Run complete for size: 1000; took 0.0814 seconds
+Run complete for size: 1500; took 0.1104 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 1500; took 0.1092 seconds
+Run complete for size: 1500; took 0.1027 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 2000; took 0.1386 seconds
+Run complete for size: 2000; took 0.1345 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 2000; took 0.1965 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 2500; took 0.2259 seconds
+Run complete for size: 2500; took 0.1997 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 2500; took 0.1871 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 3000; took 0.2377 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 3000; took 0.2225 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 3000; took 0.3046 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 4000; took 0.2689 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 4000; took 0.2988 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 4000; took 0.3213 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 5000; took 0.3179 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 5000; took 0.3531 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 5000; took 0.3521 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 6000; took 0.3976 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 6000; took 0.4837 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 6000; took 0.4561 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 8000; took 0.5604 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 8000; took 0.5961 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 8000; took 0.568 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 10000; took 0.7559 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 10000; took 0.6787 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 10000; took 0.6996 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 12000; took 0.9949 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 12000; took 0.9771 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 12000; took 1.0966 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 14000; took 1.2651 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 14000; took 1.2118 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 14000; took 1.3354 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 16000; took 1.3454 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 16000; took 1.2079 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 16000; took 1.0968 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 18000; took 1.2166 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 18000; took 1.215 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 18000; took 1.2833 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 20000; took 1.4117 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 20000; took 1.3423 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 20000; took 1.3897 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 22000; took 1.4809 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 22000; took 1.5475 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 22000; took 1.492 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 24000; took 1.674 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 24000; took 1.633 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 24000; took 1.6321 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 26000; took 1.7576 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 26000; took 1.7878 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 26000; took 1.7258 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 28000; took 1.8395 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 28000; took 1.9374 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 28000; took 1.8941 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 30000; took 2.0428 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 30000; took 2.041 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 30000; took 2.0524 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 32000; took 2.1921 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 32000; took 2.2152 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 32000; took 2.154 seconds</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="7">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1"></a>newXB <span class="op">=</span> benchmark_algorithm(dataset_sizes, myXB, (), {})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 500; took 0.0035 seconds
+Run complete for size: 500; took 0.003 seconds
+Run complete for size: 500; took 0.0029 seconds
+Run complete for size: 1000; took 0.0031 seconds
+Run complete for size: 1000; took 0.0032 seconds
+Run complete for size: 1000; took 0.0021 seconds
+Run complete for size: 1500; took 0.0026 seconds
+Run complete for size: 1500; took 0.0028 seconds
+Run complete for size: 1500; took 0.0022 seconds
+Run complete for size: 2000; took 0.0023 seconds
+Run complete for size: 2000; took 0.0021 seconds
+Run complete for size: 2000; took 0.0027 seconds
+Run complete for size: 2500; took 0.0028 seconds
+Run complete for size: 2500; took 0.0025 seconds
+Run complete for size: 2500; took 0.0023 seconds
+Run complete for size: 3000; took 0.0022 seconds
+Run complete for size: 3000; took 0.0028 seconds
+Run complete for size: 3000; took 0.0022 seconds
+Run complete for size: 4000; took 0.0025 seconds
+Run complete for size: 4000; took 0.0025 seconds
+Run complete for size: 4000; took 0.0028 seconds
+Run complete for size: 5000; took 0.0027 seconds
+Run complete for size: 5000; took 0.0027 seconds
+Run complete for size: 5000; took 0.003 seconds
+Run complete for size: 6000; took 0.0029 seconds
+Run complete for size: 6000; took 0.0027 seconds
+Run complete for size: 6000; took 0.003 seconds
+Run complete for size: 8000; took 0.0031 seconds
+Run complete for size: 8000; took 0.0032 seconds
+Run complete for size: 8000; took 0.0031 seconds
+Run complete for size: 10000; took 0.0034 seconds
+Run complete for size: 10000; took 0.004 seconds
+Run complete for size: 10000; took 0.0036 seconds
+Run complete for size: 12000; took 0.0037 seconds
+Run complete for size: 12000; took 0.004 seconds
+Run complete for size: 12000; took 0.0038 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 14000; took 0.0049 seconds
+Run complete for size: 14000; took 0.0046 seconds
+Run complete for size: 14000; took 0.0047 seconds
+Run complete for size: 16000; took 0.0045 seconds
+Run complete for size: 16000; took 0.0045 seconds
+Run complete for size: 16000; took 0.0041 seconds
+Run complete for size: 18000; took 0.0052 seconds
+Run complete for size: 18000; took 0.0049 seconds
+Run complete for size: 18000; took 0.0058 seconds
+Run complete for size: 20000; took 0.0052 seconds
+Run complete for size: 20000; took 0.0054 seconds
+Run complete for size: 20000; took 0.0056 seconds
+Run complete for size: 22000; took 0.0063 seconds
+Run complete for size: 22000; took 0.0065 seconds
+Run complete for size: 22000; took 0.0067 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 24000; took 0.0066 seconds
+Run complete for size: 24000; took 0.0068 seconds
+Run complete for size: 24000; took 0.0065 seconds
+Run complete for size: 26000; took 0.0069 seconds
+Run complete for size: 26000; took 0.0068 seconds
+Run complete for size: 26000; took 0.007 seconds
+Run complete for size: 28000; took 0.0072 seconds
+Run complete for size: 28000; took 0.0071 seconds
+Run complete for size: 28000; took 0.0078 seconds
+Run complete for size: 30000; took 0.0074 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run complete for size: 30000; took 0.009 seconds
+Run complete for size: 30000; took 0.0079 seconds
+Run complete for size: 32000; took 0.0081 seconds
+Run complete for size: 32000; took 0.0081 seconds
+Run complete for size: 32000; took 0.0073 seconds</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="8">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1"></a>means <span class="op">=</span> oldxb.groupby(<span class="st">"Size"</span>)[<span class="st">"Seconds"</span>].mean()</span>
+<span id="cb71-2"><a href="#cb71-2"></a>stds <span class="op">=</span> oldxb.groupby(<span class="st">"Size"</span>)[<span class="st">"Seconds"</span>].std()</span>
+<span id="cb71-3"><a href="#cb71-3"></a>inter <span class="op">=</span> pd.DataFrame(pd.concat([means, stds], keys<span class="op">=</span>[<span class="st">"Mean"</span>, <span class="st">"Std. Dev."</span>], axis<span class="op">=</span><span class="dv">1</span>))</span>
+<span id="cb71-4"><a href="#cb71-4"></a>olderXB <span class="op">=</span> inter.reset_index()</span>
+<span id="cb71-5"><a href="#cb71-5"></a></span>
+<span id="cb71-6"><a href="#cb71-6"></a>means2 <span class="op">=</span>newXB.groupby(<span class="st">"Size"</span>)[<span class="st">"Seconds"</span>].mean()</span>
+<span id="cb71-7"><a href="#cb71-7"></a>stds2 <span class="op">=</span> newXB.groupby(<span class="st">"Size"</span>)[<span class="st">"Seconds"</span>].std()</span>
+<span id="cb71-8"><a href="#cb71-8"></a>inter2 <span class="op">=</span> pd.DataFrame(pd.concat([means2, stds2], keys<span class="op">=</span>[<span class="st">"Mean"</span>, <span class="st">"Std. Dev."</span>], axis<span class="op">=</span><span class="dv">1</span>))</span>
+<span id="cb71-9"><a href="#cb71-9"></a>newerXB <span class="op">=</span> inter2.reset_index()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="9">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1"></a>resultsXB <span class="op">=</span> pd.concat([olderXB, newerXB],</span>
+<span id="cb72-2"><a href="#cb72-2"></a>                    axis<span class="op">=</span><span class="dv">0</span>, keys<span class="op">=</span>[<span class="st">"Old XB"</span>, <span class="st">"My XB"</span>])</span>
+<span id="cb72-3"><a href="#cb72-3"></a>resultsXB <span class="op">=</span> resultsXB.reset_index()</span>
+<span id="cb72-4"><a href="#cb72-4"></a>resultsXB.columns <span class="op">=</span> [<span class="st">"Indice"</span>, <span class="st">"Run"</span>, <span class="st">"NObs."</span>, <span class="st">"Mean Time"</span>, <span class="st">"SD Time"</span>]</span>
+<span id="cb72-5"><a href="#cb72-5"></a>resultsXB.head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="9">
 
+<div>
 
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Indice</th>
+      <th>Run</th>
+      <th>NObs.</th>
+      <th>Mean Time</th>
+      <th>SD Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Old XB</td>
+      <td>0</td>
+      <td>500.0</td>
+      <td>0.042300</td>
+      <td>0.001552</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Old XB</td>
+      <td>1</td>
+      <td>1000.0</td>
+      <td>0.077433</td>
+      <td>0.003496</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Old XB</td>
+      <td>2</td>
+      <td>1500.0</td>
+      <td>0.107433</td>
+      <td>0.004143</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Old XB</td>
+      <td>3</td>
+      <td>2000.0</td>
+      <td>0.156533</td>
+      <td>0.034673</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Old XB</td>
+      <td>4</td>
+      <td>2500.0</td>
+      <td>0.204233</td>
+      <td>0.019793</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="10">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1"></a>fig <span class="op">=</span> px.scatter(resultsXB, x<span class="op">=</span><span class="st">"NObs."</span>, y<span class="op">=</span><span class="st">"Mean Time"</span>, color<span class="op">=</span><span class="st">"Indice"</span>,</span>
+<span id="cb73-2"><a href="#cb73-2"></a>                 title<span class="op">=</span><span class="st">"Performance Comparison of Various Indice Implementations"</span>).update_traces(mode<span class="op">=</span><span class="st">'lines+markers'</span>)</span>
+<span id="cb73-3"><a href="#cb73-3"></a>fig.update_layout(xaxis_title<span class="op">=</span><span class="st">"Number of Observations"</span>,</span>
+<span id="cb73-4"><a href="#cb73-4"></a>                 yaxis_title<span class="op">=</span><span class="st">"Time taken to complete (s)"</span>)</span>
+<span id="cb73-5"><a href="#cb73-5"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+
+<div>                            <div id="f13c2f5a-f135-4582-9127-59d722f293df" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("f13c2f5a-f135-4582-9127-59d722f293df")) {                    Plotly.newPlot(                        "f13c2f5a-f135-4582-9127-59d722f293df",                        [{"hovertemplate":"Indice=Old XB<br>NObs.=%{x}<br>Mean Time=%{y}<extra></extra>","legendgroup":"Old XB","marker":{"color":"#636efa","symbol":"circle"},"mode":"lines+markers","name":"Old XB","orientation":"v","showlegend":true,"x":[500.0,1000.0,1500.0,2000.0,2500.0,3000.0,4000.0,5000.0,6000.0,8000.0,10000.0,12000.0,14000.0,16000.0,18000.0,20000.0,22000.0,24000.0,26000.0,28000.0,30000.0,32000.0],"xaxis":"x","y":[0.042300000000000004,0.07743333333333334,0.10743333333333334,0.15653333333333333,0.20423333333333335,0.2549333333333333,0.29633333333333334,0.34103333333333335,0.44580000000000003,0.5748333333333333,0.7113999999999999,1.0228666666666666,1.2707666666666666,1.2167000000000001,1.2383,1.3812333333333333,1.5068000000000001,1.6463666666666665,1.7570666666666668,1.8903333333333332,2.0454000000000003,2.1870999999999996],"yaxis":"y","type":"scatter"},{"hovertemplate":"Indice=My XB<br>NObs.=%{x}<br>Mean Time=%{y}<extra></extra>","legendgroup":"My XB","marker":{"color":"#EF553B","symbol":"circle"},"mode":"lines+markers","name":"My XB","orientation":"v","showlegend":true,"x":[500.0,1000.0,1500.0,2000.0,2500.0,3000.0,4000.0,5000.0,6000.0,8000.0,10000.0,12000.0,14000.0,16000.0,18000.0,20000.0,22000.0,24000.0,26000.0,28000.0,30000.0,32000.0],"xaxis":"x","y":[0.0031333333333333335,0.0028,0.002533333333333333,0.0023666666666666667,0.002533333333333333,0.0024,0.0026,0.0028000000000000004,0.0028666666666666667,0.0031333333333333335,0.0036666666666666666,0.003833333333333333,0.004733333333333333,0.004366666666666667,0.005299999999999999,0.005399999999999999,0.0065,0.006633333333333334,0.0069,0.007366666666666667,0.008100000000000001,0.007833333333333333],"yaxis":"y","type":"scatter"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Number of Observations"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Time taken to complete (s)"}},"legend":{"title":{"text":"Indice"},"tracegroupgap":0},"title":{"text":"Performance Comparison of Various Indice Implementations"}},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('f13c2f5a-f135-4582-9127-59d722f293df');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };                });            </script>        </div>
+</div>
+</div>
 </section>
 </section>
+</section>
+<section id="conclusion" class="level1">
+<h1>6. Conclusion</h1>
+<p>This project’s objective was to introduce a new Python package for computing internal clustering indices for any particular clustering solution. Given a set of observations, the user is able to run various clustering models as well as a large variety of clustering indices to determine how well a clustering solution fits the data, via the proposed library. It was shown that this library is analogous to the R library <em>NbClust</em> and borrows much of it’s inspiration from the authors previous work. The proposed library offers <span class="math inline">31</span> unique indices to assess the quality of a particular clustering method, sufficient enough to compare against each other.</p>
+<p>It was also shown that the proposed library improves upon the <em>NbClust</em> library in a variety of avenues. In addition to offering a wider plethora of indices at the user’s disposal, it also offers better performance for computing most metrics, which was shown above. Furthermore, a difference in design pattern for the two libraries should be noted. While the <em>NbClust</em> library computes various indices for two popular clustering methods: namely, K-Means and agglomerative clustering, the proposed library allows for any clustering method available. This is because the author started the project with the intention of being method-agnostic, allowing the end-user to make that decision.</p>
+<p>Finally, the proposed package was not meant to be a replacement for the <em>NbClust</em> library. Rather, the author’s intention was that both libraries would be used in conjunction with one another so as to form a basis for comparison in a user’s project. Also, a user wouldn’t have to utilize multiple languages for his/her project and instead could now use a singular environment to complete his/her tasks.</p>
+
+
 </section>
 
 </main> <!-- /main -->
