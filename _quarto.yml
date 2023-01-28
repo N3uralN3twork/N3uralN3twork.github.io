@@ -14,7 +14,7 @@ website:
   
   page-footer:
     right: "This page is built with ❤️ and [Quarto](https://quarto.org/)."
-    left: "&copy; CC-By Matthias Quinn, 2022"
+    left: "&copy; CC-By Matthias Quinn, 2023"
     
   sidebar:
     logo: "images/Transhumanism Logo for Website.png"

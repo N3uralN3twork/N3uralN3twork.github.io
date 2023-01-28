@@ -717,3 +717,262 @@ $$D(C_k, C_{k'}) = min(d(M_i, M_j)) \tag{77}$$
 and $d(M_i, M_j)$ is the distance between the cluster centroids.
 
 The optimal suggested number of clusters corresponds to the minimum value of the index.
+
+```{python}
+import sklearn.cluster
+import scipy.cluster
+import sklearn.datasets
+import numpy as np
+import pandas as pd
+import time
+import matplotlib.pyplot as plt
+import seaborn as sns
+import plotly.express as px
+import plotly.graph_objects as go
+
+from scipy.spatial.distance import pdist, cdist, euclidean
+from sklearn.datasets import make_blobs
+from timeit import default_timer as timer
+pd.set_option('display.max_columns', 30)
+
+sns.set_context('poster')
+sns.set_palette('Paired', 10)
+sns.set_color_codes()
+```
+
+Creating sample data-frames to cluster via **NumPy:**
+
+```{python}
+dataset_sizes = np.hstack([np.arange(1, 6) * 500, np.arange(3,7) * 1000, np.arange(4,17) * 2000])
+```
+
+Plotting the results:
+
+## **5.2 Indices Performance**
+
+This part will pertain to demonstrating the efficiency of the various clustering metrics offered by the proposed library. In addition, it will detail the various methods used to improve upon the efficiency of previous implementations, if they exist.
+
+```{python}
+def benchmark_algorithm(dataset_sizes, indice_function, function_args, function_kwds,
+                        n_columns=10, n_clusters=3, max_time=100, repeats=3):
+    
+    # * Initialize the result with NaNs so that any unfilled entries 
+    # * will be considered NULL when we convert to a pandas dataframe at the end
+    result = np.nan * np.ones((len(dataset_sizes), repeats))
+    for index, size in enumerate(dataset_sizes):
+        for s in range(repeats):
+            # * Use sklearns make_blobs to generate a random dataset with specified size
+            # * dimension and number of clusters
+            data, labels = make_blobs(n_samples=size, 
+                                      n_features=n_columns, 
+                                      centers=3)
+
+            # * Start the clustering with a timer
+            start_time = timer()
+            indice_function(data, labels, *function_args, **function_kwds)
+            time_taken = np.round(timer() - start_time, 4)
+            print(f"Run complete for size: {size}; took {np.round(time_taken, 4)} seconds")
+            # * If we are taking more than max_time then abort -- we don't
+            # * want to spend excessive time on slow algorithms
+            if time_taken > max_time:
+                result[index, s] = time_taken
+                return pd.DataFrame(np.vstack([dataset_sizes.repeat(repeats), 
+                                               result.flatten()]).T, columns=['Size','Seconds'])
+            else:
+                result[index, s] = time_taken
+        
+    # * Return the result as a dataframe for easier handling with seaborn afterwards
+    return pd.DataFrame(np.vstack([dataset_sizes.repeat(repeats), 
+                                   result.flatten()]).T, columns=['Size','Seconds'])
+```
+
+### 5.2.1 Ball-Hall Index:
+
+The [Ball-Hall Index](#bhindex) is a relatively simple index that is essentially the mean dispersion of all points, relative to the cluster they belong to. As such, the index can be computed in $O(nm)$ time, making it ideal for larger datasets since it only requires computing the centroids of each cluster and the distances of each point within each cluster.
+
+The author's first attempt at implementing the index was unsuccessful, mostly due to a lack of understanding of the index. As a result, the initial run will not be used as a comparison and instead, only the *NbClust* version and the author's new version will be compared.
+
+Starting with the *NbClust* algorithm first, for a dataset with shape $(10000, 5)$ and $K=3$, the mean time to compute the index was **0.01027** seconds for $100$ trial runs. In addition, the mean amount of resources used to compute the index was around $14.2$ MiB. In contrast, the new, working implementation included in the proposed library had a mean run time of **0.00257** seconds, using the same circumstances as the first experiment. In addition, the mean amount of memory used was around $0.059$ MiB, used to store the $K$ new, split dataframes from the for-loop.
+
+All together, the new, proposed implementation offers about a $9.5 \times$ speedup and uses around $0.41 \%$ of the memory. Reasons for these improvements come mostly from *NbClust's* use of the **sweep** function to compute the mean differences, as well as the multiple uses of the **split** function, which splits a dataframe into chunks.
+
+### 5.2.2 $C$ Index:
+
+The author does **not** believe the *NbClust* library calculates the $C$ index correctly. For instance, while the source code for the $C$ index correctly calculates the number of within-cluster distances, $N_W$, it does not correctly compute the sum of the $N_W$ largest/smallest pairwise distances, $S_{min}$ and $S_{max}$ respectively. In addition, it does not utilize a sorting/partitioning method of any kind, which is necessary for finding the largest/smallest pairwise distances.
+
+To alleviate this problem, I rewrote the index to account for all parts of the original equation, from [Hubert and Levin, 1976](#C_Index).
+
+In terms of performance, the *NbClust* implementation will not be considered, for reasons listed above. It should be noted that a previous implementation of the $C$ index was made available in the Python language by John Vorsten in 2020, around the same time that I was working on this very project.
+
+As stated previously, the $C$ index can be computed in $O(m^{2}(n + log_2m))$ time, which can be prohibitive if the number of variables used in the clustering is large. For reference, when $N = 10,000$, the number of pairwise distances is $49,995,000$; for $N$ observations, the number of pairwise distances is $N(N-1)/2$. Using the above example, the mean time to compute the index via John's implementation was **27.5** seconds, compared to the proposed library's mean run-time of **8.31** seconds.
+
+The largest bottleneck in computing this index is calculating $S_{min}$ and $S_{max}$, because it requires - at minimum - $O(n+ n\log N_{W})$ time to locate the $N_{W}$ smallest/largest pairwise distances. The main difference between the proposed library's implementation and John's is the calculation of $S_{min}$ and $S_{max}$. In particular, John's approach uses *Numpy's* [sort](https://numpy.org/doc/stable/reference/generated/numpy.sort.html#numpy.sort) function, which by itself run's in $O(n^{2})$ time, because the underlying algorithm used is a **quicksort**. However, the new library utilizes *Numpy's* [partition](https://numpy.org/doc/stable/reference/generated/numpy.partition.html) function, which runs in $O(n)$ time, via the **introselect** algorithm, and does not require sorting the $N_{W}$ largest/smallest arrays.
+
+### 5.2.3 Dunn Index:
+
+The Dunn index requires the computation of the entire pairwise distance matrix, just like the $C$ index above, and has a time complexity of $O(N^{2}m)$. This becomes a problem as $N$ grows large, but can be dealt with by precomputing the distance matrix and storing it in memory to query when needed. This reduces the time complexity of the algorithm to just $O(K^{2})$, where $K$ is the number of clusters under consideration.
+
+In a more practical setting, for a dataset with dimensions $(10000, 5)$ and $K = 3$, the mean time to compute the Dunn index, without precomputing the pairwise distances, is $4.72$ seconds via the proposed Python library. In contrast, the mean time to compute the same index with the same controls in place is $10.84$ seconds via the *NbClust* library. However, when utilizing a pre-computed distance matrix, the times fall to $4.03$ seconds and $9.42$ seconds for the proposed library and *NbClust* library, respectively.
+
+The reasoning behind the $O(K^{2})$ solution lies behind the fact that in order find the maximum diameter / minimum intercluster distance, it requires a nested for-loop, which is used to go through each of the $K$ labels. Indexing an array takes $O(1)$ time, so that lookup is dominated by the outer loops in the expression.
+
+### 5.2.4 Hartigan Index:
+
+Hartigan is credited with two internal clustering indices, the [Hartigan Index](#hartindex) and the [Log Between/Within SS Index](#logssindex). This section will focus on the Hartigan index mentioned in the **NbClust** library. It was previously mentioned that the index runs in $O(n(k^{2} + m))$ time, which can be quite fast when the number of requested clusters is small and the number of observations is also relatively small.
+
+In the original implementation from the **NbClust** library, using the same setup as above, the index had a mean run-time of $0.0286$ seconds and used about $0.92$ MiB of memory to compute. In contrast, the proposed library had a mean run-time of $0.0046$ seconds and used about $0.004$ MiB of memory. For easier reference, the proposed library offers around a $6 \times$ performance gain while utilizing about $230 \times$ less memory.
+
+It should be noted that both implementations perform fairly well on most datasets, so long as the dimensions of the dataset are of medium-size or lower.
+
+### 5.2.5 Point-biserial Index:
+
+As mentioned [earlier](#pbindex), the point-biserial index, referenced as the PB index from here on, runs in $O(nm^{2})$ time, where $m$ is the number of variables being clustered. However, an original implementation of the algorithm to compute the PB index runs in $O(n^{2}m)$ time, on average. For smaller inputs, this difference in run-time may be negligible; however, for larger datasets, the speed-up is quite dramatic. Using posterior analysis, the proposed library offers a speed-up in run-time up to 2600% ($n=10,000$).
+
+The main bottlenecks to the original implementation were, in decreasing order of execution time: the double for-loop to compute the distances and the design arrays ($\mu$ = 112.5 seconds), converting the design array to a factor ($\mu$ = 84 seconds), and garbage collection ($\mu$ = 43.5 seconds).
+
+A few methods were employed to improve upon the efficiency of the R implementation. Firstly, the design vector was discarded in favor of computing the number of points within/between the given clusters ($N_W, N_B$), which both run in $O(k)$ time instead of $O(n^{2}m)$ time, since the most tedious computation is counting the number of labels in each cluster. In addition, the biserial function used in NbClust's version uses a separate code block to compute the biserial correlation between the design matrix and the distances, even though both libraries employ the following equality:
+
+$$PB = s_n * r_{pb}(A, B) = [(S_W / N_W - S_B / N_B) * \displaystyle \frac {\sqrt{N_W * N_B}}{N_T}] / s_d \tag{78}$$
+
+### 5.2.6 $R^{2}$ Index:
+
+The [$R^{2}$ Index](#r2index) has the usual interpretation of the amount of variation explained by the clustering solution. It should also be noted that the $R^{2}$ index is not the best method of criterion if your clustering solution is irregularly shaped or highly elongated.
+
+Regarding the time complexity, the original implementation of the algorithm ran in $O(k*n^{2}*m^{2})$ time. This is because the algorithm has to, for each cluster $k$ and for each variable $m$: compute the euclidean distance between the cluster center and the observation $n$, write the product to an array, and then sum the result. The reasoning for the $O(n^{2})$ in the computation is because the euclidean distance requires $O(nm)$ time to be computed. For datasets with lots of observations and many variables to cluster, this time can be unfeasible to work with.
+
+The new algorithm offers a $812x$ speedup in compute time, since it does not rely on a double for-loop or the computation of euclidean distances. Rather, it takes the raw data matrix and labels and computes a series of matrix multiplications.
+
+### 5.2.7 Wemmert-Gancarski Index:
+
+The [Wemmert-Gancarski Index](#wgindex) was an interesting metric since there was not a lot of literature regarding this index. For reference, the main source for the mathematical formulation of this index was the clusterCrit library vignette.
+
+Initially, the index seemed a bit daunting since a plethora of methods were tried but none of them worked out. Instead, it required a pivot in thinking about how to structure and implement; rather than thinking about building the index in terms of what the output of each step should be, a shape-first approach was taken. More specifically, there were 5 steps to successfully implement the index using the approach of output shapes rather than just the output itself. A diagram of the author's approach is shown below for easier reference:
+
+### WG Index:
+
+```{=html}
+<iframe src="https://drive.google.com/file/d/1hCsoy6wW3fzN05MJmcvlS8xuaGJjeiai/preview" width="1400" height="480" allow="autoplay" align="center"></iframe>
+```
+Regarding the computational cost of computing the WG index, the modified OpenEnsembles version of the WG index had a mean run time of $2.74$ seconds; this is in stark contrast to the author's proposed implementation that runs in $0.118$ seconds. The proposal is not only more than $23$ times faster than the previous implementation, but it also uses less memory as well (not a significant difference). Using the same setup as the other indices previously described, the mean amount of memory used per run for the new algorithm was around $0.578$ MiB, compared to the original implementation's $0.622$ MiB memory usage; or $8\%$ less memory.
+
+It should be noted that there were two resource-demanding tasks in the proposed implementation: namely, finding a quotient and finding the distances from each point to its centroid. Finding the quotient between the distance from a point to its barycenter and the minimum distance from a point and all of the other barycenters took, on average, only $0.0013$ seconds. Finding the distances from all of the points to their centroids resulted in a mean run time of about $0.003$ seconds, using the same setup as above. Finally, the same tasks that were bottlenecks for the new version were also present in the old implementation, but the key difference lies in how those obstacles were handled.
+
+### 5.2.8 Xie-Beni Index:
+
+The [Xie-Beni Index](#xbindex) defines the inter-cluster separation as the minimum square distance between cluster centers, and the intra-cluster compactness as the mean square distance between each data object and its cluster center.
+
+In terms of computational complexity, the original implementation of the Xie-Beni index ran in $O(k*n^{2}*m^{2})$ time. With similar reasoning as the $R^{2}$ index, this can be costly to run for larger datasets, especially if the true clustering solution is not fuzzy, which this index was specifically created for. The updated implementation of the index runs in $O(n^{2})$ time, necessary for the computation of the distance matrix. In addition, the new algorithm offers up to a $291x$ speedup compared to the author's previous application.
+
+### Speed-testing the Xie-Beni Index:
+
+```{python}
+# Old version:
+def oldXB(X, labels):
+    X = pd.DataFrame(X)
+    numCluster = int(max(labels) + 1)
+    numObject = len(labels)
+    sumNorm = 0
+    list_centers = []
+
+    for i in range(numCluster):
+        # get all members from cluster i
+        indices = [t for t, x in enumerate(labels) if x == i]
+        clusterMember = X.iloc[indices, :]
+        # compute the cluster center
+        clusterCenter = np.mean(clusterMember, 0)
+        list_centers.append(clusterCenter)
+        # iterate through each member of the cluster
+        for member in clusterMember.iterrows():
+            sumNorm = sumNorm + np.power(euclidean(member[1], clusterCenter), 2)
+
+    minDis = min(pdist(list_centers))
+
+    # compute the fitness
+    score = sumNorm / (numObject * pow(minDis, 2))
+    return score
+
+def centers2(X, labels):
+    x = pd.DataFrame(X)
+    labels = np.array(labels)
+    k = int(np.max(labels) + 1)
+    n_cols = x.shape[1]
+    centers = np.array(np.zeros(shape=(k, n_cols)))
+
+    # Getting the centroids:
+    for i in range(k):
+        centers[i, :] = np.mean(x.iloc[labels == i], axis=0)
+
+    return centers
+
+# New version:
+def myXB(X, labels):
+    "My version of computing the Xie-Beni index."
+    
+    nrows = X.shape[0]
+
+    # Get the centroids:
+    centroids = centers2(X, labels)
+
+    # Computing the WGSS:
+    def getMinDist(obs, code_book):
+            dist = cdist(obs, code_book)
+            code = dist.argmin(axis=1)
+            min_dist = dist[np.arange(len(code)), code]
+            return min_dist
+                
+    euc_distance_to_centroids = getMinDist(X, centroids)
+
+    WGSS = np.sum(euc_distance_to_centroids**2)
+
+    # Computing the minimum squared distance to the centroids:
+    MinSqCentroidDist = np.min(pdist(centroids, metric='sqeuclidean'))
+
+    # COmputing the XB index:
+    xb = (1 / nrows) * (WGSS / MinSqCentroidDist)
+
+    return xb
+```
+
+```{python}
+oldxb = benchmark_algorithm(dataset_sizes, oldXB, (), {})
+```
+
+```{python}
+newXB = benchmark_algorithm(dataset_sizes, myXB, (), {})
+```
+
+```{python}
+means = oldxb.groupby("Size")["Seconds"].mean()
+stds = oldxb.groupby("Size")["Seconds"].std()
+inter = pd.DataFrame(pd.concat([means, stds], keys=["Mean", "Std. Dev."], axis=1))
+olderXB = inter.reset_index()
+
+means2 =newXB.groupby("Size")["Seconds"].mean()
+stds2 = newXB.groupby("Size")["Seconds"].std()
+inter2 = pd.DataFrame(pd.concat([means2, stds2], keys=["Mean", "Std. Dev."], axis=1))
+newerXB = inter2.reset_index()
+```
+
+```{python}
+resultsXB = pd.concat([olderXB, newerXB],
+                    axis=0, keys=["Old XB", "My XB"])
+resultsXB = resultsXB.reset_index()
+resultsXB.columns = ["Indice", "Run", "NObs.", "Mean Time", "SD Time"]
+resultsXB.head(5)
+```
+
+```{python}
+fig = px.scatter(resultsXB, x="NObs.", y="Mean Time", color="Indice",
+                 title="Performance Comparison of Various Indice Implementations").update_traces(mode='lines+markers')
+fig.update_layout(xaxis_title="Number of Observations",
+                 yaxis_title="Time taken to complete (s)")
+fig.show()
+```
+
+# 6. Conclusion
+
+This project's objective was to introduce a new Python package for computing internal clustering indices for any particular clustering solution. Given a set of observations, the user is able to run various clustering models as well as a large variety of clustering indices to determine how well a clustering solution fits the data, via the proposed library. It was shown that this library is analogous to the R library *NbClust* and borrows much of it's inspiration from the authors previous work. The proposed library offers $31$ unique indices to assess the quality of a particular clustering method, sufficient enough to compare against each other.
+
+It was also shown that the proposed library improves upon the *NbClust* library in a variety of avenues. In addition to offering a wider plethora of indices at the user's disposal, it also offers better performance for computing most metrics, which was shown above. Furthermore, a difference in design pattern for the two libraries should be noted. While the *NbClust* library computes various indices for two popular clustering methods: namely, K-Means and agglomerative clustering, the proposed library allows for any clustering method available. This is because the author started the project with the intention of being method-agnostic, allowing the end-user to make that decision.
+
+Finally, the proposed package was not meant to be a replacement for the *NbClust* library. Rather, the author's intention was that both libraries would be used in conjunction with one another so as to form a basis for comparison in a user's project. Also, a user wouldn't have to utilize multiple languages for his/her project and instead could now use a singular environment to complete his/her tasks.
