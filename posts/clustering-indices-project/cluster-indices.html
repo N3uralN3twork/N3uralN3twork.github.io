@@ -322,6 +322,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#trace-w-index" id="toc-trace-w-index" class="nav-link" data-scroll-target="#trace-w-index">4.29 Trace-W Index</a></li>
   <li><a href="#wemmert-gancarski-index" id="toc-wemmert-gancarski-index" class="nav-link" data-scroll-target="#wemmert-gancarski-index">4.30 </a><a name="wgindex" class="nav-link" data-scroll-target="undefined"></a>Wemmert-Gancarski Index</li>
   <li><a href="#xie-beni-index" id="toc-xie-beni-index" class="nav-link" data-scroll-target="#xie-beni-index">4.31 </a><a name="xbindex" class="nav-link" data-scroll-target="undefined"></a>Xie-Beni Index</li>
+  <li><a href="#indices-performance" id="toc-indices-performance" class="nav-link" data-scroll-target="#indices-performance"><strong>5.2 Indices Performance</strong></a>
+  <ul class="collapse">
+  <li><a href="#ball-hall-index-1" id="toc-ball-hall-index-1" class="nav-link" data-scroll-target="#ball-hall-index-1">5.2.1 Ball-Hall Index:</a></li>
+  <li><a href="#c-index" id="toc-c-index" class="nav-link" data-scroll-target="#c-index">5.2.2 <span class="math inline">C</span> Index:</a></li>
+  <li><a href="#dunn-index-1" id="toc-dunn-index-1" class="nav-link" data-scroll-target="#dunn-index-1">5.2.3 Dunn Index:</a></li>
+  <li><a href="#hartigan-index-1" id="toc-hartigan-index-1" class="nav-link" data-scroll-target="#hartigan-index-1">5.2.4 Hartigan Index:</a></li>
+  <li><a href="#point-biserial-index-1" id="toc-point-biserial-index-1" class="nav-link" data-scroll-target="#point-biserial-index-1">5.2.5 Point-biserial Index:</a></li>
+  <li><a href="#r2-index" id="toc-r2-index" class="nav-link" data-scroll-target="#r2-index">5.2.6 <span class="math inline">R^{2}</span> Index:</a></li>
+  <li><a href="#wemmert-gancarski-index-1" id="toc-wemmert-gancarski-index-1" class="nav-link" data-scroll-target="#wemmert-gancarski-index-1">5.2.7 Wemmert-Gancarski Index:</a></li>
+  <li><a href="#wg-index" id="toc-wg-index" class="nav-link" data-scroll-target="#wg-index">WG Index:</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/N3uralN3twork/n3uraln3twork.github.io/edit/main/posts/clustering-indices-project/cluster-indices.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/N3uralN3twork/n3uraln3twork.github.io/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -340,7 +351,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The goal of this project is to understand and compute a variety of indices that indicate the optimal number of clusters to use when performing a cluster analysis.</p>
 <p>Cluster analysis refers to a finding unique subgroup/clusters in a dataset where the observations within each cluster are more related to each other in some way compared to observations in another, separate cluster. There are a plethora of clustering techniques and algorithms, each with a different way of solving the above general problem. In addition, there does not exist a single, optimal clustering solution for any clustering problem. This is also known as the “No Free Lunch” theorem from David Wolpert and William Macready, which states that “any two optimization algorthims are equivalent when their performance is averaged across all possible problems.” <a href="#NFL">(Wolpert, Macready, 2005)</a></p>
 <p>Since cluster analysis is inherently an unsupervised learning technique, the selection of the optimal number of clusters is subjective. Consider the following example that was made via Python:</p>
-<div class="cell" data-execution_count="2">
+<div class="cell" data-execution_count="1">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_blobs</span>
@@ -384,17 +395,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-39"><a href="#cb1-39"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>C:\Users\miqui\anaconda3\envs\MLDL\lib\site-packages\sklearn\cluster\_kmeans.py:1334: UserWarning:
+<pre><code>C:\Users\miqui\anaconda3\envs\MLDL\lib\site-packages\sklearn\cluster\_kmeans.py:870: FutureWarning:
 
-KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=2.
+The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
 
-C:\Users\miqui\anaconda3\envs\MLDL\lib\site-packages\sklearn\cluster\_kmeans.py:1334: UserWarning:
+C:\Users\miqui\anaconda3\envs\MLDL\lib\site-packages\sklearn\cluster\_kmeans.py:870: FutureWarning:
 
-KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=2.
+The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
 
-C:\Users\miqui\anaconda3\envs\MLDL\lib\site-packages\sklearn\cluster\_kmeans.py:1334: UserWarning:
+C:\Users\miqui\anaconda3\envs\MLDL\lib\site-packages\sklearn\cluster\_kmeans.py:870: FutureWarning:
 
-KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=2.
+The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
 </code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -821,8 +832,88 @@ KMeans is known to have a memory leak on Windows with MKL, when there are less c
 <p><span class="math display">D(C_k, C_{k'}) = min(d(M_i, M_j)) \tag{77}</span></p>
 <p>and <span class="math inline">d(M_i, M_j)</span> is the distance between the cluster centroids.</p>
 <p>The optimal suggested number of clusters corresponds to the minimum value of the index.</p>
+<div class="cell" data-execution_count="2">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="im">import</span> sklearn.cluster</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="im">import</span> scipy.cluster</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="im">import</span> sklearn.datasets</span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="im">import</span> time</span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="im">import</span> plotly.graph_objects <span class="im">as</span> go</span>
+<span id="cb3-11"><a href="#cb3-11"></a></span>
+<span id="cb3-12"><a href="#cb3-12"></a>sns.set_context(<span class="st">'poster'</span>)</span>
+<span id="cb3-13"><a href="#cb3-13"></a>sns.set_palette(<span class="st">'Paired'</span>, <span class="dv">10</span>)</span>
+<span id="cb3-14"><a href="#cb3-14"></a>sns.set_color_codes()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Creating sample data-frames to cluster via <strong>NumPy:</strong></p>
+<div class="cell" data-execution_count="3">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>dataset_sizes <span class="op">=</span> np.hstack([np.arange(<span class="dv">1</span>, <span class="dv">6</span>) <span class="op">*</span> <span class="dv">500</span>, np.arange(<span class="dv">3</span>,<span class="dv">7</span>) <span class="op">*</span> <span class="dv">1000</span>, np.arange(<span class="dv">4</span>,<span class="dv">17</span>) <span class="op">*</span> <span class="dv">2000</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Plotting the results:</p>
+</section>
+<section id="indices-performance" class="level2">
+<h2 class="anchored" data-anchor-id="indices-performance"><strong>5.2 Indices Performance</strong></h2>
+<p>This part will pertain to demonstrating the efficiency of the various clustering metrics offered by the proposed library. In addition, it will detail the various methods used to improve upon the efficiency of previous implementations, if they exist.</p>
+<section id="ball-hall-index-1" class="level3">
+<h3 class="anchored" data-anchor-id="ball-hall-index-1">5.2.1 Ball-Hall Index:</h3>
+<p>The <a href="#bhindex">Ball-Hall Index</a> is a relatively simple index that is essentially the mean dispersion of all points, relative to the cluster they belong to. As such, the index can be computed in <span class="math inline">O(nm)</span> time, making it ideal for larger datasets since it only requires computing the centroids of each cluster and the distances of each point within each cluster.</p>
+<p>The author’s first attempt at implementing the index was unsuccessful, mostly due to a lack of understanding of the index. As a result, the initial run will not be used as a comparison and instead, only the <em>NbClust</em> version and the author’s new version will be compared.</p>
+<p>Starting with the <em>NbClust</em> algorithm first, for a dataset with shape <span class="math inline">(10000, 5)</span> and <span class="math inline">K=3</span>, the mean time to compute the index was <strong>0.01027</strong> seconds for <span class="math inline">100</span> trial runs. In addition, the mean amount of resources used to compute the index was around <span class="math inline">14.2</span> MiB. In contrast, the new, working implementation included in the proposed library had a mean run time of <strong>0.00257</strong> seconds, using the same circumstances as the first experiment. In addition, the mean amount of memory used was around <span class="math inline">0.059</span> MiB, used to store the <span class="math inline">K</span> new, split dataframes from the for-loop.</p>
+<p>All together, the new, proposed implementation offers about a <span class="math inline">9.5 \times</span> speedup and uses around <span class="math inline">0.41 \%</span> of the memory. Reasons for these improvements come mostly from <em>NbClust’s</em> use of the <strong>sweep</strong> function to compute the mean differences, as well as the multiple uses of the <strong>split</strong> function, which splits a dataframe into chunks.</p>
+</section>
+<section id="c-index" class="level3">
+<h3 class="anchored" data-anchor-id="c-index">5.2.2 <span class="math inline">C</span> Index:</h3>
+<p>The author does not believe the <em>NbClust</em> library calculates the <span class="math inline">C</span> index correctly. For instance, while the source code for the <span class="math inline">C</span> index correctly calculates the number of within-cluster distances, <span class="math inline">N_W</span>, it does not correctly compute the sum of the <span class="math inline">N_W</span> largest/smallest pairwise distances, <span class="math inline">S_{min}</span> and <span class="math inline">S_{max}</span> respectively. In addition, it does not utilize a sorting/partitioning method of any kind, which is necessary for finding the largest/smallest pairwise distances.</p>
+<p>To alleviate this problem, I rewrote the index to account for all parts of the original equation, from <a href="#C_Index">Hubert and Levin, 1976</a>.</p>
+<p>In terms of performance, the <em>NbClust</em> implementation will not be considered, for reasons listed above. It should be noted that a previous implementation of the <span class="math inline">C</span> index was made available in the Python language by John Vorsten in 2020, around the same time that I was working on this very project.</p>
+<p>As stated previously, the <span class="math inline">C</span> index can be computed in <span class="math inline">O(m^{2}(n + log_2m))</span> time, which can be prohibitive if the number of variables used in the clustering is large. For reference, when <span class="math inline">N = 10,000</span>, the number of pairwise distances is <span class="math inline">49,995,000</span>; for <span class="math inline">N</span> observations, the number of pairwise distances is <span class="math inline">N(N-1)/2</span>. Using the above example, the mean time to compute the index via John’s implementation was <strong>27.5</strong> seconds, compared to the proposed library’s mean run-time of <strong>8.31</strong> seconds.</p>
+<p>The largest bottleneck in computing this index is calculating <span class="math inline">S_{min}</span> and <span class="math inline">S_{max}</span>, because it requires - at minimum - <span class="math inline">O(n+ n\log N_{W})</span> time to locate the <span class="math inline">N_{W}</span> smallest/largest pairwise distances. The main difference between the proposed library’s implementation and John’s is the calculation of <span class="math inline">S_{min}</span> and <span class="math inline">S_{max}</span>. In particular, John’s approach uses <em>Numpy’s</em> <a href="https://numpy.org/doc/stable/reference/generated/numpy.sort.html#numpy.sort">sort</a> function, which by itself run’s in <span class="math inline">O(n^{2})</span> time, because the underlying algorithm used is a <strong>quicksort</strong>. However, the new library utilizes <em>Numpy’s</em> <a href="https://numpy.org/doc/stable/reference/generated/numpy.partition.html">partition</a> function, which runs in <span class="math inline">O(n)</span> time, via the <strong>introselect</strong> algorithm, and does not require sorting the <span class="math inline">N_{W}</span> largest/smallest arrays.</p>
+</section>
+<section id="dunn-index-1" class="level3">
+<h3 class="anchored" data-anchor-id="dunn-index-1">5.2.3 Dunn Index:</h3>
+<p>The Dunn index requires the computation of the entire pairwise distance matrix, just like the <span class="math inline">C</span> index above, and has a time complexity of <span class="math inline">O(N^{2}m)</span>. This becomes a problem as <span class="math inline">N</span> grows large, but can be dealt with by precomputing the distance matrix and storing it in memory to query when needed. This reduces the time complexity of the algorithm to just <span class="math inline">O(K^{2})</span>, where <span class="math inline">K</span> is the number of clusters under consideration.</p>
+<p>In a more practical setting, for a dataset with dimensions <span class="math inline">(10000, 5)</span> and <span class="math inline">K = 3</span>, the mean time to compute the Dunn index, without precomputing the pairwise distances, is <span class="math inline">4.72</span> seconds via the proposed Python library. In contrast, the mean time to compute the same index with the same controls in place is <span class="math inline">10.84</span> seconds via the <em>NbClust</em> library. However, when utilizing a pre-computed distance matrix, the times fall to <span class="math inline">4.03</span> seconds and <span class="math inline">9.42</span> seconds for the proposed library and <em>NbClust</em> library, respectively.</p>
+<p>The reasoning behind the <span class="math inline">O(K^{2})</span> solution lies behind the fact that in order find the maximum diameter / minimum intercluster distance, it requires a nested for-loop, which is used to go through each of the <span class="math inline">K</span> labels. Indexing an array takes <span class="math inline">O(1)</span> time, so that lookup is dominated by the outer loops in the expression.</p>
+</section>
+<section id="hartigan-index-1" class="level3">
+<h3 class="anchored" data-anchor-id="hartigan-index-1">5.2.4 Hartigan Index:</h3>
+<p>Hartigan is credited with two internal clustering indices, the <a href="#hartindex">Hartigan Index</a> and the <a href="#logssindex">Log Between/Within SS Index</a>. This section will focus on the Hartigan index mentioned in the <strong>NbClust</strong> library. It was previously mentioned that the index runs in <span class="math inline">O(n(k^{2} + m))</span> time, which can be quite fast when the number of requested clusters is small and the number of observations is also relatively small.</p>
+<p>In the original implementation from the <strong>NbClust</strong> library, using the same setup as above, the index had a mean run-time of <span class="math inline">0.0286</span> seconds and used about <span class="math inline">0.92</span> MiB of memory to compute. In contrast, the proposed library had a mean run-time of <span class="math inline">0.0046</span> seconds and used about <span class="math inline">0.004</span> MiB of memory. For easier reference, the proposed library offers around a <span class="math inline">6 \times</span> performance gain while utilizing about <span class="math inline">230 \times</span> less memory.</p>
+<p>It should be noted that both implementations perform fairly well on most datasets, so long as the dimensions of the dataset are of medium-size or lower.</p>
+</section>
+<section id="point-biserial-index-1" class="level3">
+<h3 class="anchored" data-anchor-id="point-biserial-index-1">5.2.5 Point-biserial Index:</h3>
+<p>As mentioned <a href="#pbindex">earlier</a>, the point-biserial index, referenced as the PB index from here on, runs in <span class="math inline">O(nm^{2})</span> time, where <span class="math inline">m</span> is the number of variables being clustered. However, an original implementation of the algorithm to compute the PB index runs in <span class="math inline">O(n^{2}m)</span> time, on average. For smaller inputs, this difference in run-time may be negligible; however, for larger datasets, the speed-up is quite dramatic. Using posterior analysis, the proposed library offers a speed-up in run-time up to 2600% (<span class="math inline">n=10,000</span>).</p>
+<p>The main bottlenecks to the original implementation were, in decreasing order of execution time: the double for-loop to compute the distances and the design arrays (<span class="math inline">\mu</span> = 112.5 seconds), converting the design array to a factor (<span class="math inline">\mu</span> = 84 seconds), and garbage collection (<span class="math inline">\mu</span> = 43.5 seconds).</p>
+<p>A few methods were employed to improve upon the efficiency of the R implementation. Firstly, the design vector was discarded in favor of computing the number of points within/between the given clusters (<span class="math inline">N_W, N_B</span>), which both run in <span class="math inline">O(k)</span> time instead of <span class="math inline">O(n^{2}m)</span> time, since the most tedious computation is counting the number of labels in each cluster. In addition, the biserial function used in NbClust’s version uses a separate code block to compute the biserial correlation between the design matrix and the distances, even though both libraries employ the following equality:</p>
+<p><span class="math display">PB = s_n * r_{pb}(A, B) = [(S_W / N_W - S_B / N_B) * \displaystyle \frac {\sqrt{N_W * N_B}}{N_T}] / s_d \tag{78}</span></p>
+</section>
+<section id="r2-index" class="level3">
+<h3 class="anchored" data-anchor-id="r2-index">5.2.6 <span class="math inline">R^{2}</span> Index:</h3>
+<p>The <a href="#r2index"><span class="math inline">R^{2}</span> Index</a> has the usual interpretation of the amount of variation explained by the clustering solution. It should also be noted that the <span class="math inline">R^{2}</span> index is not the best method of criterion if your clustering solution is irregularly shaped or highly elongated.</p>
+<p>Regarding the time complexity, the original implementation of the algorithm ran in <span class="math inline">O(k*n^{2}*m^{2})</span> time. This is because the algorithm has to, for each cluster <span class="math inline">k</span> and for each variable <span class="math inline">m</span>: compute the euclidean distance between the cluster center and the observation <span class="math inline">n</span>, write the product to an array, and then sum the result. The reasoning for the <span class="math inline">O(n^{2})</span> in the computation is because the euclidean distance requires <span class="math inline">O(nm)</span> time to be computed. For datasets with lots of observations and many variables to cluster, this time can be infeasible to work with.</p>
+<p>The new algorithm offers a <span class="math inline">812x</span> speedup in compute time, since it does not rely on a double for-loop or the computation of euclidean distances. Rather, it takes the raw data matrix and labels and computes a series of matrix multiplications.</p>
+</section>
+<section id="wemmert-gancarski-index-1" class="level3">
+<h3 class="anchored" data-anchor-id="wemmert-gancarski-index-1">5.2.7 Wemmert-Gancarski Index:</h3>
+<p>The <a href="#wgindex">Wemmert-Gancarski Index</a> was an interesting metric since there was not a lot of literature regarding this index. For reference, the main source for the mathematical formulation of this index was the clusterCrit library vignette.</p>
+<p>Initially, the index seemed a bit daunting since a plethora of methods were tried but none of them worked out. Instead, it required a pivot in thinking about how to structure and implement; rather than thinking about building the index in terms of what the output of each step should be, a shape-first approach was taken. More specifically, there were 5 steps to successfully implement the index using the approach of output shapes rather than just the output itself. A diagram of the author’s approach is shown below for easier reference:</p>
+</section>
+<section id="wg-index" class="level3">
+<h3 class="anchored" data-anchor-id="wg-index">WG Index:</h3>
+<iframe src="https://drive.google.com/file/d/1hCsoy6wW3fzN05MJmcvlS8xuaGJjeiai/preview" width="1400" height="480" allow="autoplay" align="center"></iframe>
 
 
+</section>
 </section>
 </section>
 
@@ -1078,7 +1169,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">© CC-By Matthias Quinn, 2022</div>   
+    <div class="nav-footer-left">© CC-By Matthias Quinn, 2023</div>   
     <div class="nav-footer-right">This page is built with ❤️ and <a href="https://quarto.org/">Quarto</a>.</div>
   </div>
 </footer>
