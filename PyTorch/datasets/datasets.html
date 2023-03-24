@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Matthias Quinn">
+<meta name="dcterms.date" content="2023-02-14">
+<meta name="description" content="This project serves as an introduction to PyTorch and working with datasets.">
 
-<title>N3uralN3twork’s Website - Resumes</title>
+<title>N3uralN3twork’s Website - PyTorch Datasets</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,29 +23,90 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./projects.html" rel="next">
-<link href="./aboutme.html" rel="prev">
-<link href="./images/Combo-Chart-Icon.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../images/Combo-Chart-Icon.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -63,6 +127,22 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 </head>
 
@@ -72,7 +152,7 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Resumes</h1>
+      <h1 class="quarto-secondary-nav-title">PyTorch Datasets</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -84,8 +164,8 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-center sidebar-header">
-      <a href="./index.html" class="sidebar-logo-link">
-      <img src="./images/Transhumanism Logo for Website.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      <a href="../../index.html" class="sidebar-logo-link">
+      <img src="../../images/Transhumanism Logo for Website.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
       </a>
       <div class="sidebar-tools-main tools-wide">
     <a href="https://github.com/N3uralN3twork/n3uraln3twork.github.io" title="Website" class="sidebar-tool px-1"><i class="bi bi-globe"></i></a>
@@ -104,32 +184,32 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">Welcome</a>
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">Welcome</a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./aboutme.html" class="sidebar-item-text sidebar-link">Who am I?</a>
+  <a href="../../aboutme.html" class="sidebar-item-text sidebar-link">Who am I?</a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./resumes.html" class="sidebar-item-text sidebar-link active">Resumes</a>
+  <a href="../../resumes.html" class="sidebar-item-text sidebar-link">Resumes</a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./projects.html" class="sidebar-item-text sidebar-link">Projects</a>
+  <a href="../../projects.html" class="sidebar-item-text sidebar-link">Projects</a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pytorch.html" class="sidebar-item-text sidebar-link">PyTorch</a>
+  <a href="../../pytorch.html" class="sidebar-item-text sidebar-link">PyTorch</a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./publications.html" class="sidebar-item-text sidebar-link">Papers</a>
+  <a href="../../publications.html" class="sidebar-item-text sidebar-link">Papers</a>
   </div>
 </li>
     </ul>
@@ -141,28 +221,45 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#welcome" id="toc-welcome" class="nav-link active" data-scroll-target="#welcome">Historical Documents</a>
-  <ul class="collapse">
-  <li><a href="#current-resume" id="toc-current-resume" class="nav-link" data-scroll-target="#current-resume">Current Resume:</a></li>
-  <li><a href="#oldest-resume-on-file" id="toc-oldest-resume-on-file" class="nav-link" data-scroll-target="#oldest-resume-on-file">Oldest Resume on File:</a></li>
-  </ul></li>
+  <li><a href="#datasets-dataloaders" id="toc-datasets-dataloaders" class="nav-link active" data-scroll-target="#datasets-dataloaders">Datasets &amp; DataLoaders</a></li>
+  <li><a href="#how-to-load-a-dataset" id="toc-how-to-load-a-dataset" class="nav-link" data-scroll-target="#how-to-load-a-dataset">How to Load a Dataset</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/N3uralN3twork/n3uraln3twork.github.io/edit/main/resumes.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/N3uralN3twork/n3uraln3twork.github.io/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/N3uralN3twork/n3uraln3twork.github.io/edit/main/PyTorch/datasets/datasets.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/N3uralN3twork/n3uraln3twork.github.io/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Resumes</h1>
-<p class="subtitle lead">Sorted by creation date</p>
-</div>
+<h1 class="title d-none d-lg-block">PyTorch Datasets</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">code</div>
+    <div class="quarto-category">ML</div>
+  </div>
+  </div>
 
+<div>
+  <div class="description">
+    This project serves as an introduction to PyTorch and working with datasets.
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Matthias Quinn </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 14, 2023</p>
+    </div>
+  </div>
   
     
   </div>
@@ -170,31 +267,73 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="welcome" class="level2">
-<h2 class="anchored" data-anchor-id="welcome">Historical Documents</h2>
-<section id="current-resume" class="level3">
-<h3 class="anchored" data-anchor-id="current-resume">Current Resume:</h3>
-<iframe src="https://drive.google.com/file/d/1lbKSYqvvFqAhIJia5KFoLK1dQ5gs57GC/preview" width="640" height="480" allow="autoplay"></iframe>
+<div class="columns">
+<div class="column" style="width:40%;">
+<section id="goal" class="level2">
+<h2 class="anchored" data-anchor-id="goal">GOAL</h2>
+<p>Learn more about the Machine Learning framework known as PyTorch.</p>
 </section>
-<section id="oldest-resume-on-file" class="level3">
-<h3 class="anchored" data-anchor-id="oldest-resume-on-file">Oldest Resume on File:</h3>
-<iframe src="https://drive.google.com/file/d/12p5DItosgHALez5W04ei4UDI4odYfUbW/preview" width="640" height="480" allow="autoplay"></iframe>
-<div class="callout-tip callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Notice
+</div><div class="column" style="width:10%;">
+<!-- empty column to create gap -->
+</div><div class="column" style="width:40%;">
+<section id="result" class="level2">
+<h2 class="anchored" data-anchor-id="result">RESULT</h2>
+<p>A better understanding of PyTorch and working with dataset functionality.</p>
+</section>
 </div>
 </div>
-<div class="callout-body-container callout-body">
-<p>Additional information coming soon!</p>
-</div>
+<section id="datasets-dataloaders" class="level2">
+<h2 class="anchored" data-anchor-id="datasets-dataloaders">Datasets &amp; DataLoaders</h2>
+<p>PyTorch provides two data primitives:</p>
+<ol type="1">
+<li><code>torch.utils.data.DataLoader</code></li>
+<li><code>torch.utils.data.Dataset</code></li>
+</ol>
+<p>They both allow you to use pre-loaded datasets as well as your own. <code>Dataset</code> allows you to store the samples and the labels while <code>DataLoader</code> wraps an iterable around the <code>Dataset</code> to enable access to the samples.</p>
+<p>There are a number of prepackaged datasets that come with PyTorch, like <a href="https://pytorch.org/vision/stable/generated/torchvision.datasets.FashionMNIST.html">FashionMNIST</a>, and more can be found here:</p>
+<ul>
+<li><p><a href="https://pytorch.org/vision/stable/datasets.html">Image Datasets</a></p></li>
+<li><p><a href="https://pytorch.org/text/stable/datasets.html">Text Datasets</a></p></li>
+<li><p><a href="https://pytorch.org/audio/stable/datasets.html">Audio Datasets</a></p></li>
+</ul>
+</section>
+<section id="how-to-load-a-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-load-a-dataset">How to Load a Dataset</h2>
+<p>Here’s how to load the Fashion-MNIST dataset from TorchVision. This dataset is a dataset of Zalando’s article images consisting of <span class="math inline">60,000</span> training examples and <span class="math inline">10,000</span> test examples. Each example comprises of a <span class="math inline">28 \times 28</span> greyscale image and an associated label from one of <span class="math inline">10</span> classes.</p>
+<p>We’ll load the FashionMNIST dataset with the following parameters:</p>
+<ul>
+<li><p><code>root</code> = the path where the train/test datasets are stored</p></li>
+<li><p><code>train</code> = specifies the training or test dataset</p></li>
+<li><p><code>download</code> = downloads the dataset from the internet if it’s not available on your computer</p></li>
+<li><p><code>transform</code> = specifies the feature transformations to use, if requested</p></li>
+</ul>
+<div class="cell" data-execution_count="1">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> torch</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="im">from</span> torch.utils.data <span class="im">import</span> Dataset</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="im">from</span> torchvision <span class="im">import</span> datasets</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="im">from</span> torchvision.transforms <span class="im">import</span> ToTensor</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a></span>
+<span id="cb1-8"><a href="#cb1-8"></a>training_data <span class="op">=</span> datasets.FashionMNIST(</span>
+<span id="cb1-9"><a href="#cb1-9"></a>    root<span class="op">=</span><span class="st">"data"</span>,</span>
+<span id="cb1-10"><a href="#cb1-10"></a>    train<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb1-11"><a href="#cb1-11"></a>    download<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb1-12"><a href="#cb1-12"></a>    transform<span class="op">=</span>ToTensor()</span>
+<span id="cb1-13"><a href="#cb1-13"></a>)</span>
+<span id="cb1-14"><a href="#cb1-14"></a></span>
+<span id="cb1-15"><a href="#cb1-15"></a>test_data <span class="op">=</span> datasets.FashionMNIST(</span>
+<span id="cb1-16"><a href="#cb1-16"></a>    root<span class="op">=</span><span class="st">"data"</span>,</span>
+<span id="cb1-17"><a href="#cb1-17"></a>    train<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb1-18"><a href="#cb1-18"></a>    download<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb1-19"><a href="#cb1-19"></a>    transform<span class="op">=</span>ToTensor()</span>
+<span id="cb1-20"><a href="#cb1-20"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -446,18 +585,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-      <a href="./aboutme.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Who am I?</span>
-      </a>          
-  </div>
-  <div class="nav-page nav-page-next">
-      <a href="./projects.html" class="pagination-link">
-        <span class="nav-page-text">Projects</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
-  </div>
-</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

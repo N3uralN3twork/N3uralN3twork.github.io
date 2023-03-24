@@ -1,12 +1,5 @@
 [
   {
-    "listing": "/pytorch.html",
-    "items": [
-      "/PyTorch/tensors/tensor_tutorial.html",
-      "/PyTorch/tensors/tensors.html"
-    ]
-  },
-  {
     "listing": "/projects.html",
     "items": [
       "/posts/clustering-indices-project/cluster-indices.html",
@@ -18,6 +11,15 @@
       "/posts/naive-bayes/NaiveBayes.html",
       "/posts/logistic-regress-caret/logregcaret.html",
       "/posts/multi-factor-model/multi-factor-model.html"
+    ]
+  },
+  {
+    "listing": "/pytorch.html",
+    "items": [
+      "/PyTorch/tensors/tensor_tutorial.html",
+      "/PyTorch/datasets/data_tutorial.html",
+      "/PyTorch/datasets/datasets.html",
+      "/PyTorch/tensors/tensors.html"
     ]
   }
 ]
