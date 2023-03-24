@@ -186,7 +186,19 @@ $X$ = the data matrix of shape $[N, m]$
 
 $C_{k}$ = A submatrix of $X$ made up of the rows of $X$ where some partition, $P_{i}$, contains any point $X_{i}$ belonging to cluster $k$
 
-$n_{k}$ = the number of observations belonging to cluster $C_{k}$
+$n_{k}$ = the number of observations belonging to cluster \$\$C\_{k}\$\$
+
+$x_{i}$ = p-dim vector of observations of the $i^{th}$ object in cluster $C_{k}$
+
+$W_{q}$ = $\Large \sum^{K}_{k=1} \sum (x_{i} - c_{k}) (x_{i} - c_{k})^{T}$ is the within-group dispersion matrix for data clustered into $K$ clusters
+
+$B_{q}$ = $\Large \sum^{K}_{k=1} n_{k} (c_{k} - \bar{x}) (c_{k} - \bar{x})^{T}$ is the between-group dispersion matrix for data clustered into $K$ clusters
+
+$N_{t}$ = $\frac {n(n-1)}{2}$ is the total number of pairs of observations in the dataset
+
+$N_{w}$ = $\Large \sum_{k=1}^{K} \frac {n_{k} (n_{k} - 1)}{2}$ is the total number of pairs of observations belonging to the same cluster
+
+$N_{b}$ = $N_{t} - N_{w}$ is the total number of pairs of observations belonging to different cluster
 
 ## 4.1 <a name="bhindex"></a>Ball-Hall Index
 

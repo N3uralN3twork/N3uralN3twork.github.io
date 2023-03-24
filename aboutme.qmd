@@ -39,9 +39,9 @@ Cleveland State University \| Cleveland, OH
 
 ## Experience
 
-Data Analyst \| Progressive Insurance \| July 2021 - Present
+Senior Data Scientist \| Progressive Insurance \| Feb. 2023 - Present
 
-Graduate Assistant \| Cleveland State University \| Aug. 2019 - Dec. 2021
+Data Analyst \| Progressive Insurance \| July 2021 - Jan. 2023
 :::
 
 ### Tech Stack

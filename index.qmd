@@ -5,7 +5,7 @@ subtitle: "Made with Quarto"
 
 **Hello there.**
 
-My name is *Matthias* and I am a data analyst currently working in the insurance industry.
+My name is *Matthias* and I am a data scientist currently working in the insurance industry.
 
 I am an analytically minded developer with 5 years of experience in data analysis and 2 years of experience in model building. I hold a Master of Science in mathematics with a specialization in statistics, where I created software in Python for analyzing the validity of clustering models.
 

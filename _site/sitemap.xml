@@ -2,70 +2,78 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/aboutme.html</loc>
-    <lastmod>2023-01-28T19:47:35.792Z</lastmod>
+    <lastmod>2023-03-24T22:53:04.981Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/index.html</loc>
-    <lastmod>2023-01-28T19:47:36.370Z</lastmod>
+    <lastmod>2023-03-24T22:53:05.387Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/posts/clustering-indices-project/cluster-indices.html</loc>
-    <lastmod>2023-01-28T19:58:51.065Z</lastmod>
+    <lastmod>2023-03-24T22:53:08.411Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/posts/japan-population/japanMaps.html</loc>
-    <lastmod>2023-01-28T19:47:42.010Z</lastmod>
+    <lastmod>2023-03-24T22:53:09.424Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/posts/logistic-regress-caret/logregcaret.html</loc>
-    <lastmod>2023-01-28T19:47:43.112Z</lastmod>
+    <lastmod>2023-03-24T22:53:10.094Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/posts/multi-factor-model/multi-factor-model.html</loc>
-    <lastmod>2023-01-28T19:47:43.852Z</lastmod>
+    <lastmod>2023-03-24T22:53:10.558Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/posts/naive-bayes/NaiveBayes.html</loc>
-    <lastmod>2023-01-28T19:47:44.887Z</lastmod>
+    <lastmod>2023-03-24T22:53:11.194Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/posts/random-schemas/random-schemas.html</loc>
-    <lastmod>2023-01-28T19:47:45.631Z</lastmod>
+    <lastmod>2023-03-24T22:53:11.584Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/posts/sample-size-app/powerAnalysis.html</loc>
-    <lastmod>2023-01-28T19:47:46.429Z</lastmod>
+    <lastmod>2023-03-24T22:53:12.065Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/posts/sem-cfa/SEM-Indices.html</loc>
-    <lastmod>2023-01-28T19:47:47.635Z</lastmod>
+    <lastmod>2023-03-24T22:53:12.769Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/posts/xgboost/xgboost.html</loc>
-    <lastmod>2023-01-28T19:47:48.678Z</lastmod>
+    <lastmod>2023-03-24T22:53:13.380Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/projects.html</loc>
-    <lastmod>2023-01-28T19:58:44.015Z</lastmod>
+    <lastmod>2023-03-24T23:02:09.346Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/publications.html</loc>
-    <lastmod>2023-01-28T19:47:50.157Z</lastmod>
+    <lastmod>2023-03-24T22:53:14.300Z</lastmod>
+  </url>
+  <url>
+    <loc>https://openscapes.github.io/quarto-website-tutorial/PyTorch/datasets/datasets.html</loc>
+    <lastmod>2023-03-24T22:53:15.399Z</lastmod>
+  </url>
+  <url>
+    <loc>https://openscapes.github.io/quarto-website-tutorial/PyTorch/datasets/data_tutorial.html</loc>
+    <lastmod>2023-03-24T22:53:15.858Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/PyTorch/tensors/tensors.html</loc>
-    <lastmod>2023-01-28T19:47:51.698Z</lastmod>
+    <lastmod>2023-03-24T22:53:16.974Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/PyTorch/tensors/tensor_tutorial.html</loc>
-    <lastmod>2023-01-28T19:47:52.443Z</lastmod>
+    <lastmod>2023-03-24T22:53:17.443Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/pytorch.html</loc>
-    <lastmod>2023-01-28T19:47:53.055Z</lastmod>
+    <lastmod>2023-03-24T22:53:17.867Z</lastmod>
   </url>
   <url>
     <loc>https://openscapes.github.io/quarto-website-tutorial/resumes.html</loc>
-    <lastmod>2023-01-28T19:47:53.624Z</lastmod>
+    <lastmod>2023-03-24T23:02:11.326Z</lastmod>
   </url>
 </urlset>

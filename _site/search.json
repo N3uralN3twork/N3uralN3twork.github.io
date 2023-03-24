@@ -4,14 +4,14 @@
     "href": "aboutme.html",
     "title": "About Me",
     "section": "",
-    "text": "Website\n  \n  \n    \n     Personal Github\n  \n  \n    \n     Personal Linkedin\n  \n  \n    \n     Contact Me\n  \n\n  \n  \nI am currently a data analyst (or scientist, depending on the project) working in the insurance industry. I’ve still have a lot to learn before I’m ready to transition to a full data science position, but I’m confident that - in the coming years - I’ll be able to fully qualify for such a role at Progressive.\n\n\nCleveland State University | Cleveland, OH\n| M.S. in Statistics | Sept 2020 - June 2021\n\nCleveland State University | Cleveland, OH\n| B.A. in Finance | Sept 2016 - June 2020\n\n\n\nData Analyst | Progressive Insurance | July 2021 - Present\nGraduate Assistant | Cleveland State University | Aug. 2019 - Dec. 2021"
+    "text": "Website\n  \n  \n    \n     Personal Github\n  \n  \n    \n     Personal Linkedin\n  \n  \n    \n     Contact Me\n  \n\n  \n  \nI am currently a data analyst (or scientist, depending on the project) working in the insurance industry. I’ve still have a lot to learn before I’m ready to transition to a full data science position, but I’m confident that - in the coming years - I’ll be able to fully qualify for such a role at Progressive.\n\n\nCleveland State University | Cleveland, OH\n| M.S. in Statistics | Sept 2020 - June 2021\n\nCleveland State University | Cleveland, OH\n| B.A. in Finance | Sept 2016 - June 2020\n\n\n\nSenior Data Scientist | Progressive Insurance | Feb. 2023 - Present\nData Analyst | Progressive Insurance | July 2021 - Jan. 2023"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Homepage",
     "section": "",
-    "text": "Hello there.\nMy name is Matthias and I am a data analyst currently working in the insurance industry.\nI am an analytically minded developer with 5 years of experience in data analysis and 2 years of experience in model building. I hold a Master of Science in mathematics with a specialization in statistics, where I created software in Python for analyzing the validity of clustering models."
+    "text": "Hello there.\nMy name is Matthias and I am a data scientist currently working in the insurance industry.\nI am an analytically minded developer with 5 years of experience in data analysis and 2 years of experience in model building. I hold a Master of Science in mathematics with a specialization in statistics, where I created software in Python for analyzing the validity of clustering models."
   },
   {
     "objectID": "index.html#goals",
@@ -469,6 +469,76 @@
     "text": "Explaining the school-to-prison pipeline via race and gender: The impact of trauma, school suspension, school dropout, and delinquency\n\n\n\n\n\nAuthors: Tedor, Mallett, Quinn, Quinn\n\n\n\n\n\n\n\n\n\nExamining Trauma and Crime by Gender and Sexual Orientation among Youth: Findings from the Add Health National Longitudinal Study\n\n\n\n\n\nAuthors: Yun, Tedor, Mallett, Quinn, Quinn\nPaper: Link to Paper - SAGE Journal\n\n\n\n🚧 This page is under construction. 🚧"
   },
   {
+    "objectID": "PyTorch/datasets/datasets.html",
+    "href": "PyTorch/datasets/datasets.html",
+    "title": "PyTorch Datasets",
+    "section": "",
+    "text": "Learn more about the Machine Learning framework known as PyTorch.\n\n\n\n\n\n\nA better understanding of PyTorch and working with dataset functionality."
+  },
+  {
+    "objectID": "PyTorch/datasets/datasets.html#datasets-dataloaders",
+    "href": "PyTorch/datasets/datasets.html#datasets-dataloaders",
+    "title": "PyTorch Datasets",
+    "section": "Datasets & DataLoaders",
+    "text": "Datasets & DataLoaders\nPyTorch provides two data primitives:\n\ntorch.utils.data.DataLoader\ntorch.utils.data.Dataset\n\nThey both allow you to use pre-loaded datasets as well as your own. Dataset allows you to store the samples and the labels while DataLoader wraps an iterable around the Dataset to enable access to the samples.\nThere are a number of prepackaged datasets that come with PyTorch, like FashionMNIST, and more can be found here:\n\nImage Datasets\nText Datasets\nAudio Datasets"
+  },
+  {
+    "objectID": "PyTorch/datasets/datasets.html#how-to-load-a-dataset",
+    "href": "PyTorch/datasets/datasets.html#how-to-load-a-dataset",
+    "title": "PyTorch Datasets",
+    "section": "How to Load a Dataset",
+    "text": "How to Load a Dataset\nHere’s how to load the Fashion-MNIST dataset from TorchVision. This dataset is a dataset of Zalando’s article images consisting of 60,000 training examples and 10,000 test examples. Each example comprises of a 28 \\times 28 greyscale image and an associated label from one of 10 classes.\nWe’ll load the FashionMNIST dataset with the following parameters:\n\nroot = the path where the train/test datasets are stored\ntrain = specifies the training or test dataset\ndownload = downloads the dataset from the internet if it’s not available on your computer\ntransform = specifies the feature transformations to use, if requested\n\n\n\nCode\nimport torch\nfrom torch.utils.data import Dataset\nfrom torchvision import datasets\nfrom torchvision.transforms import ToTensor\nimport matplotlib.pyplot as plt\n\n\ntraining_data = datasets.FashionMNIST(\n    root=\"data\",\n    train=True,\n    download=True,\n    transform=ToTensor()\n)\n\ntest_data = datasets.FashionMNIST(\n    root=\"data\",\n    train=False,\n    download=True,\n    transform=ToTensor()\n)"
+  },
+  {
+    "objectID": "PyTorch/datasets/data_tutorial.html",
+    "href": "PyTorch/datasets/data_tutorial.html",
+    "title": "N3uralN3twork's Website",
+    "section": "",
+    "text": "Code\n%matplotlib inline\nLearn the Basics || Quickstart || Tensors || Datasets & DataLoaders || Transforms || Build Model || Autograd || Optimization || Save & Load Model"
+  },
+  {
+    "objectID": "PyTorch/datasets/data_tutorial.html#loading-a-dataset",
+    "href": "PyTorch/datasets/data_tutorial.html#loading-a-dataset",
+    "title": "N3uralN3twork's Website",
+    "section": "Loading a Dataset",
+    "text": "Loading a Dataset\nHere is an example of how to load the Fashion-MNIST dataset from TorchVision. Fashion-MNIST is a dataset of Zalando’s article images consisting of 60,000 training examples and 10,000 test examples. Each example comprises a 28×28 grayscale image and an associated label from one of 10 classes.\nWe load the FashionMNIST Dataset with the following parameters: - root is the path where the train/test data is stored, - train specifies training or test dataset, - download=True downloads the data from the internet if it’s not available at root. - transform and target_transform specify the feature and label transformations\n\n\nCode\nimport torch\nfrom torch.utils.data import Dataset\nfrom torchvision import datasets\nfrom torchvision.transforms import ToTensor\nimport matplotlib.pyplot as plt\n\n\ntraining_data = datasets.FashionMNIST(\n    root=\"data\",\n    train=True,\n    download=True,\n    transform=ToTensor()\n)\n\ntest_data = datasets.FashionMNIST(\n    root=\"data\",\n    train=False,\n    download=True,\n    transform=ToTensor()\n)"
+  },
+  {
+    "objectID": "PyTorch/datasets/data_tutorial.html#iterating-and-visualizing-the-dataset",
+    "href": "PyTorch/datasets/data_tutorial.html#iterating-and-visualizing-the-dataset",
+    "title": "N3uralN3twork's Website",
+    "section": "Iterating and Visualizing the Dataset",
+    "text": "Iterating and Visualizing the Dataset\nWe can index Datasets manually like a list: training_data[index]. We use matplotlib to visualize some samples in our training data.\n\n\nCode\nlabels_map = {\n    0: \"T-Shirt\",\n    1: \"Trouser\",\n    2: \"Pullover\",\n    3: \"Dress\",\n    4: \"Coat\",\n    5: \"Sandal\",\n    6: \"Shirt\",\n    7: \"Sneaker\",\n    8: \"Bag\",\n    9: \"Ankle Boot\",\n}\nfigure = plt.figure(figsize=(8, 8))\ncols, rows = 3, 3\nfor i in range(1, cols * rows + 1):\n    sample_idx = torch.randint(len(training_data), size=(1,)).item()\n    img, label = training_data[sample_idx]\n    figure.add_subplot(rows, cols, i)\n    plt.title(labels_map[label])\n    plt.axis(\"off\")\n    plt.imshow(img.squeeze(), cmap=\"gray\")\nplt.show()\n\n\n.. .. figure:: /_static/img/basics/fashion_mnist.png :alt: fashion_mnist"
+  },
+  {
+    "objectID": "PyTorch/datasets/data_tutorial.html#creating-a-custom-dataset-for-your-files",
+    "href": "PyTorch/datasets/data_tutorial.html#creating-a-custom-dataset-for-your-files",
+    "title": "N3uralN3twork's Website",
+    "section": "Creating a Custom Dataset for your files",
+    "text": "Creating a Custom Dataset for your files\nA custom Dataset class must implement three functions: __init__, __len__, and __getitem__. Take a look at this implementation; the FashionMNIST images are stored in a directory img_dir, and their labels are stored separately in a CSV file annotations_file.\nIn the next sections, we’ll break down what’s happening in each of these functions.\n\n\nCode\nimport os\nimport pandas as pd\nfrom torchvision.io import read_image\n\nclass CustomImageDataset(Dataset):\n    def __init__(self, annotations_file, img_dir, transform=None, target_transform=None):\n        self.img_labels = pd.read_csv(annotations_file)\n        self.img_dir = img_dir\n        self.transform = transform\n        self.target_transform = target_transform\n\n    def __len__(self):\n        return len(self.img_labels)\n\n    def __getitem__(self, idx):\n        img_path = os.path.join(self.img_dir, self.img_labels.iloc[idx, 0])\n        image = read_image(img_path)\n        label = self.img_labels.iloc[idx, 1]\n        if self.transform:\n            image = self.transform(image)\n        if self.target_transform:\n            label = self.target_transform(label)\n        return image, label\n\n\n\ninit\nThe init function is run once when instantiating the Dataset object. We initialize the directory containing the images, the annotations file, and both transforms (covered in more detail in the next section).\nThe labels.csv file looks like: ::\ntshirt1.jpg, 0\ntshirt2.jpg, 0\n......\nankleboot999.jpg, 9\n\n\nCode\ndef __init__(self, annotations_file, img_dir, transform=None, target_transform=None):\n    self.img_labels = pd.read_csv(annotations_file)\n    self.img_dir = img_dir\n    self.transform = transform\n    self.target_transform = target_transform\n\n\n\n\nlen\nThe len function returns the number of samples in our dataset.\nExample:\n\n\nCode\ndef __len__(self):\n    return len(self.img_labels)\n\n\n\n\ngetitem\nThe getitem function loads and returns a sample from the dataset at the given index idx. Based on the index, it identifies the image’s location on disk, converts that to a tensor using read_image, retrieves the corresponding label from the csv data in self.img_labels, calls the transform functions on them (if applicable), and returns the tensor image and corresponding label in a tuple.\n\n\nCode\ndef __getitem__(self, idx):\n    img_path = os.path.join(self.img_dir, self.img_labels.iloc[idx, 0])\n    image = read_image(img_path)\n    label = self.img_labels.iloc[idx, 1]\n    if self.transform:\n        image = self.transform(image)\n    if self.target_transform:\n        label = self.target_transform(label)\n    return image, label"
+  },
+  {
+    "objectID": "PyTorch/datasets/data_tutorial.html#preparing-your-data-for-training-with-dataloaders",
+    "href": "PyTorch/datasets/data_tutorial.html#preparing-your-data-for-training-with-dataloaders",
+    "title": "N3uralN3twork's Website",
+    "section": "Preparing your data for training with DataLoaders",
+    "text": "Preparing your data for training with DataLoaders\nThe Dataset retrieves our dataset’s features and labels one sample at a time. While training a model, we typically want to pass samples in “minibatches”, reshuffle the data at every epoch to reduce model overfitting, and use Python’s multiprocessing to speed up data retrieval.\nDataLoader is an iterable that abstracts this complexity for us in an easy API.\n\n\nCode\nfrom torch.utils.data import DataLoader\n\ntrain_dataloader = DataLoader(training_data, batch_size=64, shuffle=True)\ntest_dataloader = DataLoader(test_data, batch_size=64, shuffle=True)"
+  },
+  {
+    "objectID": "PyTorch/datasets/data_tutorial.html#iterate-through-the-dataloader",
+    "href": "PyTorch/datasets/data_tutorial.html#iterate-through-the-dataloader",
+    "title": "N3uralN3twork's Website",
+    "section": "Iterate through the DataLoader",
+    "text": "Iterate through the DataLoader\nWe have loaded that dataset into the DataLoader and can iterate through the dataset as needed. Each iteration below returns a batch of train_features and train_labels (containing batch_size=64 features and labels respectively). Because we specified shuffle=True, after we iterate over all batches the data is shuffled (for finer-grained control over the data loading order, take a look at Samplers).\n\n\nCode\n# Display image and label.\ntrain_features, train_labels = next(iter(train_dataloader))\nprint(f\"Feature batch shape: {train_features.size()}\")\nprint(f\"Labels batch shape: {train_labels.size()}\")\nimg = train_features[0].squeeze()\nlabel = train_labels[0]\nplt.imshow(img, cmap=\"gray\")\nplt.show()\nprint(f\"Label: {label}\")"
+  },
+  {
+    "objectID": "PyTorch/datasets/data_tutorial.html#further-reading",
+    "href": "PyTorch/datasets/data_tutorial.html#further-reading",
+    "title": "N3uralN3twork's Website",
+    "section": "Further Reading",
+    "text": "Further Reading\n\ntorch.utils.data API"
+  },
+  {
     "objectID": "PyTorch/tensors/tensors.html",
     "href": "PyTorch/tensors/tensors.html",
     "title": "PyTorch Tensors",
@@ -494,7 +564,7 @@
     "href": "pytorch.html",
     "title": "PyTorch",
     "section": "",
-    "text": "Tensors\n\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n  \n\n\n\n\nPyTorch Tensors\n\n\n\n\n\n\n\ncode\n\n\nML\n\n\n\n\nThis project serves as an introduction to PyTorch and tensors.\n\n\n\n\n\n\nNov 20, 2022\n\n\nMatthias Quinn\n\n\n\n\n\n\nNo matching items"
+    "text": "Datasets & DataLoaders\n\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n\n\n\n\nTensors\n\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n  \n\n\n\n\nPyTorch Datasets\n\n\n\n\n\n\n\ncode\n\n\nML\n\n\n\n\nThis project serves as an introduction to PyTorch and working with datasets.\n\n\n\n\n\n\nFeb 14, 2023\n\n\nMatthias Quinn\n\n\n\n\n\n\n  \n\n\n\n\nPyTorch Tensors\n\n\n\n\n\n\n\ncode\n\n\nML\n\n\n\n\nThis project serves as an introduction to PyTorch and tensors.\n\n\n\n\n\n\nNov 20, 2022\n\n\nMatthias Quinn\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "resumes.html",
