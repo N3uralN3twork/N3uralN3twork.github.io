@@ -8,7 +8,7 @@ subtitle: "Sorted by creation date"
 ### Current Resume:
 
 ```{=html}
-<iframe src="https://docs.google.com/document/d/e/2PACX-1vQG1UDdiwOys7qR5843Sx2fSxACaCjZUEow9TjKT5IyQFvkT37joQEk8eJmfr746w/pub?embedded=true"></iframe>
+<iframe src="https://docs.google.com/document/d/e/2PACX-1vQG1UDdiwOys7qR5843Sx2fSxACaCjZUEow9TjKT5IyQFvkT37joQEk8eJmfr746w/pub?embedded=true"width="640" height="480" allow="autoplay">></iframe>
 ```
 
 ### Oldest Resume on File:
