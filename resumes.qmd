@@ -8,13 +8,13 @@ subtitle: "Sorted by creation date"
 ### Current Resume:
 
 ```{=html}
-<iframe src="https://docs.google.com/document/d/e/2PACX-1vQG1UDdiwOys7qR5843Sx2fSxACaCjZUEow9TjKT5IyQFvkT37joQEk8eJmfr746w/pub?embedded=true"width="640" height="480" allow="autoplay">></iframe>
+<iframe src="https://docs.google.com/document/d/e/2PACX-1vQG1UDdiwOys7qR5843Sx2fSxACaCjZUEow9TjKT5IyQFvkT37joQEk8eJmfr746w/pub?embedded=true"width="700" height="520" allow="autoplay">></iframe>
 ```
 
 ### Oldest Resume on File:
 
 ```{=html}
-<iframe src="https://drive.google.com/file/d/12p5DItosgHALez5W04ei4UDI4odYfUbW/preview" width="640" height="480" allow="autoplay"></iframe>
+<iframe src="https://docs.google.com/document/d/e/2PACX-1vS_v4rPF61USHcecZRZ1Df6RJ8tvsUoLbB_lCeOqgI8mESDXOFJdO_xYhEGfg_k4c2G2GNPzWuWsGlo/pub?embedded=true"width="700" height="520" allow="autoplay"></iframe>
 ```
 
 ::: callout-tip
