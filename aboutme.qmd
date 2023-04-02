@@ -64,9 +64,8 @@ In my free time, I work on projects like this website and - as of Oct. 3rd, 2022
 
 ### Timeline
 
-```{=html}
-<iframe src="https://drive.google.com/file/d/1EH2i0cIKr_lwj8WsVP6J-B-8EJtK6s_w/preview" width="640" height="480" allow="autoplay"></iframe>"
-```
+![My Journey](images/MyTimeline.png){fig-align="center"}
+
 ### Perception of Skills
 
 ![As of November 2022, Made with ggplot2](images/SkillsGraph.png){fig-align="center"}

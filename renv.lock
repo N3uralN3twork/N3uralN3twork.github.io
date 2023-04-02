@@ -2058,6 +2058,23 @@
       ],
       "Hash": "8548b44f79a35ba1791308b61e6012d7"
     },
+    "timevis": {
+      "Package": "timevis",
+      "Version": "2.1.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "htmltools",
+        "htmlwidgets",
+        "jsonlite",
+        "magrittr",
+        "methods",
+        "rmarkdown",
+        "shiny"
+      ],
+      "Hash": "322f35cae1fcac54fe0c14201fb1fecf"
+    },
     "tinytex": {
       "Package": "tinytex",
       "Version": "0.44",
